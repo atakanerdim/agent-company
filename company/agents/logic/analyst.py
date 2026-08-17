@@ -32,7 +32,7 @@ def _fetch(date_from, date_to):
     return matches
 
 
-def calis(agent, ctx, chat, root):
+def run(agent, ctx, chat, root):
     today = dt.date.fromisoformat(ctx["date"])
     friday = today + dt.timedelta(days=1) if ctx["day"] == "thu" else today - dt.timedelta(days=3)
     week = _week(friday)

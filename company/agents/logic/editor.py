@@ -21,7 +21,7 @@ def _current(root, areas):
     return "\n".join(parts)
 
 
-def calis(agent, ctx, chat, root):
+def run(agent, ctx, chat, root):
     areas = agent["alan"]
     task = ("Revise your draft taking the feedback into account." if ctx["mode"] == "revision"
             else "Make ONE concrete improvement to the files in your area.")

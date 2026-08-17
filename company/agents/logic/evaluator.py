@@ -15,7 +15,7 @@ def score_prediction(predicted, actual):
     return 1 if sign(ph, pa) == sign(ah, aa) else 0
 
 
-def calis(agent, ctx, chat, root):
+def run(agent, ctx, chat, root):
     friday = dt.date.fromisoformat(ctx["date"]) - dt.timedelta(days=3)
     y, w, _ = friday.isocalendar()
     week = f"{y}-W{w:02d}"
