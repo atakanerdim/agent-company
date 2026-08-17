@@ -1,0 +1,34 @@
+:root{
+  --zemin:#0f1117; --kart:#171a23; --cizgi:#262b38;
+  --metin:#e8eaf0; --soluk:#9aa3b5; --vurgu:#5b8cff; --vurgu2:#3ddc97;
+  --tehlike:#ff6b6b; --radius:12px;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--zemin);color:var(--metin);line-height:1.65;font-size:16px}
+a{color:var(--vurgu);text-decoration:none}
+a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--cizgi);padding:18px 24px;display:flex;gap:18px;align-items:baseline;flex-wrap:wrap}
+header h1{font-size:20px;font-weight:600}
+header nav{display:flex;gap:14px;flex-wrap:wrap}
+header nav a{color:var(--soluk)}
+header nav a.aktif{color:var(--metin);border-bottom:2px solid var(--vurgu)}
+main{max-width:960px;margin:0 auto;padding:28px 24px 64px}
+h2{font-size:18px;font-weight:600;margin:28px 0 12px}
+.rozet{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;
+  background:#12351f;color:var(--vurgu2);border:1px solid #1d5b36;vertical-align:middle}
+.rozet.kurgu{background:#3a2a12;color:#f0b35c;border-color:#6b4b1d}
+.kartlar{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.kart{background:var(--kart);border:1px solid var(--cizgi);border-radius:var(--radius);padding:16px}
+.kart h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.kart p{color:var(--soluk);font-size:14px}
+.satir{border-bottom:1px solid var(--cizgi);padding:10px 4px;display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}
+.soluk{color:var(--soluk);font-size:14px}
+.uyari{margin-top:26px;font-size:13px;color:var(--soluk);border:1px dashed var(--cizgi);
+  border-radius:var(--radius);padding:10px 14px}
+pre{background:#0b0d12;border:1px solid var(--cizgi);border-radius:8px;padding:14px;
+  overflow-x:auto;font-size:13px;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{border-bottom:1px solid var(--cizgi);padding:8px 6px;text-align:left}
+canvas{max-height:280px}
+.bos{color:var(--soluk);font-style:italic;padding:18px 0}
