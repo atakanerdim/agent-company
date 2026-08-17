@@ -50,10 +50,15 @@ jobs:
             BRANCH="shift/$A/$DATE"
             git checkout -B "$BRANCH"
             rm -f out/pr_queue.json
-            python kernel/runner.py --agent "$A" --day "$DAY" || { echo "::warning::$A skipped"; continue; }
+            SKIPPED=0
+            python kernel/runner.py --agent "$A" --day "$DAY" || { SKIPPED=1; echo "::warning::$A skipped"; }
             git add -A
             git diff --cached --quiet && { echo "$A: no changes"; continue; }
-            if [ -f out/pr_queue.json ]; then
+            if [ "$SKIPPED" = "1" ]; then
+              TITLE="log: $A shift skipped $DATE"
+              BODY="The shift did not complete. See company/log/$DATE.log for the reason."
+              DRAFT="false"
+            elif [ -f out/pr_queue.json ]; then
               TITLE=$(python -c 'import json;print(json.load(open("out/pr_queue.json"))[-1]["title"])')
               BODY=$(python -c 'import json;print(json.load(open("out/pr_queue.json"))[-1]["body"])')
               DRAFT=$(python -c 'import json;print(str(json.load(open("out/pr_queue.json"))[-1]["draft"]).lower())')

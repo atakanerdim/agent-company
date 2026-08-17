@@ -140,6 +140,7 @@ def apply(root, agent, result):
 
 
 def run_agent(root, agent, day, mode, input_path):
+    """Runs one shift. Returns True if it produced output, False if it was skipped."""
     ctx = build_ctx(root, agent, day, mode, input_path)
     try:
         if agent.get("logic") and mode != "comment":
@@ -148,9 +149,11 @@ def run_agent(root, agent, day, mode, input_path):
             result = generic(root, agent, ctx)
         apply(root, agent, result)
         print(f"done: {agent['id']}")
+        return True
     except Exception as e:  # a shift must never take the company down
         log(root, f"{agent['id']} shift skipped: {type(e).__name__}: {e}")
         print(f"skipped: {agent['id']} ({e})", file=sys.stderr)
+        return False
 
 
 def main():
@@ -171,9 +174,14 @@ def main():
         return
     picked = [ag for ag in roster if ag["id"] == a.agent] if a.agent \
         else [ag for ag in roster if day in ag["gunler"]]
+    ok = True
     for ag in picked:
-        run_agent(root, ag, day, a.mode, a.input)
+        ok = run_agent(root, ag, day, a.mode, a.input) and ok
         time.sleep(int(os.environ.get("SHIFT_GAP_SEC", "0")))
+    if not ok:
+        # The caller must be able to tell a real shift from an error log,
+        # otherwise the skipped shift gets committed as if it were output.
+        sys.exit(1)
 
 
 if __name__ == "__main__":
