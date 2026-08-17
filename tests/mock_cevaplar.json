@@ -1,0 +1,18 @@
+{
+ "[LIG:PL]": [
+   {"mac_id":1001,"ev":"Arsenal","dep":"Chelsea","skor":"2-1","gerekce":"Ev sahibi formda."},
+   {"mac_id":1002,"ev":"Liverpool","dep":"Everton","skor":"1-1","gerekce":"Derbi dengeli geçer."}
+ ],
+ "[LIG:PD]": [
+   {"mac_id":1003,"ev":"Barcelona","dep":"Sevilla","skor":"2-0","gerekce":"Kadro derinliği belirleyici."},
+   {"mac_id":1004,"ev":"Real Madrid","dep":"Betis","skor":"çok","gerekce":"bozuk kayıt"}
+ ],
+ "[MOD:yorum]": {"yorum":"Mock inceleme: başlık kontrastı düşük, mobilde satırlar taşıyor. Yine de fikir fena değil."},
+ "[AJAN:bozuk]": "bu gecerli bir json degil",
+ "[AJAN:analist]": {"cikti_markdown":"Mock brifing: bu hafta beş ligde program yoğun.","koridor":"Fikstürü astım, herkes baksın.","hafiza_ekle":null},
+ "[AJAN:degerlendirici]": {"cikti_markdown":"Mock retro: kesin skor azdı, tevazu şart.","koridor":"Skorlar açıklandı, koridor gergin.","hafiza_ekle":"Not: beraberlik tahminleri zayıf."},
+ "[AJAN:tasarimci]": {"dosyalar":{"site/tema-mock.css":":root{--vurgu:#7c5cff;}\n"},"gerekce":"Vurgu rengini morlaştırdım; pano kartları daha ayırt edilir.","koridor":"Yeni temayı görünce bayılacaksınız."},
+ "[AJAN:websorumlusu]": {"dosyalar":{"site/notlar-mock.css":".gecici{display:none}\n"},"gerekce":"Kullanılmayan sınıf gizlendi.","koridor":null},
+ "[AJAN:surec]": {"dosyalar":{"company/agents/memory/gm.md":"# Hafıza — Genel Müdür\nRetro dersi: rapora somut sayı koy.\n"},"gerekce":"Retrodaki 'rapor soyut' eleştirisine karşılık GM hafızasına ilke eklendi.","koridor":null},
+ "[AJAN:": {"cikti_markdown":"Mock vardiya çıktısı: bugün ofiste işler yolundaydı.","koridor":"Bugün sakin bir gündü.","hafiza_ekle":null}
+}
