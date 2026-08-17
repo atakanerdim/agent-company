@@ -3,6 +3,12 @@
 Three wave sources, each emitting concentric rings. Nothing draws the pattern in the
 middle — it is interference, the product of sources that never coordinate. One seed
 produces the whole image; no stroke is placed by hand.
+
+Run it with no arguments to rewrite hero.svg next to this file. The README shows
+hero.webp, rendered from that SVG, because a raster is the one form every markdown
+renderer agrees on. The SVG uses only circles, rects and gradients — no filter and no
+clip-path, since sanitisers strip those and an unresolvable clip-path reference means
+the element is not drawn at all.
 """
 import math
 import random
@@ -77,24 +83,30 @@ def build():
     <stop offset="50%" stop-color="#8a7aff" stop-opacity="0.16"/>
     <stop offset="100%" stop-color="#3ddc97" stop-opacity="0.24"/>
   </linearGradient>
-  <filter id="soft" x="-25%" y="-25%" width="150%" height="150%">
-    <feGaussianBlur stdDeviation="70"/>
-  </filter>
   <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0%" stop-color="{BG}" stop-opacity="0.35"/>
     <stop offset="35%" stop-color="{BG}" stop-opacity="0"/>
     <stop offset="70%" stop-color="{BG}" stop-opacity="0"/>
     <stop offset="100%" stop-color="{BG}" stop-opacity="0.5"/>
   </linearGradient>
+  <radialGradient id="glowA" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#5b8cff" stop-opacity="0.20"/>
+    <stop offset="100%" stop-color="#5b8cff" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="glowB" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#3ddc97" stop-opacity="0.18"/>
+    <stop offset="100%" stop-color="#3ddc97" stop-opacity="0"/>
+  </radialGradient>
   <radialGradient id="vig" cx="50%" cy="50%" r="78%">
     <stop offset="55%" stop-color="{BG}" stop-opacity="0"/>
     <stop offset="100%" stop-color="{BG}" stop-opacity="0.7"/>
   </radialGradient>
-  <clipPath id="frame"><rect width="{W}" height="{H}"/></clipPath>
 </defs>
 <rect width="{W}" height="{H}" fill="{BG}"/>
-<rect width="{W}" height="{H}" fill="url(#wash)" filter="url(#soft)"/>
-<g clip-path="url(#frame)">{body}</g>
+<rect width="{W}" height="{H}" fill="url(#wash)"/>
+<ellipse cx="{W*0.22}" cy="{H*0.46}" rx="520" ry="360" fill="url(#glowA)"/>
+<ellipse cx="{W*0.86}" cy="{H*0.34}" rx="520" ry="360" fill="url(#glowB)"/>
+{body}
 <rect width="{W}" height="{H}" fill="url(#fade)"/>
 <rect width="{W}" height="{H}" fill="url(#vig)"/>
 </svg>
