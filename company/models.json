@@ -1,0 +1,5 @@
+{"zincir":[
+  {"saglayici":"groq","model":"llama-3.3-70b-versatile"},
+  {"saglayici":"gemini","model":"gemini-2.0-flash"},
+  {"saglayici":"openrouter","model":"meta-llama/llama-3.3-70b-instruct:free"}
+]}
