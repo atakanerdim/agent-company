@@ -1,0 +1,18 @@
+{
+ "[LEAGUE:PL]": [
+   {"match_id":1001,"home":"Arsenal","away":"Chelsea","score":"2-1","reasoning":"Home form decides it."},
+   {"match_id":1002,"home":"Liverpool","away":"Everton","score":"1-1","reasoning":"Derbies stay tight."}
+ ],
+ "[LEAGUE:PD]": [
+   {"match_id":1003,"home":"Barcelona","away":"Sevilla","score":"2-0","reasoning":"Squad depth tells."},
+   {"match_id":1004,"home":"Real Madrid","away":"Betis","score":"lots","reasoning":"broken record"}
+ ],
+ "[MODE:comment]": {"comment":"Mock review: the heading contrast is low and rows overflow on mobile. Otherwise, fine, I suppose."},
+ "[AGENT:broken]": "this is not valid json",
+ "[AGENT:analyst]": {"output_markdown":"Mock briefing: a packed weekend across all five leagues.","hallway":"Fixtures are up, come take a look.","memory_add":null},
+ "[AGENT:evaluator]": {"output_markdown":"Mock retro: exact scores were rare; humility is due.","hallway":"Scores are out; the hallway is tense.","memory_add":"Note: draw predictions remain weak."},
+ "[AGENT:designer]": {"files":{"site/theme-mock.css":":root{--vurgu:#7c5cff;}\n"},"rationale":"Shifted the accent toward purple; dashboard cards separate better.","hallway":"Wait till you see the new theme."},
+ "[AGENT:webdev]": {"files":{"site/notes-mock.css":".unused{display:none}\n"},"rationale":"Hid an unused class to keep the sheet lean.","hallway":null},
+ "[AGENT:process]": {"files":{"company/agents/memory/ceo.md":"# Memory — The CEO\nRetro lesson: put concrete numbers in the report.\n"},"rationale":"Codified the retro feedback about vague reports into the CEO memory.","hallway":null},
+ "[AGENT:": {"output_markdown":"Mock shift output: a quiet, productive day at the office.","hallway":"A calm day today.","memory_add":null}
+}

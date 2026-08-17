@@ -1,0 +1,14 @@
+{"matches":[
+ {"id":1001,"competition":{"code":"PL"},"utcDate":"2026-08-21T19:00:00Z","status":"FINISHED",
+  "homeTeam":{"shortName":"Arsenal"},"awayTeam":{"shortName":"Chelsea"},
+  "score":{"fullTime":{"home":2,"away":1}}},
+ {"id":1002,"competition":{"code":"PL"},"utcDate":"2026-08-22T14:00:00Z","status":"FINISHED",
+  "homeTeam":{"shortName":"Liverpool"},"awayTeam":{"shortName":"Everton"},
+  "score":{"fullTime":{"home":3,"away":1}}},
+ {"id":1003,"competition":{"code":"PD"},"utcDate":"2026-08-22T19:00:00Z","status":"TIMED",
+  "homeTeam":{"shortName":"Barcelona"},"awayTeam":{"shortName":"Sevilla"},
+  "score":{"fullTime":{"home":null,"away":null}}},
+ {"id":1004,"competition":{"code":"PD"},"utcDate":"2026-08-23T19:00:00Z","status":"TIMED",
+  "homeTeam":{"shortName":"Real Madrid"},"awayTeam":{"shortName":"Betis"},
+  "score":{"fullTime":{"home":null,"away":null}}}
+]}
