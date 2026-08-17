@@ -25,3 +25,22 @@ def test_mock_mode_does_not_probe(company):
     p = _run(company, extra_env={"MOCK_LLM": "1"})
     assert p.returncode == 0
     assert "not probed" in p.stdout
+
+def test_json_contracts_say_the_word_json(company):
+    """Groq refuses response_format=json_object unless 'json' appears in the messages.
+
+    Every prompt that asks for JSON must therefore say so out loud. Dropping the word
+    is an easy edit to make and produces a 400 that looks nothing like its cause.
+    """
+    sources = ["kernel/runner.py", "kernel/healthcheck.py"] + \
+              [f"company/agents/logic/{n}.py" for n in ("analyst", "evaluator", "predictor", "editor")]
+    checked = 0
+    for rel in sources:
+        text = (company / rel).read_text(encoding="utf-8")
+        for n, after in enumerate(text.split("ANSWER ONLY")[1:], 1):
+            assert "json" in after[:400].lower(), f"{rel}: contract #{n} never says 'json'"
+            checked += 1
+    assert checked >= 5, "the contracts moved; this guard is no longer looking at them"
+    probe = (company / "kernel/healthcheck.py").read_text(encoding="utf-8")
+    assert "json" in probe.split("PING_USER =")[1][:200].lower(), \
+        "the health probe itself must say 'json' or Groq rejects it"

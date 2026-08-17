@@ -18,8 +18,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import llm
 import runner
 
-PING_SYSTEM = "You are a health probe. Answer with the single word: ok"
-PING_USER = "ping"
+# The probe asks for JSON exactly like a real shift does, so that a provider which
+# accepts plain chat but rejects JSON mode is still caught. The word "json" has to
+# appear in the message itself: Groq refuses response_format=json_object without it.
+PING_SYSTEM = "You are a health probe. Answer in JSON."
+PING_USER = 'Reply with this JSON object and nothing else: {"ok": true}'
 
 
 def check(root):
@@ -33,7 +36,7 @@ def check(root):
             lines.append(f"{provider} [{model}]: no API key in the environment")
             continue
         try:
-            llm._call(step, key, PING_SYSTEM, PING_USER, False)
+            llm._call(step, key, PING_SYSTEM, PING_USER, True)
             healthy += 1
             lines.append(f"{provider} [{model}]: ok")
         except Exception as e:
