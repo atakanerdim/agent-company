@@ -1,4 +1,4 @@
-import json, os, subprocess, sys
+import io, json, os, subprocess, sys, urllib.error
 
 def _run(company, extra_env=None):
     env = dict(os.environ, SHIFT_DATE="2026-08-23")
@@ -25,6 +25,40 @@ def test_mock_mode_does_not_probe(company):
     p = _run(company, extra_env={"MOCK_LLM": "1"})
     assert p.returncode == 0
     assert "not probed" in p.stdout
+
+def _hc(company):
+    sys.path.insert(0, str(company / "kernel"))
+    import importlib, healthcheck
+    importlib.reload(healthcheck)
+    return healthcheck
+
+def _http(code):
+    return urllib.error.HTTPError("https://x", code, "boom", {}, io.BytesIO(b"busy"))
+
+def test_transient_failure_is_retried(company, monkeypatch):
+    """503 means the provider is busy, not that the model is gone. Retry before reporting."""
+    hc = _hc(company)
+    calls = []
+    def flaky(step, key, system, user, want_json):
+        calls.append(1)
+        if len(calls) == 1: raise _http(503)
+        return '{"ok": true}'
+    monkeypatch.setattr(hc.llm, "_call", flaky)
+    monkeypatch.setattr(hc.time, "sleep", lambda s: None)
+    assert hc._probe({"saglayici": "groq", "model": "m"}, "k") is None
+    assert len(calls) == 2, "a transient failure must be retried exactly once"
+
+def test_dead_model_is_not_retried(company, monkeypatch):
+    """404 means the model is retired. Retrying wastes the shift's time budget."""
+    hc = _hc(company)
+    calls = []
+    def gone(step, key, system, user, want_json):
+        calls.append(1); raise _http(404)
+    monkeypatch.setattr(hc.llm, "_call", gone)
+    monkeypatch.setattr(hc.time, "sleep", lambda s: None)
+    err = hc._probe({"saglayici": "groq", "model": "m"}, "k")
+    assert isinstance(err, urllib.error.HTTPError) and err.code == 404
+    assert len(calls) == 1, "a permanent failure must not be retried"
 
 def test_json_contracts_say_the_word_json(company):
     """Groq refuses response_format=json_object unless 'json' appears in the messages.

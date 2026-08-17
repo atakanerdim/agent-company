@@ -12,6 +12,8 @@ A failing link is written to company/log/<date>.log, the same place shift failur
 import json
 import os
 import sys
+import time
+import urllib.error
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -25,6 +27,30 @@ PING_SYSTEM = "You are a health probe. Answer in JSON."
 PING_USER = 'Reply with this JSON object and nothing else: {"ok": true}'
 
 
+RETRY_SEC = 5
+
+
+def _probe(step, key):
+    """Returns None if the link answered, otherwise the exception that stopped it.
+
+    Retries once on 429/5xx. A provider under load is not a retired model, and a
+    report that cries wolf every Sunday is a report nobody reads.
+    """
+    last = None
+    for attempt in (1, 2):
+        try:
+            llm._call(step, key, PING_SYSTEM, PING_USER, True)
+            return None
+        except Exception as e:
+            last = e
+            transient = isinstance(e, urllib.error.HTTPError) and (e.code == 429 or e.code >= 500)
+            if attempt == 1 and transient:
+                time.sleep(RETRY_SEC)
+                continue
+            break
+    return last
+
+
 def check(root):
     """Returns (ok, report_lines) — one line per link in the chain."""
     chain = json.loads((root / "company/models.json").read_text(encoding="utf-8"))["zincir"]
@@ -35,12 +61,12 @@ def check(root):
         if not key:
             lines.append(f"{provider} [{model}]: no API key in the environment")
             continue
-        try:
-            llm._call(step, key, PING_SYSTEM, PING_USER, True)
+        err = _probe(step, key)
+        if err is None:
             healthy += 1
             lines.append(f"{provider} [{model}]: ok")
-        except Exception as e:
-            lines.append(f"{llm._detail(provider, e)} [model: {model}]")
+        else:
+            lines.append(f"{llm._detail(provider, err)} [model: {model}]")
     return healthy == len(chain) and healthy > 0, lines
 
 
