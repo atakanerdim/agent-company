@@ -14,6 +14,6 @@ def sirket(tmp_path, monkeypatch):
     (tmp_path / "out").mkdir()
     monkeypatch.setenv("MOCK_LLM", "1")
     monkeypatch.setenv("MOCK_HTTP", "1")
-    monkeypatch.setenv("MOCK_CEVAPLAR", str(KOK / "tests" / "mock_cevaplar.json"))
-    monkeypatch.setenv("MOCK_FIKSTUR", str(KOK / "tests" / "mock_fikstur.json"))
+    monkeypatch.setenv("MOCK_ANSWERS", str(KOK / "tests" / "mock_answers.json"))
+    monkeypatch.setenv("MOCK_FIXTURES", str(KOK / "tests" / "mock_fixtures.json"))
     return tmp_path
