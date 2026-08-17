@@ -71,6 +71,29 @@ jobs:
             gh pr create --head "$BRANCH" --title "$TITLE" --body "$BODY" $EXTRA || echo "::warning::$A PR not created (may already exist)"
           done
           git checkout main
+      - name: model-healthcheck
+        if: steps.roster.outputs.day == 'sun'
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GH_TOKEN: ${{ secrets.AJAN_PAT }}
+        run: |
+          git config user.name "autonomous-studio-agent"
+          git config user.email "agent@users.noreply.github.com"
+          git checkout main && git pull --quiet
+          if python kernel/healthcheck.py; then echo "provider chain healthy"; exit 0; fi
+          DATE=$(date -u +%F)
+          BRANCH="health/$DATE"
+          git checkout -B "$BRANCH"
+          git add -A
+          git diff --cached --quiet && { git checkout main; exit 0; }
+          git commit -q -m "log: provider chain health $DATE"
+          git push -f -q origin "$BRANCH"
+          gh pr create --head "$BRANCH" --title "log: provider chain health $DATE" \
+            --body "A link in the provider chain did not answer. See company/log/$DATE.log for the provider and model." \
+            || echo "::warning::health PR not created (may already exist)"
+          git checkout main
       - name: design-feedback
         if: steps.roster.outputs.day == 'wed' || steps.roster.outputs.day == 'thu'
         env:
