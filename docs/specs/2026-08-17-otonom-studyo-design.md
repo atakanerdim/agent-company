@@ -155,3 +155,12 @@ Her bölümde "gerçek üretim / kurgu" rozeti. Tahmin sayfasında sorumluluk re
 2. Bedava anahtarları al: Groq, Google AI Studio, OpenRouter, football-data.org.
 3. Dördünü Actions secrets olarak ekle.
 4. İlk workflow'u elle bir kez tetikle. Sonrası tamamen otonom.
+
+## 14. Faz 0 uygulama notları (spec'ten bilinçli sapmalar)
+
+- Koridor `koridor.md` yerine `company/koridor/` klasöründe satır-başına-dosya tutulur: aynı gün açılan PR'ların tek dosyada çakışmasını (merge conflict) önler. "Son 10 satır" = ada göre son 10 dosya.
+- Tasarımcı roster'da yalnız Salı görünür; Cumartesi revizyonu ve Çarşamba-Perşembe geri bildirimi vardiya workflow'unun özel adımlarıdır (taslak PR mekaniği gh CLI ister, kernel LLM işine odaklı kalır).
+- v1'de tasarım geri bildirimcileri sabittir: Pesimist + Web Sorumlusu + Romantik (rastgele seçim için durum tutmak gerekirdi; YAGNI).
+- Web Sorumlusu ve Süreç Sorumlusu, Tasarımcı ile aynı `editor` mantığını farklı izinli alanlarla paylaşır (`alan` alanı roster'da).
+- Pesimist'in "her PR'a yorum" görevi v1'de tasarım PR'ları + Cuma tahmin seti incelemesiyle sınırlıdır.
+- Çekirdek toplamı ~300 satırdır (runner + llm istemcisi); dokunulmazlık sınırı değişmedi.
