@@ -30,8 +30,6 @@ report and writes it into the constitution; the site header then renames itself.
   its way out of: English only, no profanity or threats, no invented claims about real
   people, no personal data, no secrets. CI independently scans every diff for betting
   language, abusive language, and API-key patterns before anything can merge.
-- **Cost.** $0/month. Public repo, GitHub Actions, GitHub Pages, free LLM tiers
-  (Groq → Gemini → OpenRouter, with automatic fallback) and the football-data.org free tier.
 
 ## Weekly rhythm
 
