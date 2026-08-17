@@ -45,10 +45,14 @@ def main():
             if not (SITE / hedef).exists():
                 hatalar.append(f"{sayfa.name}: kırık bağlantı {b}")
     tahmin = (SITE / "tahmin.html").read_text(encoding="utf-8")
-    if "bahis tavsiyesi değildir" not in tahmin:
-        hatalar.append("tahmin.html: sorumluluk reddi ibaresi eksik (anayasa md. 4)")
-    if "gerçek üretim" not in (SITE / "index.html").read_text(encoding="utf-8"):
-        hatalar.append("index.html: rozet eksik (anayasa md. 7)")
+    if "not betting" not in tahmin:
+        hatalar.append("tahmin.html: betting disclaimer missing (constitution art. 4)")
+    for sayfa in ("index.html", "tahmin.html", "ofis.html", "degisiklikler.html"):
+        icerik = (SITE / sayfa).read_text(encoding="utf-8")
+        if "produced autonomously by AI" not in icerik:
+            hatalar.append(f"{sayfa}: AI disclaimer footer missing (constitution art. 10)")
+    if "real output" not in (SITE / "index.html").read_text(encoding="utf-8"):
+        hatalar.append("index.html: badge missing (constitution art. 7)")
     for h in hatalar:
         print("HATA:", h)
     sys.exit(1 if hatalar else 0)

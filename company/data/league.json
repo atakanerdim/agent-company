@@ -1,5 +1,5 @@
-{"personalar":{
-  "istatistikci":{"puan":0,"kesin":0,"sonuc":0,"hafta":0},
-  "romantik":{"puan":0,"kesin":0,"sonuc":0,"hafta":0},
-  "sogukkanli":{"puan":0,"kesin":0,"sonuc":0,"hafta":0}
+{"personas":{
+  "statistician":{"points":0,"exact":0,"outcome":0,"weeks":0},
+  "romantic":{"points":0,"exact":0,"outcome":0,"weeks":0},
+  "coolhead":{"points":0,"exact":0,"outcome":0,"weeks":0}
 }}

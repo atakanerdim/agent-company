@@ -15,26 +15,26 @@ def main():
         shutil.rmtree(VERI)
     VERI.mkdir(parents=True)
     (VERI / "data").mkdir()
-    for alt in ("fixtures", "predictions", "results", "skorlar"):
+    for alt in ("fixtures", "predictions", "results", "scores"):
         kaynak = KOK / "company/data" / alt
         if kaynak.exists():
             shutil.copytree(kaynak, VERI / "data" / alt)
     for tekil in ("company/data/league.json",):
         if (KOK / tekil).exists():
             shutil.copy(KOK / tekil, VERI / "data" / Path(tekil).name)
-    for klasor in ("minutes", "koridor"):
+    for klasor in ("minutes", "hallway"):
         if (KOK / "company" / klasor).exists():
             shutil.copytree(KOK / "company" / klasor, VERI / klasor)
     shutil.copytree(KOK / "company/agents/prompts", VERI / "prompts")
     shutil.copy(KOK / "company/roster.json", VERI / "roster.json")
-    shutil.copy(KOK / "company/anayasa.md", VERI / "anayasa.md")
+    shutil.copy(KOK / "company/constitution.md", VERI / "constitution.md")
 
-    # Şirket adı: anayasadaki "Şirket adı:" satırından
+    # Company name: from the "Company name:" line of the constitution
     ad = ""
-    for satir in (KOK / "company/anayasa.md").read_text(encoding="utf-8").splitlines():
-        if satir.startswith("Şirket adı:") and "henüz yok" not in satir:
+    for satir in (KOK / "company/constitution.md").read_text(encoding="utf-8").splitlines():
+        if satir.startswith("Company name:") and "not chosen" not in satir:
             ad = satir.split(":", 1)[1].strip()
-    (VERI / "ad.txt").write_text(ad, encoding="utf-8")
+    (VERI / "name.txt").write_text(ad, encoding="utf-8")
 
     # Değişiklik günlüğü (git varsa)
     gunluk = []

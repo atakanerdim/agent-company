@@ -1,14 +1,14 @@
 [
-  {"id":"gm","ad":"Genel Müdür","rol":"yonetim","logic":null,"alan":null,"gunler":["sun"],"draft_pr":false},
-  {"id":"scrum","ad":"Scrum Master","rol":"surec","logic":null,"alan":null,"gunler":["tue"],"draft_pr":false},
-  {"id":"analist","ad":"Analist","rol":"tahmin","logic":"analist","alan":null,"gunler":["thu","mon"],"draft_pr":false},
-  {"id":"istatistikci","ad":"İstatistikçi","rol":"tahminci","logic":"tahminci","alan":null,"gunler":["fri"],"draft_pr":false},
-  {"id":"romantik","ad":"Romantik","rol":"tahminci","logic":"tahminci","alan":null,"gunler":["fri"],"draft_pr":false},
-  {"id":"sogukkanli","ad":"Soğukkanlı","rol":"tahminci","logic":"tahminci","alan":null,"gunler":["fri"],"draft_pr":false},
-  {"id":"degerlendirici","ad":"Değerlendirici","rol":"tahmin","logic":"degerlendirici","alan":null,"gunler":["mon"],"draft_pr":false},
-  {"id":"pesimist","ad":"Pesimist Eleştirmen","rol":"kalite","logic":null,"alan":null,"gunler":["fri"],"draft_pr":false},
-  {"id":"dedikoducu","ad":"Dedikoducu","rol":"kultur","logic":null,"alan":null,"gunler":["wed"],"draft_pr":false},
-  {"id":"tasarimci","ad":"Tasarımcı","rol":"site","logic":"editor","alan":["site/"],"gunler":["tue"],"draft_pr":true},
-  {"id":"websorumlusu","ad":"Web Sorumlusu","rol":"site","logic":"editor","alan":["site/"],"gunler":["wed","sat"],"draft_pr":false},
-  {"id":"surec","ad":"Süreç Sorumlusu","rol":"surec","logic":"editor","alan":["company/agents/prompts/","company/agents/memory/"],"gunler":["tue"],"draft_pr":false}
+  {"id":"ceo","ad":"The CEO","rol":"management","logic":null,"alan":null,"gunler":["sun"],"draft_pr":false},
+  {"id":"scrum","ad":"The Scrum Master","rol":"process","logic":null,"alan":null,"gunler":["tue"],"draft_pr":false},
+  {"id":"analyst","ad":"The Analyst","rol":"predictions","logic":"analyst","alan":null,"gunler":["thu","mon"],"draft_pr":false},
+  {"id":"statistician","ad":"The Statistician","rol":"predictor","logic":"predictor","alan":null,"gunler":["fri"],"draft_pr":false},
+  {"id":"romantic","ad":"The Romantic","rol":"predictor","logic":"predictor","alan":null,"gunler":["fri"],"draft_pr":false},
+  {"id":"coolhead","ad":"The Coolhead","rol":"predictor","logic":"predictor","alan":null,"gunler":["fri"],"draft_pr":false},
+  {"id":"evaluator","ad":"The Evaluator","rol":"predictions","logic":"evaluator","alan":null,"gunler":["mon"],"draft_pr":false},
+  {"id":"pessimist","ad":"The Pessimist Critic","rol":"quality","logic":null,"alan":null,"gunler":["fri"],"draft_pr":false},
+  {"id":"gossip","ad":"The Gossip","rol":"culture","logic":null,"alan":null,"gunler":["wed"],"draft_pr":false},
+  {"id":"designer","ad":"The Designer","rol":"site","logic":"editor","alan":["site/"],"gunler":["tue"],"draft_pr":true},
+  {"id":"webdev","ad":"The Web Dev","rol":"site","logic":"editor","alan":["site/"],"gunler":["wed","sat"],"draft_pr":false},
+  {"id":"process","ad":"The Process Owner","rol":"process","logic":"editor","alan":["company/agents/prompts/","company/agents/memory/","company/constitution.md"],"gunler":["tue"],"draft_pr":false}
 ]

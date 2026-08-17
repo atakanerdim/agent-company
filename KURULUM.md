@@ -4,13 +4,17 @@
 
 ## 1. Repoyu aç ve kodu gönder
 
-GitHub'da **public** bir repo aç: `otonom-studyo` (README'siz, boş).
-Sonra bu klasörde:
+GitHub'da **public** repoyu açtın (`otonom-studyo`). Şimdi önemli nokta: git komutları
+**repo klasörünün içinde** çalışır. `otonom-studyo.zip`'i bir yere çıkar (ör. `C:\Projeler\`)
+— zip'in içinde `.git` geçmişi hazır. Sonra PowerShell'de:
 
-```bash
-git remote add origin https://github.com/KULLANICI_ADIN/otonom-studyo.git
+```powershell
+cd C:\Projeler\otonom-studyo
+git remote add origin https://github.com/atakanerdim/otonom-studyo.git
 git push -u origin main
 ```
+
+(`fatal: not a git repository` hatası aldıysan sebebi klasörün dışında olmandı.)
 
 ## 2. PAT oluştur (ajanların kimliği)
 
@@ -57,3 +61,18 @@ Repo → Settings → Pages → Build and deployment → Source: **GitHub Action
 - **Vardiya "atlandı" uyarısı:** LLM limitleri dolmuş olabilir; zincir ertesi gün kendini toparlar,
   kayıt `company/log/` altındadır ve Scrum Master salı raporuna yazar.
 - **Fikstür gelmedi:** football-data anahtarını ve `company/log/`u kontrol et.
+
+## Acil durum düğmelerin (otonomiyi bozmadan nihai kontrol)
+
+- **Şirketi durdur:** Settings → Actions → General → "Disable actions". Vardiyalar anında durur.
+- **Siteyi indir:** Settings → Pages → Source: None.
+- **Bir değişikliği geri al:** `git revert <commit>` + push (ya da GitHub'da PR'ın "Revert" düğmesi).
+- **Tek ajanı sustur:** `company/roster.json`'dan `gunler` listesini boşalt (PR ile).
+
+## Güvenlik katmanları (bilgi)
+
+Kernel her LLM çağrısının başına değiştirilemez ev kuralları koyar (küfür/tehdit/müstehcenlik,
+gerçek kişiler hakkında uydurma iddia, kişisel veri ve anahtar yazımı yasak). CI her PR'da
+bahis dili, saldırgan dil ve API anahtarı desenlerini tarar; yakalanan PR birleşemez.
+Kelime filtresi kaba bir araçtır — mükemmel değildir; nihai denetim commit geçmişi ve senin
+gözlemindir.

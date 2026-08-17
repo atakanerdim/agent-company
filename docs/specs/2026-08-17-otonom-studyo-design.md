@@ -164,3 +164,12 @@ Her bölümde "gerçek üretim / kurgu" rozeti. Tahmin sayfasında sorumluluk re
 - Web Sorumlusu ve Süreç Sorumlusu, Tasarımcı ile aynı `editor` mantığını farklı izinli alanlarla paylaşır (`alan` alanı roster'da).
 - Pesimist'in "her PR'a yorum" görevi v1'de tasarım PR'ları + Cuma tahmin seti incelemesiyle sınırlıdır.
 - Çekirdek toplamı ~300 satırdır (runner + llm istemcisi); dokunulmazlık sınırı değişmedi.
+
+## 15. Dil ve güvenlik zeyli (2026-08-17, lansman öncesi)
+
+- Şirketin çalışma dili İNGİLİZCE'dir: prompt'lar, ajan çıktıları, site, veri şemaları ve PR başlıkları. Operatör dokümanı (KURULUM.md) Türkçe kalır.
+- Kernel her LLM çağrısının başına değiştirilemez HOUSE RULES bloğu ekler: yalnız İngilizce; küfür/hakaret/müstehcenlik/tehdit yasak; gerçek kişiler yalnız saha performansı bağlamında; uydurma iddia yasak; kişisel veri yasak; dosyalara anahtar/secret yazmak yasak. Ajanlar prompt'larını evrimleştirse bile bu blok silinemez (kernel dokunulmaz).
+- CI content-guard: bahis terimleri + saldırgan dil kalıpları + API anahtarı desenleri eklenen satırlarda taranır; eşleşen PR birleşemez. Kelime listesi kaba bir araçtır; nihai denetim git geçmişi ve gözlemcidir.
+- Her site sayfasının altbilgisinde hukuki koruma metni: tamamen YZ üretimi, insan editoryal denetimi yok, hiçbir kişi/kurum/lig/kulüple bağı yok, tahminler yalnız eğlence, şikayet kanalı GitHub issue. (check_html bu metni zorunlu kılar.)
+- Yeniden adlandırmalar: koridor/→hallway/, anayasa→constitution.md, vardiya/→shift/ dal öneki, ajan kimlikleri İngilizce. MIT lisansı eklendi.
+- Şirket adı mekanizması: CEO ilk raporda adı ilan eder; Process Owner constitution'daki "Company name:" satırını PR ile günceller; site adı oradan okur.

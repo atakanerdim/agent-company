@@ -5,28 +5,33 @@ permissions:
   contents: write
   pull-requests: write
 jobs:
-  bekci:
+  guard:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: dokunulmaz-cekirdek
+      - name: immutable-kernel
         run: |
           git fetch origin ${{ github.base_ref }} --quiet
-          DEGISEN=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
-          echo "$DEGISEN"
-          if echo "$DEGISEN" | grep -qE '^(kernel/|\.github/workflows/)'; then
-            echo "::error::Anayasa md. 1 — çekirdek ve workflow dosyaları dokunulmazdır."
+          CHANGED=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
+          echo "$CHANGED"
+          if echo "$CHANGED" | grep -qE '^(kernel/|\.github/workflows/)'; then
+            echo "::error::Constitution art. 1 — kernel and workflow files are immutable."
             exit 1
           fi
-      - name: bahis-dili
+      - name: content-guard
         run: |
-          git diff -U0 "origin/${{ github.base_ref }}...HEAD" -- '*.md' '*.html' '*.json' \
-            | grep '^+' | grep -vi 'bahis tavsiyesi' | grep -qiE 'iddaa|kupon|banko' \
-            && { echo "::error::Anayasa md. 4 — bahis dili yasak."; exit 1; } || true
-  testler:
-    needs: bekci
+          ADDED=$(git diff -U0 "origin/${{ github.base_ref }}...HEAD" -- '*.md' '*.html' '*.json' '*.js' '*.css' | grep '^+' || true)
+          FILTERED=$(echo "$ADDED" | grep -viE 'not betting|betting language is forbidden|no betting' || true)
+          if echo "$FILTERED" | grep -qiE 'iddaa|kupon|banko|sure bet|guaranteed odds|betting tip|parlay'; then
+            echo "::error::Constitution art. 4 — betting language is forbidden."; exit 1; fi
+          if echo "$ADDED" | grep -qiE '\b(fuck|shit|cunt|bitch|nigger|faggot|whore)\b|kill yourself|deserves to die|i will kill'; then
+            echo "::error::Constitution art. 9 — profanity/threat language detected."; exit 1; fi
+          if echo "$ADDED" | grep -qE 'gsk_[A-Za-z0-9]{16,}|AIza[0-9A-Za-z_\-]{30,}|sk-or-[A-Za-z0-9\-]{16,}|github_pat_[A-Za-z0-9_]{22,}|ghp_[A-Za-z0-9]{30,}'; then
+            echo "::error::Constitution art. 9 — an API key pattern was found in the diff."; exit 1; fi
+  tests:
+    needs: guard
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,30 +39,30 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install pytest --quiet
-      - name: birim-testleri
+      - name: unit-tests
         run: pytest -q
-      - name: kuru-kosu
+      - name: dry-run
         env:
           MOCK_LLM: "1"
           MOCK_HTTP: "1"
-          VARDIYA_TARIH: "2026-08-21"
+          SHIFT_DATE: "2026-08-21"
         run: |
-          python kernel/runner.py --agent analist --gun thu
-          python kernel/runner.py --gun fri
-          git checkout -- . && git clean -qfd company site || true
+          python kernel/runner.py --agent analyst --day thu
+          python kernel/runner.py --day fri
+          git checkout -- . || true
       - name: site
         run: |
           python site/build.py
           python tests/check_html.py
-  birlestir:
-    needs: [testler]
+  merge:
+    needs: [tests]
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
-      - name: otomatik-birlesme
+      - name: auto-merge
         env:
           GH_TOKEN: ${{ secrets.AJAN_PAT }}
         run: |
           gh pr merge ${{ github.event.pull_request.number }} \
             --repo "${{ github.repository }}" --squash --delete-branch \
-            || echo "::warning::birleşme ertelendi (çakışma ya da yarış olabilir)"
+            || echo "::warning::merge deferred (conflict or race)"
