@@ -1,0 +1,63 @@
+name: ci
+on:
+  pull_request:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  bekci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: dokunulmaz-cekirdek
+        run: |
+          git fetch origin ${{ github.base_ref }} --quiet
+          DEGISEN=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
+          echo "$DEGISEN"
+          if echo "$DEGISEN" | grep -qE '^(kernel/|\.github/workflows/)'; then
+            echo "::error::Anayasa md. 1 — çekirdek ve workflow dosyaları dokunulmazdır."
+            exit 1
+          fi
+      - name: bahis-dili
+        run: |
+          git diff -U0 "origin/${{ github.base_ref }}...HEAD" -- '*.md' '*.html' '*.json' \
+            | grep '^+' | grep -vi 'bahis tavsiyesi' | grep -qiE 'iddaa|kupon|banko' \
+            && { echo "::error::Anayasa md. 4 — bahis dili yasak."; exit 1; } || true
+  testler:
+    needs: bekci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pytest --quiet
+      - name: birim-testleri
+        run: pytest -q
+      - name: kuru-kosu
+        env:
+          MOCK_LLM: "1"
+          MOCK_HTTP: "1"
+          VARDIYA_TARIH: "2026-08-21"
+        run: |
+          python kernel/runner.py --agent analist --gun thu
+          python kernel/runner.py --gun fri
+          git checkout -- . && git clean -qfd company site || true
+      - name: site
+        run: |
+          python site/build.py
+          python tests/check_html.py
+  birlestir:
+    needs: [testler]
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: otomatik-birlesme
+        env:
+          GH_TOKEN: ${{ secrets.AJAN_PAT }}
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} \
+            --repo "${{ github.repository }}" --squash --delete-branch \
+            || echo "::warning::birleşme ertelendi (çakışma ya da yarış olabilir)"

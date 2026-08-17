@@ -1,0 +1,107 @@
+name: vardiya
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    inputs:
+      agent:
+        description: "tek ajan id (boşsa günün tüm vardiyası)"
+        required: false
+        default: ""
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: vardiya
+  cancel-in-progress: false
+jobs:
+  vardiya:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.AJAN_PAT }}
+          fetch-depth: 0
+      - name: gun-ve-liste
+        id: liste
+        run: |
+          GUN=$(date -u +%a | tr 'A-Z' 'a-z')
+          echo "gun=$GUN" >> "$GITHUB_OUTPUT"
+          if [ -n "${{ inputs.agent }}" ]; then
+            echo "ajanlar=${{ inputs.agent }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "ajanlar=$(python kernel/runner.py --liste --gun "$GUN" | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+          fi
+      - name: vardiyalari-kos
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          FOOTBALL_DATA_KEY: ${{ secrets.FOOTBALL_DATA_KEY }}
+          GH_TOKEN: ${{ secrets.AJAN_PAT }}
+          VARDIYA_ARA_SN: "20"
+        run: |
+          git config user.name "otonom-studyo-ajan"
+          git config user.email "ajan@users.noreply.github.com"
+          TARIH=$(date -u +%F)
+          GUN="${{ steps.liste.outputs.gun }}"
+          for A in ${{ steps.liste.outputs.ajanlar }}; do
+            git checkout main && git pull --quiet
+            DAL="vardiya/$A/$TARIH"
+            git checkout -B "$DAL"
+            rm -f out/pr_queue.json
+            python kernel/runner.py --agent "$A" --gun "$GUN" || { echo "::warning::$A atlandı"; continue; }
+            git add -A
+            git diff --cached --quiet && { echo "$A: değişiklik yok"; continue; }
+            if [ -f out/pr_queue.json ]; then
+              BASLIK=$(python -c 'import json;print(json.load(open("out/pr_queue.json"))[-1]["baslik"])')
+              GOVDE=$(python -c 'import json;print(json.load(open("out/pr_queue.json"))[-1]["govde"])')
+              DRAFT=$(python -c 'import json;print(str(json.load(open("out/pr_queue.json"))[-1]["draft"]).lower())')
+            else
+              BASLIK="$A: $TARIH vardiyası"; GOVDE="Otonom vardiya çıktısı."; DRAFT="false"
+            fi
+            git commit -q -m "$BASLIK"
+            git push -f -q origin "$DAL"
+            EK=""; [ "$DRAFT" = "true" ] && EK="--draft"
+            gh pr create --head "$DAL" --title "$BASLIK" --body "$GOVDE" $EK || echo "::warning::$A PR açılamadı (belki zaten açık)"
+          done
+          git checkout main
+      - name: tasarim-geri-bildirimi
+        if: steps.liste.outputs.gun == 'wed' || steps.liste.outputs.gun == 'thu'
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GH_TOKEN: ${{ secrets.AJAN_PAT }}
+        run: |
+          NUM=$(gh pr list --state open --draft --json number,headRefName \
+                --jq '[.[]|select(.headRefName|startswith("vardiya/tasarimci"))][0].number' || true)
+          [ -z "$NUM" ] || [ "$NUM" = "null" ] && { echo "açık tasarım taslağı yok"; exit 0; }
+          mkdir -p out
+          gh pr diff "$NUM" > out/fark.diff || exit 0
+          for Y in pesimist websorumlusu romantik; do
+            python kernel/runner.py --agent "$Y" --mode yorum --girdi out/fark.diff || continue
+            [ -f "out/yorum-$Y.txt" ] && gh pr comment "$NUM" --body-file "out/yorum-$Y.txt"
+          done
+          git checkout -- . || true
+      - name: cumartesi-tasarim-revizyonu
+        if: steps.liste.outputs.gun == 'sat'
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GH_TOKEN: ${{ secrets.AJAN_PAT }}
+        run: |
+          NUM=$(gh pr list --state open --draft --json number,headRefName \
+                --jq '[.[]|select(.headRefName|startswith("vardiya/tasarimci"))][0].number' || true)
+          [ -z "$NUM" ] || [ "$NUM" = "null" ] && { echo "revize edilecek taslak yok"; exit 0; }
+          DAL=$(gh pr view "$NUM" --json headRefName --jq .headRefName)
+          mkdir -p out
+          gh pr view "$NUM" --json comments --jq '[.comments[].body]|join("\n---\n")' > out/yorumlar.txt || true
+          git fetch origin "$DAL" && git checkout "$DAL"
+          python kernel/runner.py --agent tasarimci --gun sat --mode revizyon --girdi out/yorumlar.txt || exit 0
+          git config user.name "otonom-studyo-ajan"
+          git config user.email "ajan@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || { git commit -q -m "tasarimci: geri bildirim revizyonu"; git push -q origin "$DAL"; }
+          gh pr ready "$NUM"
