@@ -25,9 +25,9 @@ def test_generic_shift(company):
     p = _run(company, "--agent", "gossip", "--day", "wed")
     assert p.returncode == 0, p.stderr
     mins = list((company / "company/minutes").glob("*gossip*"))
-    assert mins and "Mock shift" in mins[0].read_text()
+    assert any("Mock shift" in m.read_text(encoding="utf-8") for m in mins)
     hall = list((company / "company/hallway").glob("2026-08-19-gossip.txt"))
-    assert hall and "calm" in hall[0].read_text()
+    assert any("calm" in h.read_text(encoding="utf-8") for h in hall)
     q = json.loads((company / "out/pr_queue.json").read_text())
     assert q[-1]["agent"] == "gossip" and q[-1]["draft"] is False
 

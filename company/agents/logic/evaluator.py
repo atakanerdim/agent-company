@@ -28,30 +28,44 @@ def run(agent, ctx, chat, root):
     lpath = root / "company/data/league.json"
     league = json.loads(lpath.read_text(encoding="utf-8"))
     weekly = {}
+    played = []
     for persona in league["personas"]:
         ppath = root / f"company/data/predictions/{persona}/{week}.json"
+        if not ppath.exists():
+            # No predictions is not a score of zero. Counting it as a played week
+            # would put a phantom round into the public accuracy league.
+            weekly[persona] = {"points": 0, "detail": [], "submitted": False}
+            continue
         detail = []
-        if ppath.exists():
-            for t in json.loads(ppath.read_text(encoding="utf-8")):
-                if t["match_id"] in results:
-                    pts = score_prediction(t["score"], results[t["match_id"]])
-                    detail.append({"match_id": t["match_id"], "home": t["home"], "away": t["away"],
-                                   "predicted": t["score"],
-                                   "actual": "%d-%d" % results[t["match_id"]], "points": pts})
+        for t in json.loads(ppath.read_text(encoding="utf-8")):
+            if t["match_id"] in results:
+                pts = score_prediction(t["score"], results[t["match_id"]])
+                detail.append({"match_id": t["match_id"], "home": t["home"], "away": t["away"],
+                               "predicted": t["score"],
+                               "actual": "%d-%d" % results[t["match_id"]], "points": pts})
         total = sum(d["points"] for d in detail)
-        weekly[persona] = {"points": total, "detail": detail}
+        weekly[persona] = {"points": total, "detail": detail, "submitted": True}
+        played.append(persona)
         k = league["personas"][persona]
         k["points"] += total
         k["exact"] += sum(1 for d in detail if d["points"] == 3)
         k["outcome"] += sum(1 for d in detail if d["points"] == 1)
         k["weeks"] += 1
 
-    summary = "\n".join(f'- {p}: {v["points"]} points '
-                        f'({sum(1 for d in v["detail"] if d["points"]==3)} exact)'
-                        for p, v in weekly.items())
+    if not played:
+        raise ValueError(f"no persona submitted predictions for {week}; nothing to score")
+
+    summary = "\n".join(
+        f'- {p}: did not submit predictions this week'
+        if not v["submitted"] else
+        f'- {p}: {v["points"]} points ({sum(1 for d in v["detail"] if d["points"] == 3)} exact)'
+        for p, v in weekly.items())
     raw = chat(ctx["prompt"],
                f"[AGENT:evaluator][DAY:mon]\nWeek {week} scores:\n{summary}\n\n"
-               "Write a short, honest retro: who missed and why, what we learned. "
+               "Write a short, honest retro on what these numbers show. "
+               "Stay strictly within them: a persona listed as not submitting predictions "
+               "did not play this week, so never invent a reason for how it scored, and "
+               "never describe matches or reasoning you were not given. "
                'ANSWER ONLY with {"output_markdown": "...", "hallway": "... or null", '
                '"memory_add": "... or null"} as a JSON object.',
                want_json=True, root=root)
