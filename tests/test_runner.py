@@ -7,6 +7,15 @@ def _run(company, *arg, extra_env=None):
     return subprocess.run([sys.executable, str(company / "kernel/runner.py"), *arg],
                           cwd=company, env=env, capture_output=True, text=True)
 
+def _logged(company, needle):
+    """True if any log file mentions `needle`.
+
+    Never index into the glob: the company keeps real shift logs in company/log,
+    so more than one file can be present and their order is not defined.
+    """
+    return any(needle in f.read_text(encoding="utf-8")
+               for f in (company / "company/log").glob("*.log"))
+
 def test_list_friday(company):
     p = _run(company, "--list", "--day", "fri")
     assert p.returncode == 0, p.stderr
@@ -39,9 +48,8 @@ def test_broken_json_skipped(company):
     (company / "company/agents/prompts/broken.md").write_text("test")
     (company / "company/agents/memory/broken.md").write_text("empty")
     p = _run(company, "--agent", "broken", "--day", "wed")
-    assert p.returncode == 0
-    logs = list((company / "company/log").glob("*.log"))
-    assert logs and "broken" in logs[0].read_text()
+    assert p.returncode == 1, "a skipped shift must report failure"
+    assert _logged(company, "broken")
 
 def test_editor_agent(company):
     p = _run(company, "--agent", "designer", "--day", "tue")
@@ -55,6 +63,6 @@ def test_editor_area_guard(company):
     (company / "bad.json").write_text(json.dumps(bad))
     p = _run(company, "--agent", "webdev", "--day", "wed",
              extra_env={"MOCK_ANSWERS": str(company / "bad.json")})
-    assert p.returncode == 0
+    assert p.returncode == 1, "a rejected edit must report failure"
     assert (company / "kernel/runner.py").read_text() != "x"
-    assert list((company / "company/log").glob("*.log"))
+    assert _logged(company, "webdev")

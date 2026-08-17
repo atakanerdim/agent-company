@@ -25,6 +25,7 @@ def test_http_error_keeps_files(company):
     env = dict(os.environ, SHIFT_DATE="2026-08-20", MOCK_HTTP="fail")
     p = subprocess.run([sys.executable, str(company / "kernel/runner.py"), "--agent", "analyst", "--day", "thu"],
                        cwd=company, env=env, capture_output=True, text=True)
-    assert p.returncode == 0
+    assert p.returncode == 1, "a skipped shift must report failure"
     assert (company / "company/data/fixtures/2026-W34.json").read_text() == old
-    assert list((company / "company/log").glob("*.log"))
+    assert any("analyst" in f.read_text(encoding="utf-8")
+               for f in (company / "company/log").glob("*.log"))
