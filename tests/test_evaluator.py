@@ -28,4 +28,15 @@ def test_weekly_cycle(company):
     lg = json.loads((company / "company/data/league.json").read_text())
     assert lg["personas"]["statistician"] == {"points": 3, "exact": 1, "outcome": 0, "weeks": 1}
     mins = [m for m in (company / "company/minutes").iterdir() if "evaluator" in m.name]
-    assert mins and "Mock retro" in mins[0].read_text()
+    assert any("Mock retro" in m.read_text(encoding="utf-8") for m in mins)
+
+def test_week_without_predictions_is_not_scored(company):
+    """A silent week must not enter the public league as a round played and lost."""
+    _shift(company, "analyst", "thu", "2026-08-20")
+    _shift(company, "analyst", "mon", "2026-08-24")      # results exist, predictions never made
+    p = _shift(company, "evaluator", "mon", "2026-08-24")
+    assert p.returncode == 1, "with nothing to score the shift must be skipped, not invented"
+    lg = json.loads((company / "company/data/league.json").read_text())
+    for name, row in lg["personas"].items():
+        assert row["weeks"] == 0, f"{name} was credited with a week it never played"
+    assert not (company / "company/data/scores/2026-W34.json").exists()

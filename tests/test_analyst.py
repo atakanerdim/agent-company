@@ -11,7 +11,7 @@ def test_thursday_fixtures(company):
     f = json.loads((company / "company/data/fixtures/2026-W34.json").read_text())
     assert len(f) == 4 and f[0]["home"] == "Arsenal" and f[0]["league"] == "PL"
     mins = list((company / "company/minutes").glob("*analyst*"))
-    assert mins and "Mock briefing" in mins[0].read_text()
+    assert any("Mock briefing" in m.read_text(encoding="utf-8") for m in mins)
 
 def test_monday_results(company):
     p = _run(company, "mon", "2026-08-24")
