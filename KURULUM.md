@@ -4,17 +4,20 @@
 
 ## 1. Repoyu aç ve kodu gönder
 
-GitHub'da **public** repoyu açtın (`otonom-studyo`). Şimdi önemli nokta: git komutları
-**repo klasörünün içinde** çalışır. `otonom-studyo.zip`'i bir yere çıkar (ör. `C:\Projeler\`)
-— zip'in içinde `.git` geçmişi hazır. Sonra PowerShell'de:
+GitHub'da **public** repoyu açtın (`otonom-studyo`). Proje artık Cowork çalışma klasöründe
+duruyor ve `.git` geçmişi (9 commit) içinde hazır. PowerShell'de:
 
 ```powershell
-cd C:\Projeler\otonom-studyo
+cd C:\Users\ataka\Documents\Claude\Projects\Company\otonom-studyo
 git remote add origin https://github.com/atakanerdim/otonom-studyo.git
 git push -u origin main
 ```
 
-(`fatal: not a git repository` hatası aldıysan sebebi klasörün dışında olmandı.)
+Notlar:
+- Git komutları **repo klasörünün içinde** çalışır; `fatal: not a git repository` hatası
+  alırsan yanlış klasördesin.
+- `git status` ilk açılışta dosyaları "modified" gösterebilir; bu yalnızca dosya izni
+  (mode 100644 → 100755) farkıdır, içerik değişmemiştir. Susturmak için: `git config core.fileMode false`.
 
 ## 2. PAT oluştur (ajanların kimliği)
 
@@ -45,12 +48,12 @@ Repo → Settings → Pages → Build and deployment → Source: **GitHub Action
 ## 5. İlk kıvılcım
 
 - Repo → Actions → soldan **pages** → Run workflow (site ilk kez yayınlanır).
-- Sonra **vardiya** → Run workflow (agent alanını boş bırak: o günün vardiyası koşar;
-  ya da `gm` yaz: Genel Müdür ilk raporunu yazıp şirkete AD seçer).
+- Sonra **shift** → Run workflow (agent alanını boş bırak: o günün vardiyası koşar;
+  ya da `ceo` yaz: The CEO ilk raporunu yazıp şirkete AD seçer).
 
 ## 6. Ne göreceksin
 
-- Dakikalar içinde `vardiya/...` dalları ve PR'lar açılır; CI koşar; yeşilse kendi kendine birleşir.
+- Dakikalar içinde `shift/<ajan>/<tarih>` dalları ve PR'lar açılır; CI koşar; yeşilse kendi kendine birleşir.
 - Her birleşmede site yeniden yayınlanır: `https://KULLANICI_ADIN.github.io/otonom-studyo/`
 - Salı açılan tasarım taslağı, çarşamba-perşembe iş arkadaşı yorumlarını alır, cumartesi birleşir.
 - Sen hiçbir şeye dokunma — anayasa gereği zaten gerek yok. Felaket anında tek yetkin: `git revert`.
@@ -58,7 +61,7 @@ Repo → Settings → Pages → Build and deployment → Source: **GitHub Action
 ## Sorun giderme
 
 - **PR açıldı ama CI koşmadı:** `AJAN_PAT` eksik/yetkisiz demektir (2. adım).
-- **Vardiya "atlandı" uyarısı:** LLM limitleri dolmuş olabilir; zincir ertesi gün kendini toparlar,
+- **Actions'ta `::warning:: <ajan> skipped` uyarısı:** LLM limitleri dolmuş olabilir; zincir ertesi gün kendini toparlar,
   kayıt `company/log/` altındadır ve Scrum Master salı raporuna yazar.
 - **Fikstür gelmedi:** football-data anahtarını ve `company/log/`u kontrol et.
 
