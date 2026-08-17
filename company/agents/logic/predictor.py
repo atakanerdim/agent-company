@@ -12,7 +12,7 @@ def _week(ctx):
     return f"{y}-W{w:02d}"
 
 
-def calis(agent, ctx, chat, root):
+def run(agent, ctx, chat, root):
     week = _week(ctx)
     fpath = root / f"company/data/fixtures/{week}.json"
     if not fpath.exists():

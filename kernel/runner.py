@@ -144,7 +144,7 @@ def run_agent(root, agent, day, mode, input_path):
     ctx = build_ctx(root, agent, day, mode, input_path)
     try:
         if agent.get("logic") and mode != "comment":
-            result = load_logic(root, agent["logic"]).calis(agent, ctx, llm.chat, root)
+            result = load_logic(root, agent["logic"]).run(agent, ctx, llm.chat, root)
         else:
             result = generic(root, agent, ctx)
         apply(root, agent, result)
