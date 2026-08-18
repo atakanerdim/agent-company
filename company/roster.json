@@ -1,14 +1,14 @@
 [
-  {"id":"ceo","ad":"The CEO","rol":"management","logic":null,"alan":null,"gunler":["sun"],"draft_pr":false},
-  {"id":"scrum","ad":"The Scrum Master","rol":"process","logic":null,"alan":null,"gunler":["tue"],"draft_pr":false},
-  {"id":"analyst","ad":"The Analyst","rol":"predictions","logic":"analyst","alan":null,"gunler":["thu","mon"],"draft_pr":false},
-  {"id":"statistician","ad":"The Statistician","rol":"predictor","logic":"predictor","alan":null,"gunler":["fri"],"draft_pr":false},
-  {"id":"romantic","ad":"The Romantic","rol":"predictor","logic":"predictor","alan":null,"gunler":["fri"],"draft_pr":false},
-  {"id":"coolhead","ad":"The Coolhead","rol":"predictor","logic":"predictor","alan":null,"gunler":["fri"],"draft_pr":false},
-  {"id":"evaluator","ad":"The Evaluator","rol":"predictions","logic":"evaluator","alan":null,"gunler":["mon"],"draft_pr":false},
-  {"id":"pessimist","ad":"The Pessimist Critic","rol":"quality","logic":null,"alan":null,"gunler":["fri"],"draft_pr":false},
-  {"id":"gossip","ad":"The Gossip","rol":"culture","logic":null,"alan":null,"gunler":["wed"],"draft_pr":false},
-  {"id":"designer","ad":"The Designer","rol":"site","logic":"editor","alan":["company/agents/appearance.json","site/"],"gunler":["tue"],"draft_pr":true},
-  {"id":"webdev","ad":"The Web Dev","rol":"site","logic":"editor","alan":["site/"],"gunler":["wed","sat"],"draft_pr":false},
-  {"id":"process","ad":"The Process Owner","rol":"process","logic":"editor","alan":["company/agents/prompts/","company/agents/memory/","company/constitution.md"],"gunler":["tue"],"draft_pr":false}
+  {"id":"ceo","ad":"Vera Lindqvist","rol":"management","logic":null,"alan":null,"gunler":["sun"],"draft_pr":false},
+  {"id":"scrum","ad":"Oscar Delgado","rol":"process","logic":null,"alan":null,"gunler":["tue"],"draft_pr":false},
+  {"id":"analyst","ad":"Hana Sato","rol":"predictions","logic":"analyst","alan":null,"gunler":["thu","mon"],"draft_pr":false},
+  {"id":"statistician","ad":"Elias Brandt","rol":"predictor","logic":"predictor","alan":null,"gunler":["fri"],"draft_pr":false},
+  {"id":"romantic","ad":"Sofia Marchetti","rol":"predictor","logic":"predictor","alan":null,"gunler":["fri"],"draft_pr":false},
+  {"id":"coolhead","ad":"Amara Diallo","rol":"predictor","logic":"predictor","alan":null,"gunler":["fri"],"draft_pr":false},
+  {"id":"evaluator","ad":"Ruth Okafor","rol":"predictions","logic":"evaluator","alan":null,"gunler":["mon"],"draft_pr":false},
+  {"id":"pessimist","ad":"Viktor Stein","rol":"quality","logic":null,"alan":null,"gunler":["fri"],"draft_pr":false},
+  {"id":"gossip","ad":"Nadia Vance","rol":"culture","logic":null,"alan":null,"gunler":["wed"],"draft_pr":false},
+  {"id":"designer","ad":"Leo Fontaine","rol":"site","logic":"editor","alan":["company/agents/appearance.json","site/"],"gunler":["tue"],"draft_pr":true},
+  {"id":"webdev","ad":"Kiran Menon","rol":"site","logic":"editor","alan":["site/"],"gunler":["wed","sat"],"draft_pr":false},
+  {"id":"process","ad":"Miriam Adler","rol":"process","logic":"editor","alan":["company/agents/prompts/","company/agents/memory/","company/constitution.md"],"gunler":["tue"],"draft_pr":false}
 ]
