@@ -75,6 +75,25 @@ def test_identity_covers_the_roster_and_reads_as_prose():
         assert "You are" not in p["bio"], f"{p['id']}: bio is prompt text, not a description"
 
 
+def test_every_prompt_still_carries_its_own_name():
+    """The Process Owner may rewrite any prompt, but not rename a colleague.
+
+    A persona only knows who it is from its prompt: the kernel builds the system
+    message from the house rules and that file alone. Lose the name there and the
+    colleague stops signing its reviews, which is the only thing that tells the
+    office page who is speaking — and the roster and the portraits go on claiming
+    a person the text no longer describes.
+    """
+    rows = json.loads((ROOT / "company/roster.json").read_text(encoding="utf-8"))
+    for person in _identity():
+        prompt = (ROOT / f"company/agents/prompts/{person['id']}.md").read_text(encoding="utf-8")
+        assert person["person"] in prompt, \
+            f"{person['id']}: the prompt no longer names {person['person']}"
+        row = next(r for r in rows if r["id"] == person["id"])
+        assert row["ad"] == person["person"], \
+            f"{person['id']}: roster display name and identity disagree"
+
+
 def test_the_designer_can_actually_reach_the_wardrobe():
     """The freedom has to be wired up, not just described in a brief.
 
