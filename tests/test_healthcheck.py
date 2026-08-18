@@ -45,7 +45,9 @@ def test_transient_failure_is_retried(company, monkeypatch):
         return '{"ok": true}'
     monkeypatch.setattr(hc.llm, "_call", flaky)
     monkeypatch.setattr(hc.time, "sleep", lambda s: None)
-    assert hc._probe({"saglayici": "groq", "model": "m"}, "k") is None
+    assert hc._probe({"saglayici": "groq", "model": "m", "style": "openai",
+                "url": "https://example.invalid/v1/chat/completions",
+                "key_env": "GROQ_API_KEY"}, "k") is None
     assert len(calls) == 2, "a transient failure must be retried exactly once"
 
 def test_dead_model_is_not_retried(company, monkeypatch):
@@ -56,7 +58,9 @@ def test_dead_model_is_not_retried(company, monkeypatch):
         calls.append(1); raise _http(404)
     monkeypatch.setattr(hc.llm, "_call", gone)
     monkeypatch.setattr(hc.time, "sleep", lambda s: None)
-    err = hc._probe({"saglayici": "groq", "model": "m"}, "k")
+    err = hc._probe({"saglayici": "groq", "model": "m", "style": "openai",
+                "url": "https://example.invalid/v1/chat/completions",
+                "key_env": "GROQ_API_KEY"}, "k")
     assert isinstance(err, urllib.error.HTTPError) and err.code == 404
     assert len(calls) == 1, "a permanent failure must not be retried"
 

@@ -22,11 +22,15 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-KEYS = {"groq": "GROQ_API_KEY", "gemini": "GEMINI_API_KEY", "openrouter": "OPENROUTER_API_KEY"}
-BASES = {
-    "groq": "https://api.groq.com/openai/v1/chat/completions",
-    "openrouter": "https://openrouter.ai/api/v1/chat/completions",
-}
+# Which providers exist, where they live and which variable holds their key is data,
+# not code: it all comes from company/models.json, which is outside the immutable
+# kernel. Adding, dropping or reordering a provider is then an ordinary edit that
+# the company can make about itself — the alternative was a constitution exception
+# every time a free tier changed its mind.
+#
+# A link needs: saglayici (id), model, url, key_env, and style — "openai" for the
+# chat-completions shape every provider copies, "gemini" for Google's own.
+LINK_FIELDS = ("saglayici", "model", "url", "key_env", "style")
 
 
 # A request with no User-Agent is sent as "Python-urllib/3.x", which the bot
@@ -97,10 +101,10 @@ def _request(url, body, headers):
 
 
 def _call(step, key, system, user, want_json):
-    provider, model = step["saglayici"], step["model"]
-    if provider == "gemini":
-        url = ("https://generativelanguage.googleapis.com/v1beta/models/"
-               f"{model}:generateContent?key={key}")
+    """One request to one link. ``url`` may contain {model} and {key} placeholders."""
+    model = step["model"]
+    url = step["url"].replace("{model}", model).replace("{key}", key)
+    if step["style"] == "gemini":
         body = {"contents": [{"parts": [{"text": system + "\n\n" + user}]}]}
         if want_json:
             body["generationConfig"] = {"response_mime_type": "application/json"}
@@ -113,22 +117,36 @@ def _call(step, key, system, user, want_json):
     }
     if want_json:
         body["response_format"] = {"type": "json_object"}
-    resp = _request(BASES[provider], body, {"Authorization": f"Bearer {key}"})
+    resp = _request(url, body, {"Authorization": f"Bearer {key}"})
     return resp["choices"][0]["message"]["content"]
+
+
+def chain(root=Path(".")):
+    """The provider chain, validated. A malformed link is a configuration error and
+    should say so here rather than as a KeyError halfway through a shift."""
+    links = json.loads(
+        (Path(root) / "company/models.json").read_text(encoding="utf-8"))["zincir"]
+    for link in links:
+        missing = [f for f in LINK_FIELDS if not link.get(f)]
+        if missing:
+            raise ValueError(f"provider chain link {link!r} is missing {missing}")
+        if link["style"] not in ("openai", "gemini"):
+            raise ValueError(f"unknown provider style {link['style']!r}")
+    return links
 
 
 def chat(system, user, want_json=False, root=Path(".")):
     if os.environ.get("MOCK_LLM") == "1":
         return _mock(user)
-    chain = json.loads((Path(root) / "company/models.json").read_text(encoding="utf-8"))["zincir"]
+    links = chain(root)
     failures = []
     for pause in BACKOFF_SEC:
         if pause:
             time.sleep(pause)
         failures, worth_retrying = [], False
-        for step in chain:
+        for step in links:
             provider = step["saglayici"]
-            key = os.environ.get(KEYS.get(provider, ""), "")
+            key = os.environ.get(step["key_env"], "")
             if not key:
                 failures.append(f"{provider}: no API key in the environment")
                 continue
