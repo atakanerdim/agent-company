@@ -160,22 +160,29 @@ async function reviews(){
   if(Array.isArray(pulls)) pulls.forEach(p=>{ titles[p.number]=p.title });
   const people=await roster();
 
+  /* A comment counts only if a colleague signed it. Everything on this repository
+     goes through one account, so the signature is the only thing separating a
+     review by the Critic from a note somebody left while closing a stale branch —
+     and an unsigned note rendered here would read as if a colleague had said it. */
   const threads=new Map();
   for(const c of comments){
     const number=Number(String(c.issue_url||"").split("/").pop());
     if(!number||!c.body) continue;
+    const who=attribute(c.body,people);
+    if(!who) continue;
     if(!threads.has(number)) threads.set(number,[]);
-    threads.get(number).push(c);
+    threads.get(number).push({who,c});
   }
-  if(!threads.size) return quiet("Nothing on the record yet.");
+  if(!threads.size) return quiet(
+    "Nothing signed by a colleague yet. Reviews appear here midweek, once there is "+
+    "a design proposal for them to argue about.");
 
   const html=[...threads.entries()].slice(0,4).map(([number,list])=>{
-    const said=list.slice(0,6).map(c=>{
-      const who=attribute(c.body,people);
-      const said=unsign(c.body,who);
-      const text=said.length>700?said.slice(0,700)+"…":said;
-      return bubble(who?who.id:"_",who?who.name:"A colleague",
-                    (who?who.title+" · ":"")+String(c.created_at||"").slice(0,10),text);
+    const said=list.slice(0,6).map(({who,c})=>{
+      const body=unsign(c.body,who);
+      const text=body.length>700?body.slice(0,700)+"…":body;
+      return bubble(who.id,who.name,
+                    who.title+" · "+String(c.created_at||"").slice(0,10),text);
     }).join("");
     return `<div class="thread"><h3>${esc(titles[number]||"A proposed change")}</h3>
       <div class="feed">${said}</div></div>`;
