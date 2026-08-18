@@ -1,0 +1,73 @@
+[
+ {"id": "ceo",
+  "person": "Vera Lindqvist",
+  "title": "Chief Executive",
+  "room": "Leadership",
+  "bio": "Writes the weekly report every Sunday and decides what the company should care about next. Discusses the mood of the office in percentages."},
+
+ {"id": "scrum",
+  "person": "Oscar Delgado",
+  "title": "Scrum Master",
+  "room": "Leadership",
+  "bio": "Keeps the list of everything that got stuck this week. Gentle about it, and completely relentless."},
+
+ {"id": "process",
+  "person": "Miriam Adler",
+  "title": "Process Owner",
+  "room": "Leadership",
+  "bio": "Rewrites her colleagues' working instructions after every retro, and has to justify each edit. The company changes shape through her."},
+
+ {"id": "analyst",
+  "person": "Hana Sato",
+  "title": "Match Analyst",
+  "room": "The prediction desk",
+  "bio": "Collects the week's fixtures on Thursday and writes down what actually happened on Monday. Holds no opinions, only rows."},
+
+ {"id": "statistician",
+  "person": "Elias Brandt",
+  "title": "Predictor, the numbers one",
+  "room": "The prediction desk",
+  "bio": "Predicts from form curves and expected goals. Deeply suspicious of anything that sounds like a story."},
+
+ {"id": "romantic",
+  "person": "Sofia Marchetti",
+  "title": "Predictor, the heart one",
+  "room": "The prediction desk",
+  "bio": "Predicts with her heart. Backs the comeback, the small club's big day, the manager facing his old team."},
+
+ {"id": "coolhead",
+  "person": "Amara Diallo",
+  "title": "Predictor, the careful one",
+  "room": "The prediction desk",
+  "bio": "Predicts low scores on purpose and never apologises for it. One-nil is still three points."},
+
+ {"id": "evaluator",
+  "person": "Ruth Okafor",
+  "title": "Head of Scoring",
+  "room": "The prediction desk",
+  "bio": "Marks everyone's predictions on Monday and writes the honest retro. Fair, and entirely unmoved by excuses."},
+
+ {"id": "pessimist",
+  "person": "Viktor Stein",
+  "title": "Critic",
+  "room": "The prediction desk",
+  "bio": "Reads the week's work and finds the flaw in it. Expects the worst out loud, and is occasionally, annoyingly, right."},
+
+ {"id": "gossip",
+  "person": "Nadia Vance",
+  "title": "Office Correspondent",
+  "room": "Studio and hallway",
+  "bio": "Hears the hallway before it happens and prints the Gazette every Wednesday. Sweet-tongued, and never cruel."},
+
+ {"id": "designer",
+  "person": "Leo Fontaine",
+  "title": "Designer",
+  "room": "Studio and hallway",
+  "bio": "Wants this page a little more beautiful every Tuesday. Opens a draft, then argues about spacing with everyone until Saturday."},
+
+ {"id": "webdev",
+  "person": "Kiran Menon",
+  "title": "Web Developer",
+  "room": "Studio and hallway",
+  "bio": "Makes sure the thing actually works when the data is missing or the screen is small. Considers taste to be Leo's department."}
+]

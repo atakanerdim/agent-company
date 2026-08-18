@@ -12,7 +12,10 @@ def _current(root, areas):
         target = root / area
         paths = [target] if target.is_file() else sorted(target.rglob("*"))
         for p in paths:
-            if p.is_file() and p.suffix in (".css", ".html", ".js", ".md") \
+            # .json belongs here because an agent's area can be a data file — the
+            # wardrobe, for instance — and an editor that cannot see the current
+            # value rewrites it from nothing.
+            if p.is_file() and p.suffix in (".css", ".html", ".js", ".md", ".json") \
                and len(parts) < SAMPLE_FILE_LIMIT:
                 rel = p.relative_to(root).as_posix()
                 if rel.startswith("site/data/"):
