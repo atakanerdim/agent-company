@@ -32,3 +32,55 @@ table{width:100%;border-collapse:collapse;font-size:14px}
 td,th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left}
 canvas{max-height:280px}
 .empty{color:var(--muted);font-style:italic;padding:18px 0}
+
+/* ---- the office floor ------------------------------------------------ */
+/* Structure only. Which colours and spacing win is the Designer's call. */
+
+.explainer{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;margin:4px 0 8px}
+.explainer p{color:var(--muted);font-size:15px;max-width:62ch}
+.steps{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.steps li{border-left:2px solid var(--accent);padding:2px 0 2px 12px;
+  color:var(--muted);font-size:14px}
+.steps b{color:var(--text);display:block;font-weight:600}
+
+.room{margin:22px 0 0}
+.room > h3{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.desks{display:flex;flex-wrap:wrap;gap:14px}
+.desk{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px;display:flex;flex-direction:column;gap:8px;flex:1 1 280px;max-width:100%}
+.desk.on{border-color:var(--accent)}
+.desk-head{display:flex;gap:12px;align-items:center}
+.desk .avatar{width:56px;height:56px;border-radius:10px;display:block;flex:0 0 auto}
+.desk .who{min-width:0}
+.desk .who h3{font-size:15px;font-weight:600;margin:0}
+.desk .role{color:var(--muted);font-size:13px;margin:0}
+.desk .bio{color:var(--muted);font-size:14px;margin:0}
+.desk .days{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin:0}
+.day{font-size:11px;padding:1px 6px;border-radius:5px;border:1px solid var(--line);
+  color:var(--muted)}
+.day.on{border-color:var(--accent);color:var(--text)}
+.status{font-size:12px;color:var(--muted);margin:0}
+.status.in{color:var(--accent2)}
+.quiet{font-size:12px;color:var(--muted);text-decoration:underline;
+  text-underline-offset:3px;align-self:flex-start}
+.quiet:hover{color:var(--accent)}
+
+/* ---- hallway and reviews --------------------------------------------- */
+
+.feed{display:flex;flex-direction:column;gap:12px}
+.bubble{display:flex;gap:10px;align-items:flex-start}
+.bubble .avatar{width:44px;height:44px;border-radius:9px;display:block;flex:0 0 auto}
+.bubble > div{min-width:0;flex:1 1 auto}
+.bubble .said{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  border-top-left-radius:3px;padding:9px 13px}
+.bubble .said p{margin:0;font-size:14px}
+.bubble .meta{color:var(--muted);font-size:12px;margin-bottom:2px}
+.bubble .meta b{color:var(--text);font-weight:600}
+
+.thread{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px;margin-bottom:12px}
+.thread > h3{font-size:14px;font-weight:600;margin-bottom:10px}
+.thread .feed{margin-top:8px}

@@ -2,20 +2,41 @@
 Deterministic; runs in CI and on every Pages deploy. Makes no LLM calls."""
 import datetime as dt
 import json
-import re
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "site/data"
 
+sys.path.insert(0, str(ROOT / "assets"))
+import avatars  # noqa: E402  (the portrait parts library; pure computation, no network)
+
 
 def roster_public(root):
-    """Publish the roster with public field names; the internal file keeps the kernel schema."""
+    """Publish the roster as people.
+
+    Three files describe a colleague and they are deliberately separate: the kernel
+    schema in ``roster.json`` (which agent runs on which day), the human identity in
+    ``identity.json`` (who they are, in prose a visitor can read), and the wardrobe in
+    ``appearance.json`` (what they look like). The site wants all three at once.
+    """
     rows = json.loads((root / "company/roster.json").read_text(encoding="utf-8"))
-    return [{"id": r["id"], "name": r["ad"], "role": r["rol"],
-             "shifts": r["gunler"], "draft": bool(r.get("draft_pr"))} for r in rows]
+    people = {p["id"]: p for p in json.loads(
+        (root / "company/agents/identity.json").read_text(encoding="utf-8"))}
+    out = []
+    for r in rows:
+        who = people.get(r["id"], {})
+        out.append({"id": r["id"],
+                    "name": who.get("person", r["ad"]),
+                    "title": who.get("title", r["ad"]),
+                    "room": who.get("room", "The office"),
+                    "bio": who.get("bio", ""),
+                    "role": r["rol"],
+                    "shifts": r["gunler"],
+                    "draft": bool(r.get("draft_pr"))})
+    return out
 
 
 def changelog(root, agent_ids):
@@ -53,6 +74,7 @@ def main():
             shutil.copytree(ROOT / "company" / folder, OUT / folder)
     shutil.copytree(ROOT / "company/agents/prompts", OUT / "prompts")
     shutil.copy(ROOT / "company/constitution.md", OUT / "constitution.md")
+    avatars.write_all(OUT / "avatars", ROOT)
 
     roster = roster_public(ROOT)
     (OUT / "roster.json").write_text(
