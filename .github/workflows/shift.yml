@@ -1,13 +1,20 @@
 name: shift
 on:
   schedule:
-    - cron: "0 6 * * *"
+    # Deliberately not on the hour. Runners are queued when every cron in the world
+    # fires at :00, and the free model tiers are busiest at exactly that minute.
+    - cron: "17 6 * * *"
   workflow_dispatch:
     inputs:
       agent:
         description: "single agent id (empty = whole day's roster)"
         required: false
         default: ""
+      probe_only:
+        description: "only probe the provider chain — no shift, no PR"
+        type: boolean
+        required: false
+        default: false
 permissions:
   contents: write
   pull-requests: write
@@ -22,7 +29,20 @@ jobs:
         with:
           token: ${{ secrets.AJAN_PAT }}
           fetch-depth: 0
+      - name: probe-chain
+        if: ${{ inputs.probe_only }}
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          # The chain can only be measured from here. A provider that answers a
+          # laptop can still refuse a datacentre address, which is why a failure
+          # seen in a shift may never reproduce locally.
+          python kernel/healthcheck.py || echo "::warning::a link of the chain is down"
+          git checkout -- . || true
       - name: day-and-roster
+        if: ${{ !inputs.probe_only }}
         id: roster
         run: |
           DAY=$(date -u +%a | tr 'A-Z' 'a-z')
@@ -33,6 +53,7 @@ jobs:
             echo "agents=$(python kernel/runner.py --list --day "$DAY" | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
           fi
       - name: run-shifts
+        if: ${{ !inputs.probe_only }}
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -72,7 +93,7 @@ jobs:
           done
           git checkout main
       - name: model-healthcheck
-        if: steps.roster.outputs.day == 'sun'
+        if: ${{ steps.roster.outputs.day == 'sun' && !inputs.probe_only }}
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -95,7 +116,7 @@ jobs:
             || echo "::warning::health PR not created (may already exist)"
           git checkout main
       - name: design-feedback
-        if: steps.roster.outputs.day == 'wed' || steps.roster.outputs.day == 'thu'
+        if: ${{ (steps.roster.outputs.day == 'wed' || steps.roster.outputs.day == 'thu') && !inputs.probe_only }}
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -113,7 +134,7 @@ jobs:
           done
           git checkout -- . || true
       - name: saturday-design-revision
-        if: steps.roster.outputs.day == 'sat'
+        if: ${{ steps.roster.outputs.day == 'sat' && !inputs.probe_only }}
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
