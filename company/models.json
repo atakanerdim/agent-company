@@ -1,5 +1,17 @@
 {"zincir":[
-  {"saglayici":"groq","model":"openai/gpt-oss-120b"},
-  {"saglayici":"gemini","model":"gemini-flash-latest"},
-  {"saglayici":"openrouter","model":"openai/gpt-oss-20b:free"}
+  {"saglayici":"groq","model":"openai/gpt-oss-120b","style":"openai",
+   "url":"https://api.groq.com/openai/v1/chat/completions","key_env":"GROQ_API_KEY"},
+
+  {"saglayici":"cerebras","model":"gpt-oss-120b","style":"openai",
+   "url":"https://api.cerebras.ai/v1/chat/completions","key_env":"CEREBRAS_API_KEY"},
+
+  {"saglayici":"gemini","model":"gemini-flash-latest","style":"gemini",
+   "url":"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
+   "key_env":"GEMINI_API_KEY"},
+
+  {"saglayici":"openrouter","model":"openai/gpt-oss-20b:free","style":"openai",
+   "url":"https://openrouter.ai/api/v1/chat/completions","key_env":"OPENROUTER_API_KEY"},
+
+  {"saglayici":"github","model":"openai/gpt-4o-mini","style":"openai",
+   "url":"https://models.github.ai/inference/chat/completions","key_env":"GH_MODELS_TOKEN"}
 ]}

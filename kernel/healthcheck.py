@@ -53,11 +53,11 @@ def _probe(step, key):
 
 def check(root):
     """Returns (ok, report_lines) — one line per link in the chain."""
-    chain = json.loads((root / "company/models.json").read_text(encoding="utf-8"))["zincir"]
+    chain = llm.chain(root)
     lines, healthy = [], 0
     for step in chain:
         provider, model = step["saglayici"], step["model"]
-        key = os.environ.get(llm.KEYS.get(provider, ""), "")
+        key = os.environ.get(step["key_env"], "")
         if not key:
             lines.append(f"{provider} [{model}]: no API key in the environment")
             continue
@@ -80,7 +80,7 @@ def main():
         print(line)
     if ok:
         return 0
-    runner.log(root, "provider chain health: " + " | ".join(lines))
+    runner.log(root, "provider chain health: " + " | ".join(lines), "health")
     return 1
 
 

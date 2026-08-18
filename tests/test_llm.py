@@ -65,9 +65,37 @@ def test_every_request_identifies_itself(monkeypatch):
         seen.update(req.headers)
         return FakeResp(json.dumps({"choices": [{"message": {"content": "ok"}}]}))
     monkeypatch.setattr(llm.urllib.request, "urlopen", fake)
-    llm._call({"saglayici": "groq", "model": "m"}, "k", "s", "u", False)
+    llm._call({"saglayici": "groq", "model": "m", "style": "openai",
+                "url": "https://example.invalid/v1/chat/completions",
+                "key_env": "GROQ_API_KEY"}, "k", "s", "u", False)
     agent = seen.get("User-agent", "")
     assert agent.startswith("agent-company/") and "urllib" not in agent
+
+
+def test_the_shipped_chain_is_well_formed():
+    """The chain is configuration now, so a typo in it is a configuration error and
+    has to be caught here rather than at 06:17 in the morning."""
+    links = llm.chain(llm.Path(__file__).resolve().parents[1])
+    assert len(links) >= 2, "a chain of one is not a fallback"
+    for link in links:
+        for field in llm.LINK_FIELDS:
+            assert link.get(field), f"{link.get('saglayici')}: {field} missing"
+        assert link["url"].startswith("https://"), link["saglayici"]
+        assert link["key_env"].isupper(), link["key_env"]
+    ids = [l["saglayici"] for l in links]
+    assert len(set(ids)) == len(ids), f"duplicate provider in the chain: {ids}"
+
+
+def test_a_malformed_link_is_rejected(tmp_path):
+    (tmp_path / "company").mkdir()
+    (tmp_path / "company/models.json").write_text(
+        json.dumps({"zincir": [{"saglayici": "x", "model": "m", "style": "openai"}]}))
+    try:
+        llm.chain(tmp_path)
+    except ValueError as e:
+        assert "url" in str(e) and "key_env" in str(e)
+    else:
+        raise AssertionError("a link with no url should not be accepted")
 
 
 def test_a_busy_chain_is_walked_again(monkeypatch, instant):

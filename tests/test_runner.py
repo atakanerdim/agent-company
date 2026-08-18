@@ -51,6 +51,34 @@ def test_broken_json_skipped(company):
     assert p.returncode == 1, "a skipped shift must report failure"
     assert _logged(company, "broken")
 
+def test_two_failed_shifts_do_not_share_a_log_file(company):
+    """Each writer gets its own file, or the second one can never merge.
+
+    Both shifts branch off the same main and both append to the log. The first pull
+    request merges; the second is then a conflicting edit to the same lines of the
+    same file, and nothing in the company can resolve it — the pull request stays
+    open forever. This happened on 2026-08-18 to two shifts skipped in one morning.
+    """
+    roster = json.loads((company / "company/roster.json").read_text())
+    answers = {}
+    for name in ("brokenone", "brokentwo"):
+        roster.append({"id":name,"ad":name,"rol":"test","logic":None,"alan":None,
+                       "gunler":["wed"],"draft_pr":False})
+        (company / f"company/agents/prompts/{name}.md").write_text("test")
+        (company / f"company/agents/memory/{name}.md").write_text("empty")
+        answers[f"[AGENT:{name}]"] = "this is not json"
+    (company / "company/roster.json").write_text(json.dumps(roster))
+    (company / "answers.json").write_text(json.dumps(answers))
+
+    for name in ("brokenone", "brokentwo"):
+        p = _run(company, "--agent", name, "--day", "wed",
+                 extra_env={"MOCK_ANSWERS": str(company / "answers.json")})
+        assert p.returncode == 1, f"{name} should have failed: {p.stdout}"
+
+    written = sorted(f.name for f in (company / "company/log").glob("*.log"))
+    assert written == ["2026-08-19-brokenone.log", "2026-08-19-brokentwo.log"], written
+
+
 def test_editor_agent(company):
     p = _run(company, "--agent", "designer", "--day", "tue")
     assert p.returncode == 0, p.stderr

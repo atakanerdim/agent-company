@@ -42,8 +42,16 @@ def shift_date():
     return os.environ.get("SHIFT_DATE") or dt.date.today().isoformat()
 
 
-def log(root, message):
-    path = root / "company/log" / f"{shift_date()}.log"
+def log(root, message, slug=""):
+    """Append a line to today's log for ``slug``.
+
+    One file per writer, not one per day. Two shifts that fail on the same day each
+    open a branch off the same main and each append to the log; the first merges and
+    the second is left with a conflict it can never resolve on its own, so its pull
+    request sits open forever. Separate files cannot collide.
+    """
+    stem = f"{shift_date()}-{slug}" if slug else shift_date()
+    path = root / "company/log" / f"{stem}.log"
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "a", encoding="utf-8") as f:
         f.write(f"[{dt.datetime.utcnow().isoformat(timespec='seconds')}] {message}\n")
@@ -151,7 +159,7 @@ def run_agent(root, agent, day, mode, input_path):
         print(f"done: {agent['id']}")
         return True
     except Exception as e:  # a shift must never take the company down
-        log(root, f"{agent['id']} shift skipped: {type(e).__name__}: {e}")
+        log(root, f"{agent['id']} shift skipped: {type(e).__name__}: {e}", agent["id"])
         print(f"skipped: {agent['id']} ({e})", file=sys.stderr)
         return False
 
