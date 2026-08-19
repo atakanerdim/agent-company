@@ -1,0 +1,1 @@
+Kiran Menon: Added safe fallback for missing room names in office view.
