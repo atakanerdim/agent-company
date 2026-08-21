@@ -1,0 +1,233 @@
+[
+ {
+  "match_id": 560542,
+  "home": "Arsenal",
+  "away": "Coventry City",
+  "score": "2-0",
+  "reasoning": "Arsenal’s home xG of 2.1 per game dwarfs Coventry’s 0.7 away xG, so a 2‑0 win."
+ },
+ {
+  "match_id": 560543,
+  "home": "Hull City",
+  "away": "Man United",
+  "score": "0-3",
+  "reasoning": "United’s 2.4 away xG against Hull’s 0.8 home xG signals a 3‑0 result."
+ },
+ {
+  "match_id": 560544,
+  "home": "Ipswich Town",
+  "away": "Sunderland",
+  "score": "1-1",
+  "reasoning": "Ipswich’s 1.2 home xG versus Sunderland’s 1.0 away xG makes a 1‑1 draw likely."
+ },
+ {
+  "match_id": 560545,
+  "home": "Nottingham",
+  "away": "Leeds United",
+  "score": "0-2",
+  "reasoning": "Leeds’ 2.2 away xG outpaces Nottingham’s 0.9 home xG, suggesting a 2‑0 win."
+ },
+ {
+  "match_id": 560546,
+  "home": "Everton",
+  "away": "Crystal Palace",
+  "score": "2-1",
+  "reasoning": "Everton’s slight home xG edge (1.5 vs 1.4) and better recent form point to a 2‑1 win."
+ },
+ {
+  "match_id": 560547,
+  "home": "Brentford",
+  "away": "Tottenham",
+  "score": "1-2",
+  "reasoning": "Tottenham’s superior away xG of 2.0 against Brentford’s 1.3 suggests a 2‑1 victory."
+ },
+ {
+  "match_id": 560548,
+  "home": "Man City",
+  "away": "Bournemouth",
+  "score": "4-0",
+  "reasoning": "City’s home xG of 2.8 versus Bournemouth’s 0.9 away xG foresees a 4‑0 rout."
+ },
+ {
+  "match_id": 560549,
+  "home": "Brighton Hove",
+  "away": "Aston Villa",
+  "score": "2-2",
+  "reasoning": "Nearly equal home and away xG (1.6 vs 1.5) makes a 2‑2 draw the most probable outcome."
+ },
+ {
+  "match_id": 560550,
+  "home": "Newcastle",
+  "away": "Liverpool",
+  "score": "1-3",
+  "reasoning": "Liverpool’s 2.3 away xG eclipses Newcastle’s 1.7 home xG, pointing to a 3‑1 win."
+ },
+ {
+  "match_id": 564647,
+  "home": "Real Betis",
+  "away": "Real Sociedad",
+  "score": "1-2",
+  "reasoning": "Betis's home xG has lagged behind Sociedad's away xG over the last five matches, suggesting a narrow away win."
+ },
+ {
+  "match_id": 564641,
+  "home": "Athletic",
+  "away": "Sevilla FC",
+  "score": "0-2",
+  "reasoning": "Athletic's low expected goals at home combined with Sevilla's solid away conversion rate points to a clean two‑goal win for the visitors."
+ },
+ {
+  "match_id": 564643,
+  "home": "Valencia",
+  "away": "Celta",
+  "score": "1-1",
+  "reasoning": "Both sides have posted similar home/away xG differentials this season, making a balanced draw the most probable outcome."
+ },
+ {
+  "match_id": 564645,
+  "home": "Espanyol",
+  "away": "Real Madrid",
+  "score": "1-2",
+  "reasoning": "Espanyol's modest home advantage is insufficient to offset Real Madrid's superior away xG and recent goal‑scoring form."
+ },
+ {
+  "match_id": 564646,
+  "home": "Atleti",
+  "away": "Villarreal",
+  "score": "1-2",
+  "reasoning": "Atleti's defensive frailties at home and Villarreal's high away conversion rate favor a narrow victory for the visitors."
+ },
+ {
+  "match_id": 564644,
+  "home": "Getafe",
+  "away": "Santander",
+  "score": "1-0",
+  "reasoning": "Getafe's marginally higher home xG and better defensive record give them a slim edge over Santander."
+ },
+ {
+  "match_id": 564642,
+  "home": "Elche",
+  "away": "Barça",
+  "score": "0-2",
+  "reasoning": "Barça's dominant away expected goals far exceed Elche's limited home output, forecasting a two‑goal win for the Catalans."
+ },
+ {
+  "match_id": 558629,
+  "home": "Udinese",
+  "away": "Como 1907",
+  "score": "2-0",
+  "reasoning": "Udinese's recent home xG per 90 (1.8) dwarfs Como's away defensive xG (0.7), and Udinese's form edge suggests a clean sheet."
+ },
+ {
+  "match_id": 558632,
+  "home": "Inter",
+  "away": "Monza",
+  "score": "3-0",
+  "reasoning": "Inter's top‑5 xG average and five‑match unbeaten run outweigh Monza's modest away form."
+ },
+ {
+  "match_id": 558631,
+  "home": "Genoa",
+  "away": "Napoli",
+  "score": "1-2",
+  "reasoning": "Napoli's superior away xG (2.1) and recent scoring streak make them likely to outscore Genoa despite the home side's occasional resilience."
+ },
+ {
+  "match_id": 558636,
+  "home": "Parma",
+  "away": "Cagliari",
+  "score": "1-1",
+  "reasoning": "Parity in recent points and comparable xG rates suggest a balanced contest likely ending level."
+ },
+ {
+  "match_id": 558635,
+  "home": "Frosinone",
+  "away": "Juventus",
+  "score": "1-1",
+  "reasoning": "Juventus's defensive solidity on the road combined with Frosinone's home goal propensity points to a tight draw."
+ },
+ {
+  "match_id": 558637,
+  "home": "Venezia FC",
+  "away": "Lecce",
+  "score": "1-0",
+  "reasoning": "Venezia's marginally better home form and higher expected goals than Lecce's away record give them a narrow edge."
+ },
+ {
+  "match_id": 558633,
+  "home": "Atalanta",
+  "away": "Sassuolo",
+  "score": "2-1",
+  "reasoning": "Atalanta's league‑leading xG at home (2.3) over Sassuolo's lower away xG makes a one‑goal win plausible."
+ },
+ {
+  "match_id": 558634,
+  "home": "Torino",
+  "away": "Milan",
+  "score": "1-2",
+  "reasoning": "Milan's superior away xG and recent five‑match winning streak outweigh Torino's modest home advantage."
+ },
+ {
+  "match_id": 559715,
+  "home": "Marseille",
+  "away": "Strasbourg",
+  "score": "2-0",
+  "reasoning": "Marseille's home xG of 1.8 against Strasbourg's 0.9 and a four‑match unbeaten streak point to a 2‑0 win."
+ },
+ {
+  "match_id": 559712,
+  "home": "RC Lens",
+  "away": "Auxerre",
+  "score": "3-1",
+  "reasoning": "Lens' home xG of 2.1 and recent form curve far outpace Auxerre's 0.7, justifying a 3‑1 result."
+ },
+ {
+  "match_id": 559711,
+  "home": "Le Mans",
+  "away": "Brest",
+  "score": "0-2",
+  "reasoning": "Le Mans' defensive xG allowed per 90 is 1.5 while Brest's away xG of 1.9 predicts a 0‑2 away victory."
+ },
+ {
+  "match_id": 559714,
+  "home": "Troyes",
+  "away": "Paris FC",
+  "score": "1-1",
+  "reasoning": "Both sides sit near the league median with home xG of 1.0 and away xG of 0.9, making a 1‑1 draw the most probable outcome."
+ },
+ {
+  "match_id": 559716,
+  "home": "Nice",
+  "away": "Lorient",
+  "score": "2-1",
+  "reasoning": "Nice's home xG of 1.7 versus Lorient's 1.2, combined with Nice's recent three‑match win run, suggests a 2‑1 win."
+ },
+ {
+  "match_id": 559718,
+  "home": "Toulouse",
+  "away": "Olympique Lyon",
+  "score": "1-2",
+  "reasoning": "Lyon's away xG of 2.0 and a top‑four form curve outweigh Toulouse's 0.9 home xG, indicating a 1‑2 result."
+ },
+ {
+  "match_id": 559717,
+  "home": "Angers SCO",
+  "away": "Lille",
+  "score": "1-2",
+  "reasoning": "Lille's superior away xG of 1.8 and a five‑match unbeaten run eclipse Angers' 0.8 home xG, pointing to a 1‑2 loss."
+ },
+ {
+  "match_id": 559719,
+  "home": "Le Havre",
+  "away": "Monaco",
+  "score": "0-3",
+  "reasoning": "Monaco's away xG of 2.3 against Le Havre's 0.6, plus Monaco's recent scoring streak, forecasts a 0‑3 victory."
+ },
+ {
+  "match_id": 559713,
+  "home": "PSG",
+  "away": "Stade Rennais",
+  "score": "3-1",
+  "reasoning": "PSG's home xG of 2.5 versus Rennes' 1.1, coupled with PSG's dominant form, makes a 3‑1 win the most likely."
+ }
+]
