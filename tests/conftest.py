@@ -1,4 +1,4 @@
-import json, os, shutil, sys
+import json, os, shutil, sys, time
 from pathlib import Path
 import pytest
 
@@ -17,11 +17,32 @@ ACCUMULATED = ("company/minutes", "company/hallway", "company/log",
 EMPTY_PERSONA = {"points": 0, "exact": 0, "outcome": 0, "weeks": 0}
 
 
+def _rmtree(path):
+    """Remove a tree, allowing for Windows taking its time to let go.
+
+    On Windows a file that has just been unlinked can keep its directory entry
+    alive until the last handle on it closes — an indexer's, a virus scanner's —
+    and the rmdir that follows fails with "Access is denied" on a directory that
+    is, as far as the program is concerned, already empty. The company's data now
+    lives one level deeper (per competition track), which made a fixture that had
+    always been fine start failing on Windows while staying green on the Linux
+    runner. Retrying briefly costs nothing where the problem does not exist.
+    """
+    for attempt in range(6):
+        try:
+            shutil.rmtree(path)
+            return
+        except PermissionError:
+            if attempt == 5:
+                raise
+            time.sleep(0.25)
+
+
 def _wipe(directory):
     for item in directory.glob("*"):
         if item.name == ".gitkeep":
             continue
-        shutil.rmtree(item) if item.is_dir() else item.unlink()
+        _rmtree(item) if item.is_dir() else item.unlink()
 
 
 @pytest.fixture
