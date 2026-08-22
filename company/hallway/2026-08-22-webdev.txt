@@ -1,0 +1,1 @@
+Kiran Menon: Added safeEsc to prevent undefined text in desk cards.
