@@ -11,7 +11,8 @@ sys.path.insert(0, str(ROOT / "kernel"))
 # fixture wipes it: tests describe behaviour, never accumulated history.
 ACCUMULATED = ("company/minutes", "company/hallway", "company/log",
                "company/data/scores", "company/data/predictions",
-               "company/data/fixtures", "company/data/results")
+               "company/data/fixtures", "company/data/results",
+               "company/data/league-archive")
 
 EMPTY_PERSONA = {"points": 0, "exact": 0, "outcome": 0, "weeks": 0}
 
@@ -40,7 +41,9 @@ def company(tmp_path, monkeypatch):
         _wipe(tmp_path / rel)
     league_path = tmp_path / "company/data/league.json"
     league = json.loads(league_path.read_text(encoding="utf-8"))
-    league["personas"] = {name: dict(EMPTY_PERSONA) for name in league["personas"]}
+    for record in league["tracks"].values():
+        record["personas"] = {n: dict(EMPTY_PERSONA) for n in record["personas"]}
+        record["first_week"] = record["last_week"] = None
     league_path.write_text(json.dumps(league), encoding="utf-8")
 
     monkeypatch.setenv("MOCK_LLM", "1")

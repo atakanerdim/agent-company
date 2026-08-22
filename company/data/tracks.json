@@ -1,0 +1,13 @@
+{"tracks": [
+  {"id": "domestic", "label": "Domestic leagues",
+   "competitions": ["PL", "PD", "BL1", "SA", "FL1"],
+   "fixtures": {"day": "thu", "from": 1,  "to": 3},
+   "predict":  {"day": "fri"},
+   "results":  {"day": "mon", "from": -3, "to": -1}},
+
+  {"id": "europe", "label": "European nights",
+   "competitions": ["CL"],
+   "fixtures": {"day": "mon", "from": 1,  "to": 2},
+   "predict":  {"day": "tue"},
+   "results":  {"day": "thu", "from": -2, "to": -1}}
+]}

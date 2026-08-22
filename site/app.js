@@ -5,7 +5,7 @@ const REPO = "atakanerdim/agent-company";
 async function j(p){ try{ const r=await fetch("data/"+p); return r.ok? r.json():null }catch(e){ return null } }
 async function t(p){ try{ const r=await fetch("data/"+p); return r.ok? r.text():null }catch(e){ return null } }
 const el=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 // safeEsc returns an empty string for null/undefined values, avoiding literal "undefined" in the UI
 const safeEsc=s=> s==null? "" : esc(s);
 
@@ -115,5 +115,204 @@ async function hallway(){
   if(html) target.innerHTML=html;
 }
 
-/** Exported entry points */
-common(); office(); hallway();
+/* ---- what they said about each other's work ---------------------------- */
+/* Read straight from the public record rather than baked in at build time, so the
+   build stays offline and deterministic. Unauthenticated and rate limited; if it
+   is refused the section simply says so rather than breaking the page. */
+
+/* Comments are all posted through the same account, so the only way to tell who
+   wrote one is the signature the reviewer opens with. Find it, then take it off
+   the front of the text: the name is already shown above the bubble. */
+function attribute(body,people){
+  const head=body.slice(0,120).toLowerCase();
+  for(const p of people){
+    if(head.includes(p.name.toLowerCase())||head.includes(p.title.toLowerCase())) return p;
+  }
+  return null;
+}
+
+function unsign(body,person){
+  if(!person) return body.trim();
+  const name=person.name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  const title=person.title.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+  return body.replace(
+    new RegExp(`^[\\s\\-–—]*${name}(\\s*[,–—-]\\s*${title})?\\s*[.:–—-]*\\s*`,"i"),
+    "").trim();
+}
+
+async function reviews(){
+  if(!el("reviews")) return;
+  const quiet=m=>{ el("reviews").innerHTML=`<p class="empty">${m}</p>` };
+  let comments=null, pulls=null;
+  try{
+    [comments,pulls]=await Promise.all([
+      fetch(`https://api.github.com/repos/${REPO}/issues/comments?per_page=30&sort=created&direction=desc`)
+        .then(r=>r.ok?r.json():null),
+      fetch(`https://api.github.com/repos/${REPO}/pulls?state=all&per_page=20`)
+        .then(r=>r.ok?r.json():null)
+    ]);
+  }catch(e){ /* offline or blocked; fall through */ }
+
+  if(!Array.isArray(comments)) return quiet(
+    "The public record could not be reached just now. It is read live, so this section "+
+    "depends on the network rather than on the company.");
+  if(!comments.length) return quiet(
+    "Nothing yet. Colleagues review the Designer's proposals midweek, so this fills up "+
+    "once there is a design change to argue about.");
+
+  const titles={};
+  if(Array.isArray(pulls)) pulls.forEach(p=>{ titles[p.number]=p.title });
+  const people=await roster();
+
+  /* A comment counts only if a colleague signed it. Everything on this repository
+     goes through one account, so the signature is the only thing separating a
+     review by the Critic from a note somebody left while closing a stale branch —
+     and an unsigned note rendered here would read as if a colleague had said it. */
+  const threads=new Map();
+  for(const c of comments){
+    const number=Number(String(c.issue_url||"").split("/").pop());
+    if(!number||!c.body) continue;
+    const who=attribute(c.body,people);
+    if(!who) continue;
+    if(!threads.has(number)) threads.set(number,[]);
+    threads.get(number).push({who,c});
+  }
+  if(!threads.size) return quiet(
+    "Nothing signed by a colleague yet. Reviews appear here midweek, once there is "+
+    "a design proposal for them to argue about.");
+
+  const html=[...threads.entries()].slice(0,4).map(([number,list])=>{
+    const said=list.slice(0,6).map(({who,c})=>{
+      const body=unsign(c.body,who);
+      const text=body.length>700?body.slice(0,700)+"…":body;
+      return bubble(who.id,who.name,
+                    who.title+" · "+String(c.created_at||"").slice(0,10),text);
+    }).join("");
+    return `<div class="thread"><h3>${esc(titles[number]||"A proposed change")}</h3>
+      <div class="feed">${said}</div></div>`;
+  }).join("");
+  el("reviews").innerHTML=html;
+}
+
+/* ---- dashboard --------------------------------------------------------- */
+
+async function dashboard(){
+  if(!el("events")) return;
+  const log=await j("changelog.json");
+  if(log&&log.length) el("events").innerHTML=log.slice(0,12).map(x=>
+    `<div class="row"><span>${esc(x.message)}</span><span class="muted">${esc(x.date)}</span></div>`).join("");
+
+  if(el("on-duty")){
+    const people=await roster();
+    const inToday=people.filter(p=>p.shifts.includes(today()));
+    el("on-duty").innerHTML=inToday.length
+      ? `<div class="desks">${inToday.map(p=>`<article class="desk on">
+          <div class="desk-head">${face(p.id,56)}
+            <div class="who"><h3>${esc(p.name)}</h3>
+            <p class="role">${esc(p.title)}</p></div></div>
+          <p class="bio">${esc(p.bio)}</p></article>`).join("")}</div>`
+      : `<p class="empty">Nobody is rostered for ${FULL[today()]}. The office is empty today.</p>`;
+  }
+}
+
+/* ---- prediction desk ---------------------------------------------------- */
+
+async function predictionDesk(){
+  if(!el("league-tables")) return;
+  const people=Object.fromEntries((await roster()).map(p=>[p.id,p]));
+  const shown=id=>people[id]?people[id].name:id;
+  const doc=await j("tracks.json");
+  const tracks=(doc&&doc.tracks)?doc.tracks:[];
+  if(!tracks.length) return;
+
+  /* ---- one accuracy table per track ---- */
+  const league=await j("league.json");
+  const charts=[];
+  if(league&&league.tracks){
+    const blocks=tracks.filter(t=>league.tracks[t.id]).map(t=>{
+      const rows=Object.entries(league.tracks[t.id].personas)
+        .sort((a,b)=>b[1].points-a[1].points);
+      const played=rows.some(([,k])=>k.weeks>0);
+      charts.push({id:t.id,rows,played});
+      return `<section class="track"><h3>${esc(t.label)}</h3>`+
+        (played?`<canvas id="chart-${esc(t.id)}" aria-label="${esc(t.label)} accuracy chart"
+           role="img"></canvas>`:"")+
+        "<table><tr><th>Predictor</th><th>Points</th><th>Exact scores</th>"+
+        "<th>Correct outcomes</th><th>Weeks</th></tr>"+
+        rows.map(([id,k])=>`<tr><td>${esc(shown(id))}</td><td>${k.points}</td>`+
+          `<td>${k.exact}</td><td>${k.outcome}</td><td>${k.weeks}</td></tr>`).join("")+
+        "</table>"+
+        (played?"":`<p class="empty">No round scored yet.</p>`)+
+        "</section>";
+    }).join("");
+    if(blocks) el("league-tables").innerHTML=blocks;
+  }
+  for(const c of charts){
+    if(!c.played||!window.Chart||!el("chart-"+c.id)) continue;
+    new Chart(el("chart-"+c.id),{type:"bar",
+      data:{labels:c.rows.map(x=>shown(x[0])),
+            datasets:[{label:"points",data:c.rows.map(x=>x[1].points),backgroundColor:"#5b8cff"}]},
+      options:{plugins:{legend:{display:false}},
+               scales:{y:{beginAtZero:true,ticks:{color:"#9aa3b5"}},x:{ticks:{color:"#9aa3b5"}}}}});
+  }
+
+  /* ---- this week's predictions, grouped by track ---- */
+  const manifest=await j("manifest.json"); if(!manifest) return;
+  const sets=manifest.files.filter(f=>/^predictions\/[^/]+\/[^/]+\/.+\.json$/.test(f)).sort();
+  if(!sets.length) return;
+  const allWeeks=new Set();
+  let html="";
+  for(const t of tracks){
+    const mine=sets.filter(f=>f.split("/")[2]===t.id);
+    if(!mine.length) continue;
+    const weeks=[...new Set(mine.map(f=>f.split("/").pop().replace(".json","")))].sort();
+    weeks.forEach(w=>allWeeks.add(w));
+    const last=weeks[weeks.length-1];
+    let rows="";
+    for(const f of mine.filter(x=>x.endsWith("/"+last+".json"))){
+      const id=f.split("/")[1], data=await j(f); if(!data) continue;
+      const p=people[id];
+      rows+=`<div class="bubble" style="margin:18px 0 8px">${face(id,44)}
+        <div><div class="meta"><b>${esc(shown(id))}</b>${p?" · "+esc(p.title):""} · ${esc(last)}</div>
+        <div class="muted">${p?esc(p.bio):""}</div></div></div>`+
+        data.map(x=>`<div class="row"><span>${esc(x.home)} ${esc(x.score)} ${esc(x.away)}</span>`+
+          `<span class="muted">${esc(x.reasoning)}</span></div>`).join("");
+    }
+    if(rows) html+=`<section class="track"><h3>${esc(t.label)}</h3>${rows}</section>`;
+  }
+  if(html) el("prediction-list").innerHTML=html;
+  if(el("archive")&&allWeeks.size) el("archive").innerHTML=
+    [...allWeeks].sort().map(w=>`<span class="badge" style="margin-right:8px">${esc(w)}</span>`).join("");
+}
+
+async function changelog(){
+  if(!el("changelog")) return;
+  const log=await j("changelog.json");
+  if(log&&log.length) el("changelog").innerHTML="<table><tr><th>Date</th><th>Change</th></tr>"+
+    log.map(x=>`<tr><td class="muted">${esc(x.date)}</td><td>${esc(x.message)}</td></tr>`).join("")+"</table>";
+}
+
+async function minutes(){
+  if(!el("minutes")) return;
+  const manifest=await j("manifest.json"); if(!manifest) return;
+  const files=manifest.files.filter(f=>/^minutes\/.+\.md$/.test(f))
+    .sort().reverse().slice(0,20);
+  if(!files.length) return;
+  const people=Object.fromEntries((await roster()).map(p=>[p.id,p]));
+  el("minutes").innerHTML=files.map(f=>{
+    const stem=f.slice("minutes/".length,-3);
+    const p=people[stem.slice(11)];
+    const label=(p?p.name+" — ":"")+stem.slice(0,10);
+    return `<div class="row"><a href="#" data-min="${esc(f)}">${esc(label)}</a></div>
+            <pre hidden id="m-${esc(f)}"></pre>`;
+  }).join("");
+  document.querySelectorAll("[data-min]").forEach(link=>
+    link.addEventListener("click",async e=>{
+      e.preventDefault();
+      const pre=el("m-"+link.dataset.min);
+      if(!pre.hidden){ pre.hidden=true; return }
+      pre.textContent=(await t(link.dataset.min))||"unavailable"; pre.hidden=false;
+    }));
+}
+
+common(); dashboard(); predictionDesk(); office(); hallway(); reviews(); minutes(); changelog();

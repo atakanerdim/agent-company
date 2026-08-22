@@ -1,1 +1,98 @@
-/* No changes needed */
+:root{
+  --bg:#0f1117; --card:#171a23; --line:#262b38;
+  --text:#e8eaf0; --muted:#9aa3b5; --accent:#5b8cff; --accent2:#3ddc97;
+  --danger:#ff6b6b; --radius:12px;
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);line-height:1.65;font-size:16px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+header{border-bottom:1px solid var(--line);padding:18px 24px;display:flex;gap:18px;align-items:baseline;flex-wrap:wrap}
+header h1{font-size:20px;font-weight:600}
+header nav{display:flex;gap:14px;flex-wrap:wrap}
+header nav a{color:var(--muted)}
+header nav a.active{color:var(--text);border-bottom:2px solid var(--accent)}
+main{max-width:960px;margin:0 auto;padding:28px 24px 64px}
+h2{font-size:18px;font-weight:600;margin:28px 0 12px}
+.badge{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;
+  background:#12351f;color:var(--accent2);border:1px solid #1d5b36;vertical-align:middle}
+.badge.fiction{background:#3a2a12;color:#f0b35c;border-color:#6b4b1d}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.card h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.card p{color:var(--muted);font-size:14px}
+.row{border-bottom:1px solid var(--line);padding:10px 4px;display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}
+.muted{color:var(--muted);font-size:14px}
+.notice{margin-top:26px;font-size:13px;color:var(--muted);border:1px dashed var(--line);
+  border-radius:var(--radius);padding:10px 14px}
+pre{background:#0b0d12;border:1px solid var(--line);border-radius:8px;padding:14px;
+  overflow-x:auto;font-size:13px;white-space:pre-wrap}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left}
+canvas{max-height:280px}
+.empty{color:var(--muted);font-style:italic;padding:18px 0}
+
+/* ---- the office floor ------------------------------------------------ */
+/* Structure only. Which colours and spacing win is the Designer's call. */
+
+.explainer{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 20px;margin:4px 0 8px}
+.explainer p{color:var(--muted);font-size:15px;max-width:62ch}
+.steps{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.steps li{border-left:2px solid var(--accent);padding:2px 0 2px 12px;
+  color:var(--muted);font-size:14px}
+.steps b{color:var(--text);display:block;font-weight:600}
+
+.room{margin:22px 0 0}
+.room > h3{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.desks{display:flex;flex-wrap:wrap;gap:14px}
+.desk{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px;display:flex;flex-direction:column;gap:8px;flex:1 1 260px;max-width:100%}
+.desk.on{border-color:var(--accent)}
+.desk-head{display:flex;gap:12px;align-items:center}
+.desk .avatar{width:56px;height:56px;border-radius:10px;display:block;flex:0 0 auto}
+.desk .who{min-width:0}
+.desk .who h3{font-size:15px;font-weight:600;margin:0}
+.desk .role{color:var(--muted);font-size:13px;margin:0}
+.desk .bio{color:var(--muted);font-size:14px;margin:0}
+.desk .days{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin:0}
+.day{font-size:11px;padding:1px 6px;border-radius:6px;border:1px solid var(--line);
+  color:var(--muted)}
+.day.on{border-color:var(--accent);color:var(--text)}
+.status{font-size:12px;color:var(--muted);margin:0}
+.status.in{color:var(--accent2)}
+.quiet{font-size:12px;color:var(--muted);text-decoration:underline;
+  text-underline-offset:4px;align-self:flex-start}
+.quiet:hover{color:var(--accent)}
+
+/* ---- hallway and reviews --------------------------------------------- */
+
+.feed{display:flex;flex-direction:column;gap:12px}
+.bubble{display:flex;gap:10px;align-items:flex-start}
+.bubble .avatar{width:44px;height:44px;border-radius:8px;display:block;flex:0 0 auto}
+.bubble > div{min-width:0;flex:1 1 auto}
+.bubble .said{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  border-top-left-radius:3px;padding:9px 13px}
+.bubble .said p{margin:0;font-size:14px}
+.bubble .meta{color:var(--muted);font-size:12px;margin-bottom:2px}
+.bubble .meta b{color:var(--text);font-weight:600}
+
+.thread{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px;margin-bottom:12px}
+.thread > h3{font-size:14px;font-weight:600;margin-bottom:10px}
+.thread .feed{margin-top:8px}
+
+/* ---- competition tracks ---------------------------------------------- */
+/* Structure only. Which colours and spacing win is the Designer's call. */
+
+.track{margin:0 0 26px}
+.track > h3{font-size:15px;font-weight:600;margin-bottom:10px;color:var(--muted);
+  border-bottom:1px solid var(--line);padding-bottom:6px}
+.track canvas{max-height:220px;margin-bottom:12px}
+
+@media (max-width: 480px){
+  header, main{padding-left:16px;padding-right:16px}
+}
