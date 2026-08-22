@@ -1,4 +1,4 @@
-import json, os, shutil, sys, time
+import json, os, shutil, stat, sys
 from pathlib import Path
 import pytest
 
@@ -18,24 +18,25 @@ EMPTY_PERSONA = {"points": 0, "exact": 0, "outcome": 0, "weeks": 0}
 
 
 def _rmtree(path):
-    """Remove a tree, allowing for Windows taking its time to let go.
+    """Remove a tree, clearing the read-only flag Windows refuses to delete through.
 
-    On Windows a file that has just been unlinked can keep its directory entry
-    alive until the last handle on it closes — an indexer's, a virus scanner's —
-    and the rmdir that follows fails with "Access is denied" on a directory that
-    is, as far as the program is concerned, already empty. The company's data now
-    lives one level deeper (per competition track), which made a fixture that had
-    always been fine start failing on Windows while staying green on the Linux
-    runner. Retrying briefly costs nothing where the problem does not exist.
+    On Windows os.rmdir refuses a directory carrying FILE_ATTRIBUTE_READONLY with
+    "Access is denied", even when it is empty, and shutil.copytree carries that flag
+    from the source into every copy the fixture makes. Waiting does not help: the
+    attribute never clears on its own. Clearing it does.
+
+    Measured on 2026-08-22: every directory of one working copy was 0x11
+    READONLY|DIRECTORY, and the same rmdir succeeded immediately after a chmod.
+    Guarded by os.name because S_IWRITE means something else entirely on POSIX —
+    setting it there would strip the read and execute bits and break traversal.
     """
-    for attempt in range(6):
-        try:
-            shutil.rmtree(path)
-            return
-        except PermissionError:
-            if attempt == 5:
-                raise
-            time.sleep(0.25)
+    if os.name == "nt":
+        for item in (path, *path.rglob("*")):
+            try:
+                os.chmod(item, stat.S_IWRITE)
+            except OSError:
+                pass
+    shutil.rmtree(path)
 
 
 def _wipe(directory):
