@@ -6,6 +6,8 @@ async function j(p){ try{ const r=await fetch("data/"+p); return r.ok? r.json():
 async function t(p){ try{ const r=await fetch("data/"+p); return r.ok? r.text():null }catch(e){ return null } }
 const el=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>\"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+// safeEsc returns an empty string for null/undefined values, avoiding literal "undefined" in the UI
+const safeEsc=s=> s==null? "" : esc(s);
 
 const WEEK=["sun","mon","tue","wed","thu","fri","sat"];
 const LABEL={mon:"Mon",tue:"Tue",wed:"Wed",thu:"Thu",fri:"Fri",sat:"Sat",sun:"Sun"};
@@ -43,9 +45,9 @@ function desk(person){
   const next=nextShift(person.shifts);
   return `<article class="desk${on?" on":""}">
     <div class="desk-head">${face(person.id,56)}
-      <div class="who"><h3>${esc(person.name)}</h3>
-      <p class="role">${esc(person.title)}</p></div></div>
-    <p class="bio">${esc(person.bio)}</p>
+      <div class="who"><h3>${safeEsc(person.name)}</h3>
+      <p class="role">${safeEsc(person.title)}</p></div></div>
+    <p class="bio">${safeEsc(person.bio)}</p>
     <p class="days">${days}</p>
     <p class="status${on?" in":""}">${on?"At their desk today"
       :(next?"Next in on "+next:"No shifts rostered")}</p>
@@ -113,5 +115,5 @@ async function hallway(){
   if(html) target.innerHTML=html;
 }
 
-/* ---- what they said about each other's work ---------------------------- */
-/* Read straight from the public record rather than ba */
+/** Exported entry points */
+common(); office(); hallway();
