@@ -69,6 +69,10 @@ def main():
             shutil.copytree(source, OUT / name)
     if (ROOT / "company/data/league.json").exists():
         shutil.copy(ROOT / "company/data/league.json", OUT / "league.json")
+    # The site builds one accuracy table per track and takes their names from here,
+    # so a third track appears on the page without the page being touched.
+    if (ROOT / "company/data/tracks.json").exists():
+        shutil.copy(ROOT / "company/data/tracks.json", OUT / "tracks.json")
     for folder in ("minutes", "hallway"):
         if (ROOT / "company" / folder).exists():
             shutil.copytree(ROOT / "company" / folder, OUT / folder)

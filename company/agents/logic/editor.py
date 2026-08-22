@@ -1,13 +1,33 @@
 """Editor: agents that edit files within their allowed area (designer, webdev, process)."""
+import datetime as dt
 import json
+import os
 from pathlib import Path
 
 SAMPLE_FILE_LIMIT = 8
-CONTENT_LIMIT = 5000
+# The editor protocol asks for a file's FULL new content, so a file must never be
+# shown in part. On 2026-08-19 this limit was 5000 and site/app.js was 12900 chars:
+# the agent was handed the first 5000, asked for the whole file, and honestly
+# returned what it had been given. Two thirds of the file were deleted, mid-word.
+# A file bigger than this is still shown, but marked unrewritable rather than
+# quietly cropped.
+CONTENT_LIMIT = 24000
+# The same day, site/style.css came back as the four words "/* No changes needed */".
+# An answer meant for the human went into the field that becomes the file. A rewrite
+# that collapses a file to a fraction of itself is a failure however it is phrased.
+SHRINK_FLOOR = 0.6
 
 
-def _current(root, areas):
-    parts = []
+def _current(root, areas, seed=0):
+    """Return the sample text plus the paths that must not be rewritten.
+
+    Unrewritable means one of two things, and the agent is told which: the file was
+    shown in part because it is longer than CONTENT_LIMIT, or it was not shown at
+    all because the area holds more than SAMPLE_FILE_LIMIT files. Both end the same
+    way if left alone — an agent hands back a file it never read in full, and the
+    difference is deleted.
+    """
+    candidates = []
     for area in areas:
         target = root / area
         paths = [target] if target.is_file() else sorted(target.rglob("*"))
@@ -15,32 +35,73 @@ def _current(root, areas):
             # .json belongs here because an agent's area can be a data file — the
             # wardrobe, for instance — and an editor that cannot see the current
             # value rewrites it from nothing.
-            if p.is_file() and p.suffix in (".css", ".html", ".js", ".md", ".json") \
-               and len(parts) < SAMPLE_FILE_LIMIT:
+            if p.is_file() and p.suffix in (".css", ".html", ".js", ".md", ".json"):
                 rel = p.relative_to(root).as_posix()
                 if rel.startswith("site/data/"):
                     continue  # build output, not a source file
-                parts.append(f"--- {rel} ---\n{p.read_text(encoding='utf-8')[:CONTENT_LIMIT]}")
-    return "\n".join(parts)
+                candidates.append((rel, p))
+
+    # An area can hold far more files than fit in one prompt — the Process Owner
+    # tends twelve prompts and twelve memories. Showing the same first eight every
+    # week would make the rest unreachable for good, so the window turns: over a few
+    # shifts every file comes round. What is shown may be rewritten; what is not,
+    # may not. Which file an agent may touch changes, but the rule never does.
+    if len(candidates) > SAMPLE_FILE_LIMIT:
+        offset = (seed * SAMPLE_FILE_LIMIT) % len(candidates)
+        candidates = candidates[offset:] + candidates[:offset]
+
+    parts, unrewritable = [], {}
+    for rel, p in candidates[:SAMPLE_FILE_LIMIT]:
+        body = p.read_text(encoding="utf-8")
+        if len(body) > CONTENT_LIMIT:
+            unrewritable[rel] = (f"{rel} was shown to you in part only "
+                                 f"({CONTENT_LIMIT} of {len(body)} characters), so it "
+                                 "cannot be rewritten whole. Edit a different file.")
+            parts.append(f"--- {rel} (first {CONTENT_LIMIT} characters of "
+                         f"{len(body)}; TOO LONG TO REWRITE, read only) ---\n"
+                         f"{body[:CONTENT_LIMIT]}")
+        else:
+            parts.append(f"--- {rel} ---\n{body}")
+
+    hidden = [rel for rel, _ in candidates[SAMPLE_FILE_LIMIT:]]
+    for rel in hidden:
+        unrewritable[rel] = (f"{rel} was not shown to you this time, so it cannot be "
+                             "rewritten today. Edit one of the files listed above; this "
+                             "one comes round on another shift.")
+    if hidden:
+        parts.append("--- not shown this shift (DO NOT REWRITE; they come round later) ---\n"
+                     + "\n".join(hidden))
+    return "\n".join(parts), unrewritable
 
 
 def run(agent, ctx, chat, root):
     areas = agent["alan"]
     task = ("Revise your draft taking the feedback into account." if ctx["mode"] == "revision"
             else "Make ONE concrete improvement to the files in your area.")
+    # The window turns with the date, so consecutive shifts see different files.
+    # Dry runs pin it: a mocked shift has to be reproducible, and the turning itself
+    # is covered directly by tests rather than through the mock.
+    seed = 0 if os.environ.get("MOCK_LLM") == "1" else \
+        dt.date.fromisoformat(ctx["date"]).toordinal()
+    current, unrewritable = _current(root, areas, seed)
     user = (f"[AGENT:{agent['id']}][MODE:{ctx['mode']}][DAY:{ctx['day']}]\n"
             f"Your memory:\n{ctx['memory']}\n\nHallway:\n{ctx['hallway']}\n\n"
             f"Areas you may edit: {', '.join(areas)}\n\n"
-            f"Current files:\n{_current(root, areas)}\n\n"
+            f"Current files:\n{current}\n\n"
             + (f"Feedback received:\n{ctx['input']}\n\n" if ctx["input"] else "")
-            + f"{task} At most 3 files, each with its FULL new content. "
+            + f"{task} At most 3 files, each with its FULL new content — every line you "
+            "were shown plus your change, never a summary, a fragment or a note about "
+            "the file. "
             'ANSWER ONLY with this JSON object: {"files": {"path": "full content"}, '
             '"rationale": "why you changed it", "hallway": "one line or null"}')
 
     last = None
     for _ in range(3):
+        # A rejected attempt is told why. Resampling the identical prompt three times
+        # only rolls the same dice again; the model can correct a fault it can read.
+        retry = f"\n\nYour previous answer was rejected: {last}\nTry again." if last else ""
         try:
-            raw = chat(ctx["prompt"], user, want_json=True, root=root).strip()
+            raw = chat(ctx["prompt"], user + retry, want_json=True, root=root).strip()
             if raw.startswith("```"):
                 raw = raw.strip("`").lstrip("json").strip()
             obj = json.loads(raw)
@@ -50,11 +111,23 @@ def run(agent, ctx, chat, root):
                 raise ValueError("must edit 1-3 files")
             if not isinstance(rationale, str) or len(rationale.strip()) < 10:
                 raise ValueError("rationale required (constitution art. 3)")
-            for path in files:
+            for path, content in files.items():
                 if ".." in path or path.startswith("/") or \
                    not any(path.startswith(a.rstrip("/")) if (root / a).is_file()
                            else path.startswith(a) for a in areas):
                     raise ValueError(f"path outside area: {path}")
+                if not isinstance(content, str):
+                    raise ValueError(f"{path}: content must be the file's text")
+                if path in unrewritable:
+                    raise ValueError(unrewritable[path])
+                before = root / path
+                was = len(before.read_text(encoding="utf-8")) if before.is_file() else 0
+                if was and len(content) < was * SHRINK_FLOOR:
+                    raise ValueError(
+                        f"{path}: you returned {len(content)} characters to replace {was}. "
+                        "A rewrite may not drop below "
+                        f"{int(SHRINK_FLOOR * 100)}% of the file — return every line, "
+                        "not just the part you touched.")
             return {"files": files,
                     "pr": {"title": f"{agent['id']}: edit {ctx['date']}",
                            "body": f"Rationale: {rationale}", "draft": agent["draft_pr"]},

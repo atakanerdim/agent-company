@@ -108,10 +108,12 @@ def test_the_designer_can_actually_reach_the_wardrobe():
 
     sys.path.insert(0, str(ROOT / "company/agents/logic"))
     import editor  # noqa: E402
-    context = editor._current(ROOT, designer["alan"])
+    context, unrewritable = editor._current(ROOT, designer["alan"])
     assert wardrobe in context, \
         "the editor does not sample the wardrobe, so the Designer would rewrite it blind"
     assert '"skin"' in context, "the wardrobe is listed but its contents were not included"
+    assert wardrobe not in unrewritable, \
+        "the wardrobe outgrew the sample limit, so the Designer can no longer change it"
 
 
 def test_wardrobe_rejects_an_invented_value():

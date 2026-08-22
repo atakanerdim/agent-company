@@ -15,12 +15,23 @@ def test_no_accumulated_output(company):
         assert not leftovers, f"{rel} still holds {leftovers} from the real company"
 
 
-def test_league_starts_at_zero(company):
+def test_every_track_starts_at_zero(company):
     league = json.loads((company / "company/data/league.json").read_text(encoding="utf-8"))
-    assert league["personas"], "the league lost its personas"
-    for name, row in league["personas"].items():
-        assert row == {"points": 0, "exact": 0, "outcome": 0, "weeks": 0}, \
-            f"{name} arrives with a history: {row}"
+    assert league["tracks"], "the league lost its tracks"
+    for track, record in league["tracks"].items():
+        assert record["personas"], f"{track} lost its personas"
+        assert record["first_week"] is None and record["last_week"] is None, \
+            f"{track} arrives mid-season: {record['first_week']}..{record['last_week']}"
+        for name, row in record["personas"].items():
+            assert row == {"points": 0, "exact": 0, "outcome": 0, "weeks": 0}, \
+                f"{track}/{name} arrives with a history: {row}"
+
+
+def test_the_league_covers_every_track_the_company_defines(company):
+    """A track with no table would score into nothing and lose the week in silence."""
+    league = json.loads((company / "company/data/league.json").read_text(encoding="utf-8"))
+    tracks = json.loads((company / "company/data/tracks.json").read_text(encoding="utf-8"))
+    assert set(league["tracks"]) == {t["id"] for t in tracks["tracks"]}
 
 
 def test_the_agents_are_still_there(company):
