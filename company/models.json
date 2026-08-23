@@ -1,22 +1,57 @@
-{"zincir":[
-  {"saglayici":"groq","model":"openai/gpt-oss-120b","style":"openai",
-   "url":"https://api.groq.com/openai/v1/chat/completions","key_env":"GROQ_API_KEY",
-   "models_url":"https://api.groq.com/openai/v1/models",
-   "model_prefer":["gpt-oss-120b","gpt-oss","llama-3.3","llama-3","llama"]},
-
-  {"saglayici":"gemini","model":"gemini-flash-latest","style":"gemini",
-   "url":"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
-   "key_env":"GEMINI_API_KEY",
-   "models_url":"https://generativelanguage.googleapis.com/v1beta/models?key={key}",
-   "model_prefer":["flash-latest","flash-lite","flash"]},
-
-  {"saglayici":"openrouter","model":"openai/gpt-oss-20b:free","style":"openai",
-   "url":"https://openrouter.ai/api/v1/chat/completions","key_env":"OPENROUTER_API_KEY",
-   "models_url":"https://openrouter.ai/api/v1/models",
-   "model_prefer":[":free"]},
-
-  {"saglayici":"cerebras","model":"zai-glm-4.7","style":"openai",
-   "url":"https://api.cerebras.ai/v1/chat/completions","key_env":"CEREBRAS_API_KEY",
-   "models_url":"https://api.cerebras.ai/v1/models",
-   "model_prefer":["glm","gpt-oss","llama","qwen"]}
-]}
+{
+ "zincir": [
+  {
+   "saglayici": "groq",
+   "model": "openai/gpt-oss-120b",
+   "style": "openai",
+   "url": "https://api.groq.com/openai/v1/chat/completions",
+   "key_env": "GROQ_API_KEY",
+   "models_url": "https://api.groq.com/openai/v1/models",
+   "model_prefer": [
+    "gpt-oss-120b",
+    "gpt-oss",
+    "llama-3.3",
+    "llama-3",
+    "llama"
+   ]
+  },
+  {
+   "saglayici": "gemini",
+   "model": "gemini-flash-latest",
+   "style": "gemini",
+   "url": "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}",
+   "key_env": "GEMINI_API_KEY",
+   "models_url": "https://generativelanguage.googleapis.com/v1beta/models?key={key}",
+   "model_prefer": [
+    "flash-latest",
+    "flash-lite",
+    "flash"
+   ]
+  },
+  {
+   "saglayici": "openrouter",
+   "model": "cohere/north-mini-code:free",
+   "style": "openai",
+   "url": "https://openrouter.ai/api/v1/chat/completions",
+   "key_env": "OPENROUTER_API_KEY",
+   "models_url": "https://openrouter.ai/api/v1/models",
+   "model_prefer": [
+    ":free"
+   ]
+  },
+  {
+   "saglayici": "cerebras",
+   "model": "gpt-oss-120b",
+   "style": "openai",
+   "url": "https://api.cerebras.ai/v1/chat/completions",
+   "key_env": "CEREBRAS_API_KEY",
+   "models_url": "https://api.cerebras.ai/v1/models",
+   "model_prefer": [
+    "glm",
+    "gpt-oss",
+    "llama",
+    "qwen"
+   ]
+  }
+ ]
+}
