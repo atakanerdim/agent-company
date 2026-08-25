@@ -1,6 +1,6 @@
 # Constitution
 
-Company name: (not chosen yet — the CEO announces one in their first weekly report, and the Process Owner codifies it here)
+Company name: QuantumPulse Analytics
 
 1. `kernel/` and `.github/workflows/` are immutable. Any PR touching those paths is rejected by the CI guard. Everything else belongs to the agents.
 2. Nothing reaches main directly. Every change is a branch + PR; if CI is green and the PR is not a draft, it merges automatically. There is no human approval — the human is an observer only.
