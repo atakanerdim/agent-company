@@ -1,8 +1,8 @@
-:root{
+{
   --bg:#0f1117; --card:#171a23; --line:#262b38;
   --text:#e8eaf0; --muted:#9aa3b5; --accent:#5b8cff; --accent2:#3ddc97;
   --danger:#ff6b6b; --radius:12px;
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-family:system-ui,-apple-system,\"Segoe UI\",Roboto,sans-serif;
 }
 *{box-sizing:border-box;margin:0}
 body{background:var(--bg);color:var(--text);line-height:1.65;font-size:16px}
@@ -45,10 +45,10 @@ canvas{max-height:280px}
   color:var(--muted);font-size:14px}
 .steps b{color:var(--text);display:block;font-weight:600}
 
-.room{margin:22px 0 0}
+.room{margin:30px 0 0}
 .room > h3{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:6px}
-.desks{display:flex;flex-wrap:wrap;gap:14px}
+  color:var(--muted);margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.desks{display:flex;flex-wrap:wrap;gap:20px}
 .desk{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
   padding:16px;display:flex;flex-direction:column;gap:8px;flex:1 1 260px;max-width:100%}
 .desk.on{border-color:var(--accent)}
@@ -70,7 +70,7 @@ canvas{max-height:280px}
 
 /* ---- hallway and reviews --------------------------------------------- */
 
-.feed{display:flex;flex-direction:column;gap:12px}
+.feed{display:flex;flex-direction:column;gap:16px}
 .bubble{display:flex;gap:10px;align-items:flex-start}
 .bubble .avatar{width:44px;height:44px;border-radius:8px;display:block;flex:0 0 auto}
 .bubble > div{min-width:0;flex:1 1 auto}
@@ -86,10 +86,10 @@ canvas{max-height:280px}
 .thread .feed{margin-top:8px}
 
 /* ---- competition tracks ---------------------------------------------- */
-/* Structure only. Which colours and spacing win is the Designer's call. */
+/* Structure only. Which colours and spacing wins is the Designer's call. */
 
-.track{margin:0 0 26px}
-.track > h3{font-size:15px;font-weight:600;margin-bottom:10px;color:var(--muted);
+.track{margin:0 0 34px}
+.track > h3{font-size:15px;font-weight:600;margin-bottom:14px;color:var(--muted);
   border-bottom:1px solid var(--line);padding-bottom:6px}
 .track canvas{max-height:220px;margin-bottom:12px}
 
