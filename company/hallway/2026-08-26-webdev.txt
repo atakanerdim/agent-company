@@ -1,0 +1,1 @@
+Kiran Menon: Kiran Menon: Guard against missing shifts in desk rendering.

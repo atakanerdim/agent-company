@@ -5,7 +5,7 @@ const REPO = "atakanerdim/agent-company";
 async function j(p){ try{ const r=await fetch("data/"+p); return r.ok? r.json():null }catch(e){ return null } }
 async function t(p){ try{ const r=await fetch("data/"+p); return r.ok? r.text():null }catch(e){ return null } }
 const el=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;","\":"&gt;","'":"&quot;"}[c]));
 // safeEsc returns an empty string for null/undefined values, avoiding literal "undefined" in the UI
 const safeEsc=s=> s==null? "" : esc(s);
 
@@ -22,7 +22,7 @@ async function roster(){ if(!_roster) _roster=(await j("roster.json"))||[]; retu
 /* A missing portrait must not leave a broken image in the middle of a face. */
 function face(id,size){
   return `<img class="avatar" src="data/avatars/${esc(id)}.svg" alt="" width="${size}" `+
-         `height="${size}" loading="lazy" onerror="this.style.visibility='hidden'">`;
+         `height="${size}" loading="lazy" onerror="this.style.visibility='hidden'>"`;
 }
 
 async function common(){
@@ -39,11 +39,13 @@ function nextShift(shifts){
 }
 
 function desk(person){
-  const on=person.shifts.includes(today());
-  const days=["mon","tue","wed","thu","fri","sat","sun"].map(d=>
-    `<span class="day${person.shifts.includes(d)?" on":""}">${LABEL[d]}</span>`).join("");
-  const next=nextShift(person.shifts);
-  return `<article class="desk${on?" on":""}">
+  // Guard against missing or malformed shifts
+  const shifts = Array.isArray(person.shifts) ? person.shifts : [];
+  const on = shifts.includes(today());
+  const days = ["mon","tue","wed","thu","fri","sat","sun"].map(d =>
+    `<span class="day${shifts.includes(d) ? " on" : ""}">${LABEL[d]}</span>`).join("");
+  const next = nextShift(shifts);
+  return `<article class="desk${on?" on":""}>"
     <div class="desk-head">${face(person.id,56)}
       <div class="who"><h3>${safeEsc(person.name)}</h3>
       <p class="role">${safeEsc(person.title)}</p></div></div>
@@ -61,7 +63,8 @@ async function office(){
   const people=await roster();
   if(!people.length){ el("floor").innerHTML='<p class="empty">Roster unavailable.</p>'; return }
 
-  const inToday=people.filter(p=>p.shifts.includes(today()));
+  // Defensive filter for missing shifts
+  const inToday = people.filter(p => Array.isArray(p.shifts) && p.shifts.includes(today()));
   el("today-line").textContent=inToday.length
     ? `— ${FULL[today()]}, ${inToday.length} on shift`
     : `— ${FULL[today()]}, the office is empty`;
@@ -136,7 +139,7 @@ function unsign(body,person){
   const name=person.name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
   const title=person.title.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
   return body.replace(
-    new RegExp(`^[\\s\\-–—]*${name}(\\s*[,–—-]\\s*${title})?\\s*[.:–—-]*\\s*`,"i"),
+    new RegExp(`^[\s\-–—]*${name}(\s*[,–—-]\s*${title})?\s*[.:–—-]*\s*`,"i"),
     "").trim();
 }
 
@@ -204,13 +207,14 @@ async function dashboard(){
 
   if(el("on-duty")){
     const people=await roster();
-    const inToday=people.filter(p=>p.shifts.includes(today()));
+    // Defensive filter for missing shifts
+    const inToday = people.filter(p => Array.isArray(p.shifts) && p.shifts.includes(today()));
     el("on-duty").innerHTML=inToday.length
       ? `<div class="desks">${inToday.map(p=>`<article class="desk on">
           <div class="desk-head">${face(p.id,56)}
             <div class="who"><h3>${esc(p.name)}</h3>
             <p class="role">${esc(p.title)}</p></div></div>
-          <p class="bio">${esc(p.bio)}</p></article>`).join("")}</div>`
+          <p class="bio">${esc(p.bio)}</p></article>`).join(""")}</div>`
       : `<p class="empty">Nobody is rostered for ${FULL[today()]}. The office is empty today.</p>`;
   }
 }
@@ -236,11 +240,11 @@ async function predictionDesk(){
       charts.push({id:t.id,rows,played});
       return `<section class="track"><h3>${esc(t.label)}</h3>`+
         (played?`<canvas id="chart-${esc(t.id)}" aria-label="${esc(t.label)} accuracy chart"
-           role="img"></canvas>`:"")+
+           role="img"></canvas>"":"")+
         "<table><tr><th>Predictor</th><th>Points</th><th>Exact scores</th>"+
         "<th>Correct outcomes</th><th>Weeks</th></tr>"+
         rows.map(([id,k])=>`<tr><td>${esc(shown(id))}</td><td>${k.points}</td>`+
-          `<td>${k.exact}</td><td>${k.outcome}</td><td>${k.weeks}</td></tr>`).join("")+
+          `<td>${k.exact}</td><td>${k.outcome}</td><td>${k.weeks}</td></tr>`).join(""")+
         "</table>"+
         (played?"":`<p class="empty">No round scored yet.</p>`)+
         "</section>";
@@ -258,14 +262,14 @@ async function predictionDesk(){
 
   /* ---- this week's predictions, grouped by track ---- */
   const manifest=await j("manifest.json"); if(!manifest) return;
-  const sets=manifest.files.filter(f=>/^predictions\/[^/]+\/[^/]+\/.+\.json$/.test(f)).sort();
+  const sets=manifest.files.filter(f=>/^predictions\/[^\/]+\/[^\/]+\/.+\.json$/.test(f)).sort();
   if(!sets.length) return;
   const allWeeks=new Set();
   let html="";
   for(const t of tracks){
     const mine=sets.filter(f=>f.split("/")[2]===t.id);
     if(!mine.length) continue;
-    const weeks=[...new Set(mine.map(f=>f.split("/").pop().replace(".json","")))].sort();
+    const weeks=[...new Set(mine.map(f=>f.split("/").pop().replace(".json","")) )].sort();
     weeks.forEach(w=>allWeeks.add(w));
     const last=weeks[weeks.length-1];
     let rows="";
@@ -282,14 +286,14 @@ async function predictionDesk(){
   }
   if(html) el("prediction-list").innerHTML=html;
   if(el("archive")&&allWeeks.size) el("archive").innerHTML=
-    [...allWeeks].sort().map(w=>`<span class="badge" style="margin-right:8px">${esc(w)}</span>`).join("");
+    [...allWeeks].sort().map(w=>`<span class="badge" style="margin-right:8px">${esc(w)}</span>").join("");
 }
 
 async function changelog(){
   if(!el("changelog")) return;
   const log=await j("changelog.json");
   if(log&&log.length) el("changelog").innerHTML="<table><tr><th>Date</th><th>Change</th></tr>"+
-    log.map(x=>`<tr><td class="muted">${esc(x.date)}</td><td>${esc(x.message)}</td></tr>`).join("")+"</table>";
+    log.map(x=>`<tr><td class="muted">${esc(x.date)}</td><td>${esc(x.message)}</td></tr>`).join(""")+"</table>";
 }
 
 async function minutes(){
