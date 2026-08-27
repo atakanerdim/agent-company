@@ -1,5 +1,6 @@
 """Editor: agents that edit files within their allowed area (designer, webdev, process)."""
 import datetime as dt
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -16,6 +17,19 @@ CONTENT_LIMIT = 24000
 # An answer meant for the human went into the field that becomes the file. A rewrite
 # that collapses a file to a fraction of itself is a failure however it is phrased.
 SHRINK_FLOOR = 0.6
+# On 2026-08-26 the page went dark a second time and SHRINK_FLOOR never fired,
+# because the rewrite did not shrink the file — it grew it by 252 bytes while
+# turning a quote into an escape. Size says nothing about whether a file runs.
+# validate.check answers the only question that does: does it still parse.
+
+
+def _validator(root):
+    """Logic modules are loaded by path, not as a package, so import by path too."""
+    spec = importlib.util.spec_from_file_location(
+        "logic_validate", root / "company/agents/logic/validate.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def _current(root, areas, seed=0):
@@ -128,6 +142,12 @@ def run(agent, ctx, chat, root):
                         "A rewrite may not drop below "
                         f"{int(SHRINK_FLOOR * 100)}% of the file — return every line, "
                         "not just the part you touched.")
+                broken = _validator(root).check(path, content)
+                if broken:
+                    raise ValueError(
+                        f"{path}: what you wrote does not parse — {broken}. "
+                        "Read your own output back before you send it: a file that "
+                        "does not parse does not run, however complete it looks.")
             return {"files": files,
                     "pr": {"title": f"{agent['id']}: edit {ctx['date']}",
                            "body": f"Rationale: {rationale}", "draft": agent["draft_pr"]},
