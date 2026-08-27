@@ -179,3 +179,42 @@ def test_what_is_shown_this_shift_is_what_may_be_rewritten(company):
     with pytest.raises(ValueError):
         editor.run(agent, ctx, chat, company)
     assert (company / blocked).read_text(encoding="utf-8") == before
+
+
+def test_a_file_of_another_kind_cannot_be_rewritten_blind(company):
+    """The sample only ever offers text files, and the guard only covered those.
+
+    "What is shown may be rewritten" was half a rule. The sample is built from
+    .css .html .js .md .json, so anything else in the area — site/build.py, which
+    generates the entire site — was never a candidate, never marked unrewritable,
+    and could be handed back whole by an agent that had not seen a line of it.
+    Confirmed by hand on 2026-08-27: a 4800-character replacement for a 4455-character
+    build.py cleared SHRINK_FLOOR and was accepted.
+    """
+    editor = _editor(company)
+    target = company / "site/build.py"
+    before = target.read_text(encoding="utf-8")
+    # Long enough to clear the shrink floor, so nothing else can catch it.
+    blind = "# rewritten blind\n" + ("x = 1\n" * 1200)
+    assert len(blind) > len(before) * editor.SHRINK_FLOOR
+    chat = _answering(_edit(company, {"site/build.py": blind}))
+    with pytest.raises(ValueError, match="not one of the files you were shown"):
+        editor.run(AGENT, _ctx(), chat, company)
+    assert target.read_text(encoding="utf-8") == before
+    assert "site/build.py" not in chat.seen[0], "an unshown file must not be in the prompt"
+
+
+def test_build_output_is_not_a_place_to_write(company):
+    """site/data/ is regenerated on every deploy, so writing there is writing to nothing."""
+    editor = _editor(company)
+    chat = _answering(_edit(company, {"site/data/roster.json": '[{"id": "ceo"}]'}))
+    with pytest.raises(ValueError, match="build output"):
+        editor.run(AGENT, _ctx(), chat, company)
+
+
+def test_a_new_file_is_still_allowed(company):
+    """Only overwriting an unseen file is barred. Creating one was never the problem."""
+    editor = _editor(company)
+    chat = _answering(_edit(company, {"site/new-note.css": "/* a brand new file */\n"}))
+    result = editor.run(AGENT, _ctx(), chat, company)
+    assert "site/new-note.css" in result["files"]

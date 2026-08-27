@@ -82,6 +82,31 @@ def _current(root, areas, seed=0):
         unrewritable[rel] = (f"{rel} was not shown to you this time, so it cannot be "
                              "rewritten today. Edit one of the files listed above; this "
                              "one comes round on another shift.")
+
+    # Everything else that exists in the area. The sample only ever offers the
+    # handful of text suffixes above, so a file of any other kind — site/build.py,
+    # for one, which generates the whole site — was invisible to this guard and
+    # could be handed back by an agent that had never seen a line of it. The rule
+    # was always "what is shown may be rewritten"; this makes the other half of it
+    # true. Creating a NEW file is untouched: only a file already on disk can be
+    # overwritten blind.
+    shown = {rel for rel, _ in candidates[:SAMPLE_FILE_LIMIT]}
+    for area in areas:
+        target = root / area
+        for p in ([target] if target.is_file() else target.rglob("*")):
+            if not p.is_file():
+                continue
+            rel = p.relative_to(root).as_posix()
+            if rel in shown or rel in unrewritable:
+                continue
+            if rel.startswith("site/data/"):
+                unrewritable[rel] = (f"{rel} is build output, not a source file. It is "
+                                     "written by site/build.py on every deploy and anything "
+                                     "you put there is overwritten.")
+            else:
+                unrewritable[rel] = (f"{rel} is not one of the files you were shown, so it "
+                                     "cannot be rewritten. Only edit a file whose current "
+                                     "contents are in front of you.")
     if hidden:
         parts.append("--- not shown this shift (DO NOT REWRITE; they come round later) ---\n"
                      + "\n".join(hidden))
@@ -132,6 +157,13 @@ def run(agent, ctx, chat, root):
                     raise ValueError(f"path outside area: {path}")
                 if not isinstance(content, str):
                     raise ValueError(f"{path}: content must be the file's text")
+                # site/data/ is written by site/build.py on every deploy and is not
+                # in the repository at all, so it never appears on disk for the check
+                # below to catch. Anything left there is overwritten within the minute.
+                if path.startswith("site/data/"):
+                    raise ValueError(
+                        f"{path}: site/data/ is build output, not a source file. It is "
+                        "regenerated on every deploy; edit what produces it instead.")
                 if path in unrewritable:
                     raise ValueError(unrewritable[path])
                 before = root / path
