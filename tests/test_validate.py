@@ -184,3 +184,38 @@ def test_an_honest_edit_to_the_script_still_goes_through(company):
     chat = _answering(_edit({"site/app.js": js + "\n/* a quiet note */\n"}))
     result = editor.run(AGENT, _ctx(), chat, company)
     assert result["files"]["site/app.js"].endswith("/* a quiet note */\n")
+
+
+# --- a file, or a string that once described one ---------------------------
+# 2026-09-02: site/office.html arrived as a single line in which every line break
+# was the two characters \ and n and every attribute quote was \". It did not
+# shrink, every tag balanced, and Python's HTML parser reads a backslash as an
+# ordinary character, so all three standing fences passed it. Ten links were dead.
+
+def test_a_file_sent_as_one_escaped_line_is_refused():
+    real = (ROOT / "site/office.html").read_text(encoding="utf-8")
+    assert _validate().check("office.html", real) is None, "the real page must pass"
+    escaped = real.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
+    said = _validate().check("office.html", escaped)
+    assert said and "one line" in said
+
+
+def test_the_page_that_actually_broke_is_refused():
+    """Not a reconstruction: the exact bytes webdev pushed on 2026-09-02."""
+    broken = (ROOT / "tests/broken_office_2026_09_02.html").read_text(encoding="utf-8")
+    assert _validate().check("office.html", broken)
+
+
+def test_an_attribute_quoted_with_a_backslash_is_refused():
+    page = ('<!DOCTYPE html>\n<html>\n<head><title>x</title></head>\n<body>\n'
+            '<main>\n<div class=\\"feed\\">hello</div>\n</main>\n</body>\n</html>\n')
+    said = _validate().check("page.html", page)
+    assert said and "backslash" in said
+
+
+def test_a_stylesheet_with_real_line_breaks_is_left_alone():
+    """The fence reads one shape only. Ordinary files must not feel it."""
+    css = (ROOT / "site/style.css").read_text(encoding="utf-8")
+    assert _validate().check("style.css", css) is None
+    js = (ROOT / "site/app.js").read_text(encoding="utf-8")
+    assert _validate().check("app.js", js) is None

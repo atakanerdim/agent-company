@@ -2,6 +2,7 @@
 Deterministic; runs in CI and on every Pages deploy. Makes no LLM calls."""
 import datetime as dt
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -39,6 +40,33 @@ def roster_public(root):
     return out
 
 
+# The kernel writes each hallway file as "<colleague>: <what they said>". Models
+# keep signing the line as well, so the name arrives twice, and on 2026-09-02 one
+# of them opened with the name of a colleague who does not exist:
+#
+#     Nadia Vance: Liam Zhou: The coffee machine may be gone, but our nightly ...
+#
+# The page already says who is speaking; it reads that off the roster. So the line
+# only has to carry what was said. The prefixes come off here, at the point of
+# display — company/hallway keeps exactly what the agent wrote, because that file
+# is the evidence and evidence does not get tidied.
+#
+# Two or three capitalised words before the colon, never one: "Note:" and "Week 35:"
+# are things a colleague might legitimately open with, "Liam Zhou:" is not.
+SPEAKER = re.compile(r"^\s*[A-Z][\w.'\u2019-]*(?: [A-Z][\w.'\u2019-]*){1,2}\s*:\s*")
+
+
+def hallway_line(text):
+    """Return one hallway line with any speaker prefixes stripped off the front."""
+    line = " ".join(text.split("\n")[0].split())
+    for _ in range(3):
+        shorter = SPEAKER.sub("", line, count=1)
+        if shorter == line or not shorter:
+            break
+        line = shorter
+    return line
+
+
 def changelog(root, agent_ids):
     """Only autonomous merges belong on the public changelog.
 
@@ -73,9 +101,13 @@ def main():
     # so a third track appears on the page without the page being touched.
     if (ROOT / "company/data/tracks.json").exists():
         shutil.copy(ROOT / "company/data/tracks.json", OUT / "tracks.json")
-    for folder in ("minutes", "hallway"):
-        if (ROOT / "company" / folder).exists():
-            shutil.copytree(ROOT / "company" / folder, OUT / folder)
+    if (ROOT / "company/minutes").exists():
+        shutil.copytree(ROOT / "company/minutes", OUT / "minutes")
+    if (ROOT / "company/hallway").exists():
+        (OUT / "hallway").mkdir(parents=True, exist_ok=True)
+        for src in sorted((ROOT / "company/hallway").glob("*.txt")):
+            (OUT / "hallway" / src.name).write_text(
+                hallway_line(src.read_text(encoding="utf-8")) + "\n", encoding="utf-8")
     shutil.copytree(ROOT / "company/agents/prompts", OUT / "prompts")
     shutil.copy(ROOT / "company/constitution.md", OUT / "constitution.md")
     avatars.write_all(OUT / "avatars", ROOT)
