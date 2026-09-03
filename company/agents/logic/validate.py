@@ -30,6 +30,7 @@ Two levels, deliberately:
     the scan. A check that cannot run is skipped rather than faked.
 """
 import json
+import re
 import shutil
 import subprocess
 import tempfile
@@ -278,11 +279,49 @@ def _css(text):
 
 
 # --------------------------------------------------------------------------
+# The whole file as a string
+# --------------------------------------------------------------------------
+
+def _escaped_whole_file(text):
+    """Did the model hand back a JSON string instead of a file?
+
+    On 2026-09-02 site/office.html arrived as a single 4.8 kB line in which every
+    line break was the two characters \\ and n, and every attribute quote was
+    \\". Nothing that was watching could see it: the file had not shrunk, every
+    tag balanced, and Python's HTML parser reads a backslash as an ordinary
+    character. Ten links on the page were dead. The intended change was one
+    attribute wide.
+
+    Size asks how much of the file came back. Parsing asks whether it holds
+    together. Neither asks the question this failure turns on: is this a file at
+    all, or a string that once described one.
+    """
+    if len(text) < 400:
+        return None
+    literal, real = text.count("\\n"), text.count("\n")
+    if literal >= 3 and real <= 2:
+        return (f"the whole file came back on one line, with {literal} line breaks "
+                "written out as the two characters \\ and n. That is a JSON string, "
+                "not a file. Send the file itself: real line breaks, plain quotes.")
+    return None
+
+
+# --------------------------------------------------------------------------
 # HTML
 # --------------------------------------------------------------------------
 
+# An attribute value that opens with a backslash-quote. Deliberately narrow: a
+# backslash before a quote is ordinary inside an inline <script>, and a fence that
+# rejects legitimate work is not a fence. In a tag it is always the same mistake.
+_ESCAPED_ATTR = re.compile(r'<[a-zA-Z][^<>]*=\\"')
+
+
 def _html(text):
     from html.parser import HTMLParser
+
+    if _ESCAPED_ATTR.search(text):
+        return ('an attribute quoted with a backslash — HTML is not JSON, write it '
+                'plainly: class="feed", not class=\\"feed\\"')
 
     class P(HTMLParser):
         def __init__(self):
@@ -332,6 +371,10 @@ def check(path, text):
         except json.JSONDecodeError as e:
             return f"not valid JSON — {e.msg} at line {e.lineno}, column {e.colno}"
         return None
+    if suffix in (".html", ".css", ".js", ".md"):
+        escaped = _escaped_whole_file(text)
+        if escaped:
+            return escaped
     if suffix == ".js":
         return _js_scan(text) or _js_node(text)
     if suffix == ".css":

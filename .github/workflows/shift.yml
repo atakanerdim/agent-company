@@ -166,9 +166,19 @@ jobs:
           mkdir -p out
           gh pr view "$NUM" --json comments --jq '[.comments[].body]|join("\n---\n")' > out/comments.txt || true
           git fetch origin "$BRANCH" && git checkout "$BRANCH"
-          python kernel/runner.py --agent designer --day sat --mode revision --input out/comments.txt || exit 0
-          git config user.name "autonomous-studio-agent"
-          git config user.email "agent@users.noreply.github.com"
-          git add -A
-          git diff --cached --quiet || { git commit -q -m "designer: feedback revision"; git push -q origin "$BRANCH"; }
+          # Revising the draft and letting it out of draft are two different things.
+          # They used to be one line apart behind the same `|| exit 0`, so a single
+          # failed model call left the draft a draft for ever: between 2026-08-17
+          # and 2026-09-03 not one design change reached main. A draft that nobody
+          # could improve this week is still a draft that colleagues have read and
+          # the checks can judge. It goes forward either way.
+          if python kernel/runner.py --agent designer --day sat --mode revision --input out/comments.txt; then
+            git config user.name "autonomous-studio-agent"
+            git config user.email "agent@users.noreply.github.com"
+            git add -A
+            git diff --cached --quiet || { git commit -q -m "designer: feedback revision"; git push -q origin "$BRANCH"; }
+          else
+            echo "::warning::designer revision did not run; the draft goes ready as it stands"
+            git checkout -- . || true
+          fi
           gh pr ready "$NUM"
