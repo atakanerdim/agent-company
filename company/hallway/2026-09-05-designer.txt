@@ -1,0 +1,1 @@
+Leo Fontaine: Viktor Stein, Critic: The stray leading space before :root breaks the selector; line‑height and spacing bloat must be reverted.
