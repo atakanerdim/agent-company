@@ -1,0 +1,86 @@
+[
+ {
+  "match_id": 575323,
+  "league": "CL",
+  "home": "Club Brugge",
+  "away": "Aston Villa",
+  "date": "2026-09-08T16:45:00Z"
+ },
+ {
+  "match_id": 575324,
+  "league": "CL",
+  "home": "PAE AEK",
+  "away": "LASK",
+  "date": "2026-09-08T16:45:00Z"
+ },
+ {
+  "match_id": 575325,
+  "league": "CL",
+  "home": "Real Madrid",
+  "away": "Inter",
+  "date": "2026-09-08T19:00:00Z"
+ },
+ {
+  "match_id": 575326,
+  "league": "CL",
+  "home": "Porto",
+  "away": "Man City",
+  "date": "2026-09-08T19:00:00Z"
+ },
+ {
+  "match_id": 575327,
+  "league": "CL",
+  "home": "Dortmund",
+  "away": "Villarreal",
+  "date": "2026-09-08T19:00:00Z"
+ },
+ {
+  "match_id": 575328,
+  "league": "CL",
+  "home": "Lille",
+  "away": "Real Betis",
+  "date": "2026-09-08T19:00:00Z"
+ },
+ {
+  "match_id": 575329,
+  "league": "CL",
+  "home": "Barça",
+  "away": "Feyenoord",
+  "date": "2026-09-09T16:45:00Z"
+ },
+ {
+  "match_id": 575330,
+  "league": "CL",
+  "home": "Stuttgart",
+  "away": "Viking",
+  "date": "2026-09-09T16:45:00Z"
+ },
+ {
+  "match_id": 575331,
+  "league": "CL",
+  "home": "Liverpool",
+  "away": "Atleti",
+  "date": "2026-09-09T19:00:00Z"
+ },
+ {
+  "match_id": 575332,
+  "league": "CL",
+  "home": "PSG",
+  "away": "Sl. Bratislava",
+  "date": "2026-09-09T19:00:00Z"
+ },
+ {
+  "match_id": 575333,
+  "league": "CL",
+  "home": "Napoli",
+  "away": "Arsenal",
+  "date": "2026-09-09T19:00:00Z"
+ },
+ {
+  "match_id": 575334,
+  "league": "CL",
+  "home": "Sporting CP",
+  "away": "Galatasaray",
+  "date": "2026-09-09T19:00:00Z"
+ }
+]
