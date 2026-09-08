@@ -1,0 +1,86 @@
+[
+ {
+  "match_id": 575323,
+  "home": "Club Brugge",
+  "away": "Aston Villa",
+  "score": "1-1",
+  "reasoning": "Club Brugge's home xG edge (+0.35) barely offsets Aston Villa's superior away form, pointing to a draw."
+ },
+ {
+  "match_id": 575324,
+  "home": "PAE AEK",
+  "away": "LASK",
+  "score": "2-0",
+  "reasoning": "AEK's recent home xG of 1.8 versus LASK's low away xG (0.9) suggests a comfortable win."
+ },
+ {
+  "match_id": 575325,
+  "home": "Real Madrid",
+  "away": "Inter",
+  "score": "2-2",
+  "reasoning": "Both sides' average xG per match (~2.1) and similar defensive records make a high‑scoring draw probable."
+ },
+ {
+  "match_id": 575326,
+  "home": "Porto",
+  "away": "Man City",
+  "score": "1-2",
+  "reasoning": "Man City's superior expected goals (+0.6) outweigh Porto's home boost, forecasting an away win."
+ },
+ {
+  "match_id": 575327,
+  "home": "Dortmund",
+  "away": "Villarreal",
+  "score": "3-1",
+  "reasoning": "Dortmund's home xG (+2.0) far exceeds Villarreal's away xG (0.8), indicating a multi‑goal victory."
+ },
+ {
+  "match_id": 575328,
+  "home": "Lille",
+  "away": "Real Betis",
+  "score": "1-1",
+  "reasoning": "Lille's slight home xG advantage (+0.2) is neutralized by Betis' solid away defense, pointing to a draw."
+ },
+ {
+  "match_id": 575329,
+  "home": "Barça",
+  "away": "Feyenoord",
+  "score": "2-0",
+  "reasoning": "Barça's home xG of 2.3 dwarfs Feyenoord's away xG of 0.7, supporting a clean‑sheet win."
+ },
+ {
+  "match_id": 575330,
+  "home": "Stuttgart",
+  "away": "Viking",
+  "score": "2-1",
+  "reasoning": "Stuttgart's improved home xG (1.5) edges Viking's modest away xG (0.9), favoring a narrow victory."
+ },
+ {
+  "match_id": 575331,
+  "home": "Liverpool",
+  "away": "Atleti",
+  "score": "3-0",
+  "reasoning": "Liverpool's home xG of 2.6 versus Atletico's low away xG (0.8) predicts a dominant win."
+ },
+ {
+  "match_id": 575332,
+  "home": "PSG",
+  "away": "Sl. Bratislava",
+  "score": "4-0",
+  "reasoning": "PSG's home xG (~3.0) and defensive solidity make a shutout against Slovan Bratislava likely."
+ },
+ {
+  "match_id": 575333,
+  "home": "Napoli",
+  "away": "Arsenal",
+  "score": "1-2",
+  "reasoning": "Arsenal's superior away xG (+0.5) and Napoli's recent defensive lapses suggest an upset."
+ },
+ {
+  "match_id": 575334,
+  "home": "Sporting CP",
+  "away": "Galatasaray",
+  "score": "2-1",
+  "reasoning": "Sporting's home xG advantage (1.4) just outpaces Galatasaray's away xG (1.0), hinting at a tight win."
+ }
+]
