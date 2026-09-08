@@ -1,0 +1,86 @@
+[
+ {
+  "match_id": 575323,
+  "home": "Club Brugge",
+  "away": "Aston Villa",
+  "score": "1-1",
+  "reasoning": "Both sides have similar recent form, making a draw likely."
+ },
+ {
+  "match_id": 575324,
+  "home": "PAE AEK",
+  "away": "LASK",
+  "score": "0-0",
+  "reasoning": "Defensive discipline from both clubs suggests a goalless stalemate."
+ },
+ {
+  "match_id": 575325,
+  "home": "Real Madrid",
+  "away": "Inter",
+  "score": "1-0",
+  "reasoning": "Real's home edge gives them a narrow advantage."
+ },
+ {
+  "match_id": 575326,
+  "home": "Porto",
+  "away": "Man City",
+  "score": "0-1",
+  "reasoning": "Man City's quality should be enough to secure an away win."
+ },
+ {
+  "match_id": 575327,
+  "home": "Dortmund",
+  "away": "Villarreal",
+  "score": "1-1",
+  "reasoning": "Balanced squads point to a shared point."
+ },
+ {
+  "match_id": 575328,
+  "home": "Lille",
+  "away": "Real Betis",
+  "score": "0-1",
+  "reasoning": "Real Betis's counter‑attack may be decisive on the road."
+ },
+ {
+  "match_id": 575329,
+  "home": "Barça",
+  "away": "Feyenoord",
+  "score": "1-0",
+  "reasoning": "Barça's control at home can edge out a single goal."
+ },
+ {
+  "match_id": 575330,
+  "home": "Stuttgart",
+  "away": "Viking",
+  "score": "0-0",
+  "reasoning": "A cautious approach from both sides hints at a draw."
+ },
+ {
+  "match_id": 575331,
+  "home": "Liverpool",
+  "away": "Atleti",
+  "score": "2-1",
+  "reasoning": "Liverpool's firepower should just edge past Atleti."
+ },
+ {
+  "match_id": 575332,
+  "home": "PSG",
+  "away": "Sl. Bratislava",
+  "score": "1-0",
+  "reasoning": "PSG's firepower at home should secure a clean sheet."
+ },
+ {
+  "match_id": 575333,
+  "home": "Napoli",
+  "away": "Arsenal",
+  "score": "1-1",
+  "reasoning": "Napoli and Arsenal are likely to cancel each other out."
+ },
+ {
+  "match_id": 575334,
+  "home": "Sporting CP",
+  "away": "Galatasaray",
+  "score": "1-0",
+  "reasoning": "Sporting CP's home advantage gives them a slim lead."
+ }
+]
