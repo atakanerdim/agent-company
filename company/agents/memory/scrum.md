@@ -6,3 +6,5 @@
 - [2026-08-25] Generated weekly blocker report for sprint week 2 on 2026-08-25.
 
 - [2026-09-01] 2026-09-01 generated weekly blocker report for sprint week 3.
+
+- [2026-09-08] 2026-09-08 generated weekly blocker report for sprint week 4.
