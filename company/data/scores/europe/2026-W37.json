@@ -1,0 +1,308 @@
+{
+ "statistician": {
+  "points": 9,
+  "detail": [
+   {
+    "match_id": 575323,
+    "home": "Club Brugge",
+    "away": "Aston Villa",
+    "predicted": "1-1",
+    "actual": "2-3",
+    "points": 0
+   },
+   {
+    "match_id": 575324,
+    "home": "PAE AEK",
+    "away": "LASK",
+    "predicted": "2-0",
+    "actual": "1-0",
+    "points": 1
+   },
+   {
+    "match_id": 575325,
+    "home": "Real Madrid",
+    "away": "Inter",
+    "predicted": "2-2",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 575326,
+    "home": "Porto",
+    "away": "Man City",
+    "predicted": "1-2",
+    "actual": "0-2",
+    "points": 1
+   },
+   {
+    "match_id": 575327,
+    "home": "Dortmund",
+    "away": "Villarreal",
+    "predicted": "3-1",
+    "actual": "3-2",
+    "points": 1
+   },
+   {
+    "match_id": 575328,
+    "home": "Lille",
+    "away": "Real Betis",
+    "predicted": "1-1",
+    "actual": "2-3",
+    "points": 0
+   },
+   {
+    "match_id": 575329,
+    "home": "Barça",
+    "away": "Feyenoord",
+    "predicted": "2-0",
+    "actual": "5-1",
+    "points": 1
+   },
+   {
+    "match_id": 575330,
+    "home": "Stuttgart",
+    "away": "Viking",
+    "predicted": "2-1",
+    "actual": "3-1",
+    "points": 1
+   },
+   {
+    "match_id": 575331,
+    "home": "Liverpool",
+    "away": "Atleti",
+    "predicted": "3-0",
+    "actual": "2-1",
+    "points": 1
+   },
+   {
+    "match_id": 575332,
+    "home": "PSG",
+    "away": "Sl. Bratislava",
+    "predicted": "4-0",
+    "actual": "6-1",
+    "points": 1
+   },
+   {
+    "match_id": 575333,
+    "home": "Napoli",
+    "away": "Arsenal",
+    "predicted": "1-2",
+    "actual": "0-1",
+    "points": 1
+   },
+   {
+    "match_id": 575334,
+    "home": "Sporting CP",
+    "away": "Galatasaray",
+    "predicted": "2-1",
+    "actual": "3-1",
+    "points": 1
+   }
+  ],
+  "submitted": true
+ },
+ "romantic": {
+  "points": 10,
+  "detail": [
+   {
+    "match_id": 575323,
+    "home": "Club Brugge",
+    "away": "Aston Villa",
+    "predicted": "1-2",
+    "actual": "2-3",
+    "points": 1
+   },
+   {
+    "match_id": 575324,
+    "home": "PAE AEK",
+    "away": "LASK",
+    "predicted": "2-0",
+    "actual": "1-0",
+    "points": 1
+   },
+   {
+    "match_id": 575325,
+    "home": "Real Madrid",
+    "away": "Inter",
+    "predicted": "3-1",
+    "actual": "2-1",
+    "points": 1
+   },
+   {
+    "match_id": 575326,
+    "home": "Porto",
+    "away": "Man City",
+    "predicted": "0-2",
+    "actual": "0-2",
+    "points": 3
+   },
+   {
+    "match_id": 575327,
+    "home": "Dortmund",
+    "away": "Villarreal",
+    "predicted": "2-2",
+    "actual": "3-2",
+    "points": 0
+   },
+   {
+    "match_id": 575328,
+    "home": "Lille",
+    "away": "Real Betis",
+    "predicted": "1-1",
+    "actual": "2-3",
+    "points": 0
+   },
+   {
+    "match_id": 575329,
+    "home": "Barça",
+    "away": "Feyenoord",
+    "predicted": "2-0",
+    "actual": "5-1",
+    "points": 1
+   },
+   {
+    "match_id": 575330,
+    "home": "Stuttgart",
+    "away": "Viking",
+    "predicted": "1-3",
+    "actual": "3-1",
+    "points": 0
+   },
+   {
+    "match_id": 575331,
+    "home": "Liverpool",
+    "away": "Atleti",
+    "predicted": "2-2",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 575332,
+    "home": "PSG",
+    "away": "Sl. Bratislava",
+    "predicted": "3-0",
+    "actual": "6-1",
+    "points": 1
+   },
+   {
+    "match_id": 575333,
+    "home": "Napoli",
+    "away": "Arsenal",
+    "predicted": "1-2",
+    "actual": "0-1",
+    "points": 1
+   },
+   {
+    "match_id": 575334,
+    "home": "Sporting CP",
+    "away": "Galatasaray",
+    "predicted": "2-1",
+    "actual": "3-1",
+    "points": 1
+   }
+  ],
+  "submitted": true
+ },
+ "coolhead": {
+  "points": 9,
+  "detail": [
+   {
+    "match_id": 575323,
+    "home": "Club Brugge",
+    "away": "Aston Villa",
+    "predicted": "1-1",
+    "actual": "2-3",
+    "points": 0
+   },
+   {
+    "match_id": 575324,
+    "home": "PAE AEK",
+    "away": "LASK",
+    "predicted": "0-0",
+    "actual": "1-0",
+    "points": 0
+   },
+   {
+    "match_id": 575325,
+    "home": "Real Madrid",
+    "away": "Inter",
+    "predicted": "1-0",
+    "actual": "2-1",
+    "points": 1
+   },
+   {
+    "match_id": 575326,
+    "home": "Porto",
+    "away": "Man City",
+    "predicted": "0-1",
+    "actual": "0-2",
+    "points": 1
+   },
+   {
+    "match_id": 575327,
+    "home": "Dortmund",
+    "away": "Villarreal",
+    "predicted": "1-1",
+    "actual": "3-2",
+    "points": 0
+   },
+   {
+    "match_id": 575328,
+    "home": "Lille",
+    "away": "Real Betis",
+    "predicted": "0-1",
+    "actual": "2-3",
+    "points": 1
+   },
+   {
+    "match_id": 575329,
+    "home": "Barça",
+    "away": "Feyenoord",
+    "predicted": "1-0",
+    "actual": "5-1",
+    "points": 1
+   },
+   {
+    "match_id": 575330,
+    "home": "Stuttgart",
+    "away": "Viking",
+    "predicted": "0-0",
+    "actual": "3-1",
+    "points": 0
+   },
+   {
+    "match_id": 575331,
+    "home": "Liverpool",
+    "away": "Atleti",
+    "predicted": "2-1",
+    "actual": "2-1",
+    "points": 3
+   },
+   {
+    "match_id": 575332,
+    "home": "PSG",
+    "away": "Sl. Bratislava",
+    "predicted": "1-0",
+    "actual": "6-1",
+    "points": 1
+   },
+   {
+    "match_id": 575333,
+    "home": "Napoli",
+    "away": "Arsenal",
+    "predicted": "1-1",
+    "actual": "0-1",
+    "points": 0
+   },
+   {
+    "match_id": 575334,
+    "home": "Sporting CP",
+    "away": "Galatasaray",
+    "predicted": "1-0",
+    "actual": "3-1",
+    "points": 1
+   }
+  ],
+  "submitted": true
+ }
+}

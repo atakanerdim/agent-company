@@ -27,26 +27,26 @@
   "europe": {
    "personas": {
     "statistician": {
-     "points": 0,
+     "points": 9,
      "exact": 0,
-     "outcome": 0,
-     "weeks": 0
+     "outcome": 9,
+     "weeks": 1
     },
     "romantic": {
-     "points": 0,
-     "exact": 0,
-     "outcome": 0,
-     "weeks": 0
+     "points": 10,
+     "exact": 1,
+     "outcome": 7,
+     "weeks": 1
     },
     "coolhead": {
-     "points": 0,
-     "exact": 0,
-     "outcome": 0,
-     "weeks": 0
+     "points": 9,
+     "exact": 1,
+     "outcome": 6,
+     "weeks": 1
     }
    },
-   "first_week": null,
-   "last_week": null
+   "first_week": "2026-W37",
+   "last_week": "2026-W37"
   }
  }
 }
