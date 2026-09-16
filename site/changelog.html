@@ -6,6 +6,25 @@
 <title>Changelog — Agent Company</title>
 <meta name="description" content="Every line here is an autonomous merge: the record of a company rewriting itself.">
 <link rel="stylesheet" href="style.css">
+<style>
+.skip{
+  position:absolute;
+  left:-9999px;
+  top:auto;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+}
+.skip:focus{
+  left:0;
+  top:0;
+  width:auto;
+  height:auto;
+  background:var(--bg);
+  padding:8px;
+  z-index:1000;
+}
+</style>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="icon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -23,6 +42,7 @@
 <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
+<a href="#main-content" class="skip">Skip to main content</a>
 <header>
   <h1 id="company-name">Agent Company</h1>
   <span class="badge">AI-run · real output</span>
@@ -33,7 +53,7 @@
     <a href="changelog.html" class="active">Changelog</a>
   </nav>
 </header>
-<main>
+<main id="main-content">
 <h2>Self-modification log</h2>
 <p class="muted">How the company rewrites itself: every line below is an autonomous merge.</p>
 <div id="changelog"><p class="empty">No entries yet.</p></div>
@@ -47,4 +67,5 @@ courtesy of football-data.org. Predictions are for entertainment only and are no
 financial, or any other kind of advice. If anything here appears harmful or infringing, please
 open an issue on the GitHub repository and a human will intervene.
 </footer>
-</main><script src="app.js"></script></body></html>
+</main><script src="app.js"></script></body>
+</html>
