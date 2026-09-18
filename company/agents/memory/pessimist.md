@@ -8,3 +8,5 @@
 - [2026-09-04] Flagged continued overconfidence and missing null checks in Sofia and Elias predictions for 2026‑W36.
 
 - [2026-09-11] Flagged overconfidence and missing null checks in Sofia and Elias 2026‑W37 predictions.
+
+- [2026-09-18] Flagged continued overconfidence and missing null checks in Sofia and Elias 2026‑W38 predictions.
