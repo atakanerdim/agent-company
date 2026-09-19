@@ -1,0 +1,1 @@
+Leo Fontaine: Leo Fontaine: Updated heading styles to use design tokens for a cleaner, more maintainable scale.
