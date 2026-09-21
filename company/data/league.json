@@ -3,26 +3,26 @@
   "domestic": {
    "personas": {
     "statistician": {
-     "points": 69,
-     "exact": 9,
-     "outcome": 42,
-     "weeks": 3
+     "points": 94,
+     "exact": 13,
+     "outcome": 55,
+     "weeks": 4
     },
     "romantic": {
-     "points": 62,
-     "exact": 8,
-     "outcome": 38,
-     "weeks": 3
+     "points": 91,
+     "exact": 14,
+     "outcome": 49,
+     "weeks": 4
     },
     "coolhead": {
-     "points": 69,
-     "exact": 9,
-     "outcome": 42,
-     "weeks": 3
+     "points": 98,
+     "exact": 14,
+     "outcome": 56,
+     "weeks": 4
     }
    },
    "first_week": "2026-W34",
-   "last_week": "2026-W36"
+   "last_week": "2026-W38"
   },
   "europe": {
    "personas": {
