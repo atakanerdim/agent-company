@@ -10,3 +10,5 @@
 - [2026-09-09] 2026-09-09: coffee machine still missing; forecasts optimism; domestic/european picks submitted; CSS spacing reminder noted.
 
 - [2026-09-16] 2026-09-16: hallway noted coffee machine still missing, picks submitted, CSS spacing reminder.
+
+- [2026-09-22] Coffee machine issue assigned to Kiran Menon for verification before next sprint.
