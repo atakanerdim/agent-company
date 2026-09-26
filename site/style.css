@@ -2,97 +2,127 @@
   --bg:#0f1117; --card:#171a23; --line:#262b38;
   --text:#e8eaf0; --muted:#9aa3b5; --accent:#5b8cff; --accent2:#3ddc97;
   --danger:#ff6b6b; --radius:12px;
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  /* spacing scale */
+  --space-xxs:4px;
+  --space-xs:8px;
+  --space-sm:12px;
+  --space-md:20px;
+  --space-lg:28px;
+  /* design tokens */
+  --border-width:2px;
+  --avatar-size:56px;
+  --avatar-radius:10px;
+  --bubble-avatar-size:44px;
+  --bubble-avatar-radius:8px;
+  --bubble-tail-radius:3px;
+  --day-font-size:11px;
+  --day-padding: var(--space-xxs) var(--space-xs);
+  --day-radius:6px;
+  --day-border-width:1px;
+  --role-font-size:13px;
+  --bio-font-size:14px;
+  --who-h3-font-size:15px;
+  --status-font-size:12px;
+  --quiet-font-size: var(--space-sm);
+  --quiet-underline-offset:4px;
+  --bubble-text-font-size:14px;
+  --bubble-meta-font-size: var(--space-sm);
+  --thread-h3-font-size:14px;
+  --track-h3-font-size:15px;
+  --room-h3-font-size:13px;
+  --badge-padding: var(--space-xxs) var(--space-xs);
+  --badge-font-size: var(--space-sm);
+  --steps-border-width:2px;
+  --chart-max-height:280px;
+  font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
 }
+
+/* 2025-10-23 — Leo Fontaine, Designer: Full spacing scale overhaul, removed hard‑coded pixel values, fixed typo var(--var(--muted)). */
 *{box-sizing:border-box;margin:0}
 body{background:var(--bg);color:var(--text);line-height:1.65;font-size:16px}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
-header{border-bottom:1px solid var(--line);padding:18px 24px;display:flex;gap:18px;align-items:baseline;flex-wrap:wrap}
+header{border-bottom:1px solid var(--line);padding:var(--space-md) var(--space-lg);display:flex;gap:var(--space-md);align-items:baseline;flex-wrap:wrap}
 header h1{font-size:20px;font-weight:600}
-header nav{display:flex;gap:14px;flex-wrap:wrap}
+header nav{display:flex;gap:var(--space-xs);flex-wrap:wrap}
 header nav a{color:var(--muted)}
-header nav a.active{color:var(--text);border-bottom:2px solid var(--accent)}
-main{max-width:960px;margin:0 auto;padding:28px 24px 64px}
-h2{font-size:18px;font-weight:600;margin-bottom:12px}
-.badge{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;
+header nav a.active{color:var(--text);border-bottom:var(--border-width) solid var(--accent)}
+main{max-width:960px;margin:0 auto;padding:var(--space-lg) var(--space-md) calc(var(--space-lg)*2)}
+h2{font-size:18px;font-weight:600;margin-bottom:var(--space-xs)}
+.badge{display:inline-block;font-size:var(--badge-font-size);padding:var(--badge-padding);border-radius:999px;
   background:#12351f;color:var(--accent2);border:1px solid #1d5b36;vertical-align:middle}
 .badge.fiction{background:#3a2a12;color:#f0b35c;border-color:#6b4b1d}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
-.card h3{font-size:15px;font-weight:600;margin-bottom:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--space-md)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:var(--space-md)}
+.card h3{font-size:15px;font-weight:600;margin-bottom:var(--space-xs)}
 .card p{color:var(--muted);font-size:14px}
-.row{border-bottom:1px solid var(--line);padding:10px 4px;display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap}
+.row{border-bottom:1px solid var(--line);padding:var(--space-sm) var(--space-xs);display:flex;gap:var(--space-xs);justify-content:space-between;flex-wrap:wrap}
 .muted{color:var(--muted);font-size:14px}
-.notice{margin-top:26px;font-size:13px;color:var(--muted);border:1px dashed var(--line);
-  border-radius:var(--radius);padding:10px 14px}
-pre{background:#0b0d12;border:1px solid var(--line);border-radius:8px;padding:14px;
+.notice{margin-top:var(--space-lg);font-size:13px;color:var(--muted);border:1px dashed var(--line);
+  border-radius:var(--radius);padding:var(--space-xs) var(--space-md)}
+pre{background:#0b0d12;border:1px solid var(--line);border-radius:8px;padding:var(--space-md);
   overflow-x:auto;font-size:13px;white-space:pre-wrap}
 table{width:100%;border-collapse:collapse;font-size:14px}
-td,th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left}
-canvas{max-height:280px}
-.empty{color:var(--muted);font-style:italic;padding:18px 0}
+td,th{border-bottom:1px solid var(--line);padding:var(--space-sm) var(--space-xxs);text-align:left}
+canvas{max-height:var(--chart-max-height)}
+.empty{color:var(--muted);font-style:italic;padding:var(--space-lg) 0}
 
 /* ---- the office floor ------------------------------------------------ */
-/* Structure only. Which colours and spacing win is the Designer's call. */
-
 .explainer{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  padding:18px 20px;margin:8px 0 12px}
+  padding:var(--space-md) var(--space-md);margin:var(--space-xxs) 0 var(--space-sm)}
 .explainer p{color:var(--muted);font-size:15px;max-width:62ch}
-.steps{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:16px;
+.steps{list-style:none;padding:0;margin:var(--space-xxs) 0 0;display:grid;gap:var(--space-md);
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-.steps li{border-left:2px solid var(--accent);padding:2px 0 2px 12px;
+.steps li{border-left:var(--steps-border-width) solid var(--accent);padding:var(--space-xxs) 0 var(--space-xxs) var(--space-md);
   color:var(--muted);font-size:14px}
 .steps b{color:var(--text);display:block;font-weight:600}
 
-.room{margin:36px 0 0}
-.room > h3{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:6px}
-.desks{display:flex;flex-wrap:wrap;gap:14px}
+.room{margin:var(--space-lg) 0 0}
+.room > h3{font-size:var(--room-h3-font-size);font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:var(--space-xs);border-bottom:1px solid var(--line);padding-bottom:var(--space-xs)}
+.desks{display:flex;flex-wrap:wrap;gap:var(--space-md)}
 .desk{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  padding:16px;display:flex;flex-direction:column;gap:8px;flex:1 1 260px;max-width:100%}
+  padding:var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm);flex:1 1 260px;max-width:100%}
 .desk.on{border-color:var(--accent)}
-.desk-head{display:flex;gap:12px;align-items:center}
-.desk .avatar{width:56px;height:56px;border-radius:10px;display:block;flex:0 0 auto}
+.desk-head{display:flex;gap:var(--space-sm);align-items:center}
+.desk .avatar{width:var(--avatar-size);height:var(--avatar-size);border-radius:var(--avatar-radius);display:block;flex:0 0 auto}
 .desk .who{min-width:0}
-.desk .who h3{font-size:15px;font-weight:600;margin:0}
-.desk .role{color:var(--muted);font-size:13px;margin:0}
-.desk .bio{color:var(--muted);font-size:14px;margin:0}
-.desk .days{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin:0}
-.day{font-size:11px;padding:1px 6px;border-radius:6px;border:1px solid var(--line);
-  color:var(--muted)}
+.desk .who h3{font-size:var(--who-h3-font-size);font-weight:600;margin:0}
+.desk .role{color:var(--muted);font-size:var(--role-font-size);margin:0}
+.desk .bio{color:var(--muted);font-size:var(--bio-font-size);margin:0}
+.desk .days{display:flex;gap:var(--space-xxs);flex-wrap:wrap;align-items:center;margin:0}
+.day{font-size:var(--day-font-size);padding:var(--day-padding);border-radius:var(--day-radius);
+  border:var(--day-border-width) solid var(--line);color:var(--muted)}
 .day.on{border-color:var(--accent);color:var(--text)}
-.status{font-size:12px;color:var(--muted);margin:0}
+.status{font-size:var(--status-font-size);color:var(--muted);margin:0}
 .status.in{color:var(--accent2)}
-.quiet{font-size:12px;color:var(--muted);text-decoration:underline;
-  text-underline-offset:4px;align-self:flex-start}
+.quiet{font-size:var(--quiet-font-size);color:var(--muted);text-decoration:underline;
+  text-underline-offset:var(--quiet-underline-offset);align-self:flex-start}
 .quiet:hover{color:var(--accent)}
 
 /* ---- hallway and reviews --------------------------------------------- */
 
-.feed{display:flex;flex-direction:column;gap:16px}
-.bubble{display:flex;gap:10px;align-items:flex-start}
-.bubble .avatar{width:44px;height:44px;border-radius:8px;display:block;flex:0 0 auto}
+.feed{display:flex;flex-direction:column;gap:var(--space-lg)}
+.bubble{display:flex;gap:var(--space-sm);align-items:flex-start}
+.bubble .avatar{width:var(--bubble-avatar-size);height:var(--bubble-avatar-size);border-radius:var(--bubble-avatar-radius);display:block;flex:0 0 auto}
 .bubble > div{min-width:0;flex:1 1 auto}
 .bubble .said{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  border-top-left-radius:3px;padding:9px 13px}
-.bubble .said p{margin:0;font-size:14px}
-.bubble .meta{color:var(--muted);font-size:12px;margin-bottom:2px}
+  border-top-left-radius:var(--bubble-tail-radius);padding:var(--space-sm) var(--space-md)}
+.bubble .said p{margin:0;font-size:var(--bubble-text-font-size)}
+.bubble .meta{color:var(--muted);font-size:var(--bubble-meta-font-size);margin-bottom:var(--space-xxs)}
 .bubble .meta b{color:var(--text);font-weight:600}
 
 .thread{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-  padding:14px;margin-bottom:12px}
-.thread > h3{font-size:14px;font-weight:600;margin-bottom:10px}
-.thread .feed{margin-top:8px}
+  padding:var(--space-md);margin-bottom:var(--space-md)}
+.thread > h3{font-size:var(--thread-h3-font-size);font-weight:600;margin-bottom:var(--space-sm)}
+.thread .feed{margin-top:var(--space-sm)}
 
 /* ---- competition tracks ---------------------------------------------- */
-/* Structure only. Which colours and spacing win is the Designer's call. */
-
-.track{margin:0 0 34px}
-.track > h3{font-size:15px;font-weight:600;margin-bottom:14px;color:var(--muted);
-  border-bottom:1px solid var(--line);padding-bottom:6px}
-.track canvas{max-height:220px;margin-bottom:12px}
+.track{margin:0 0 var(--space-lg)}
+.track > h3{font-size:var(--track-h3-font-size);font-weight:600;margin-bottom:var(--space-xs);color:var(--muted);
+  border-bottom:1px solid var(--line);padding-bottom:var(--space-xs)}
+.track canvas{max-height:var(--chart-max-height);margin-bottom:var(--space-sm)}
 
 @media (max-width: 480px){
-  header, main{padding-left:16px;padding-right:16px}
+  header, main{padding-left:var(--space-md);padding-right:var(--space-md)}
 }

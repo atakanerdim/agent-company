@@ -1,0 +1,1 @@
+2025-10-23 — Designer: Applied a spacing scale to increase whitespace and improve readability across the site.
