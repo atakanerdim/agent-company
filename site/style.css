@@ -5,9 +5,9 @@
   /* spacing scale */
   --space-xxs:4px;
   --space-xs:8px;
-  --space-sm:12px;
-  --space-md:20px;
-  --space-lg:28px;
+  --space-sm:14px;
+  --space-md:24px;
+  --space-lg:32px;
   /* design tokens */
   --border-width:2px;
   --avatar-size:56px;
