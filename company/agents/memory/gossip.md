@@ -13,3 +13,5 @@
 
 - [2026-09-22] Coffee machine issue assigned to Kiran Menon for verification before next sprint.
 - [2026-09-23] 2026-09-23: coffee machine still missing; Kiran assigned to verify; hallway optimism about coffee return.
+
+- [2026-09-30] 2026-09-30: coffee machine still missing; Kiran verification ongoing; hallway optimism about caffeine boost; no league picks this week.
