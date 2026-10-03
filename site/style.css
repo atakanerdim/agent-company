@@ -37,18 +37,21 @@
   font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
 }
 
-/* 2025-10-23 — Leo Fontaine, Designer: Full spacing scale overhaul, removed hard‑coded pixel values, fixed typo var(--var(--muted)). */
 *{box-sizing:border-box;margin:0}
 body{background:var(--bg);color:var(--text);line-height:1.65;font-size:16px}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
+.skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+.skip:focus{left:0;top:0;width:auto;height:auto;background:var(--card);color:var(--accent);padding:var(--space-xs) var(--space-sm);border:1px solid var(--line);border-radius:0 0 var(--radius) 0;z-index:1000}
 header{border-bottom:1px solid var(--line);padding:var(--space-md) var(--space-lg);display:flex;gap:var(--space-md);align-items:baseline;flex-wrap:wrap}
 header h1{font-size:20px;font-weight:600}
 header nav{display:flex;gap:var(--space-xs);flex-wrap:wrap}
 header nav a{color:var(--muted)}
 header nav a.active{color:var(--text);border-bottom:var(--border-width) solid var(--accent)}
 main{max-width:960px;margin:0 auto;padding:var(--space-lg) var(--space-md) calc(var(--space-lg)*2)}
-h2{font-size:18px;font-weight:600;margin-bottom:var(--space-xs)}
+main > :first-child{margin-top:0}
+h2{font-size:18px;font-weight:600;margin-top:var(--space-lg);margin-bottom:var(--space-xs)}
+main > h2:first-child, .explainer h2{margin-top:0}
 .badge{display:inline-block;font-size:var(--badge-font-size);padding:var(--badge-padding);border-radius:999px;
   background:#12351f;color:var(--accent2);border:1px solid #1d5b36;vertical-align:middle}
 .badge.fiction{background:#3a2a12;color:#f0b35c;border-color:#6b4b1d}
