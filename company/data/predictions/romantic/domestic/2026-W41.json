@@ -1,0 +1,310 @@
+[
+ {
+  "match_id": 560593,
+  "home": "Arsenal",
+  "away": "Leeds United",
+  "score": "2-1",
+  "reasoning": "A late goal from the Gunners' talisman turns the night into a North London fairy‑tale."
+ },
+ {
+  "match_id": 560592,
+  "home": "Sunderland",
+  "away": "Brighton Hove",
+  "score": "1-2",
+  "reasoning": "Sunderland's brave fight is rewarded as Brighton's tide rolls in with a decisive strike."
+ },
+ {
+  "match_id": 560595,
+  "home": "Chelsea",
+  "away": "Bournemouth",
+  "score": "3-0",
+  "reasoning": "Chelsea's blue wave crashes over Bournemouth, a reminder of their relentless ambition."
+ },
+ {
+  "match_id": 560599,
+  "home": "Ipswich Town",
+  "away": "Fulham",
+  "score": "2-2",
+  "reasoning": "Ipswich and Fulham lock horns in a seesaw, each side refusing to surrender the dream."
+ },
+ {
+  "match_id": 560601,
+  "home": "Aston Villa",
+  "away": "Brentford",
+  "score": "1-1",
+  "reasoning": "Villa's heart beats strong, but Brentford's grit forces a stalemate."
+ },
+ {
+  "match_id": 560600,
+  "home": "Man United",
+  "away": "Tottenham",
+  "score": "2-2",
+  "reasoning": "Old rivals exchange blows, ending in a passionate draw that leaves fans yearning."
+ },
+ {
+  "match_id": 560594,
+  "home": "Hull City",
+  "away": "Everton",
+  "score": "0-3",
+  "reasoning": "Hull's hopes are dashed as Everton's fire burns bright on a rainy evening."
+ },
+ {
+  "match_id": 560596,
+  "home": "Crystal Palace",
+  "away": "Nottingham",
+  "score": "1-2",
+  "reasoning": "Palace's fight is eclipsed by Nottingham's underdog surge to a surprise win."
+ },
+ {
+  "match_id": 560598,
+  "home": "Liverpool",
+  "away": "Man City",
+  "score": "1-3",
+  "reasoning": "Liverpool's anthem fades as City's relentless surge writes a new chapter."
+ },
+ {
+  "match_id": 564706,
+  "home": "Málaga",
+  "away": "Espanyol",
+  "score": "1-2",
+  "reasoning": "Málaga's sunrise hopes fade as Espanyol's veteran striker finds the net in the dying minutes."
+ },
+ {
+  "match_id": 564698,
+  "home": "Rayo Vallecano",
+  "away": "Athletic",
+  "score": "2-2",
+  "reasoning": "Rayo's daring wing play meets Athletic's relentless press, ending in a thrilling stalemate."
+ },
+ {
+  "match_id": 564699,
+  "home": "Alavés",
+  "away": "Atleti",
+  "score": "0-3",
+  "reasoning": "Alavés' brave defense crumbles under Atleti's sudden surge of youthful fire."
+ },
+ {
+  "match_id": 564700,
+  "home": "Barça",
+  "away": "Getafe",
+  "score": "3-0",
+  "reasoning": "Barça's midnight magic dazzles, leaving Getafe chasing shadows."
+ },
+ {
+  "match_id": 564702,
+  "home": "Real Madrid",
+  "away": "Villarreal",
+  "score": "2-1",
+  "reasoning": "Real Madrid's phoenix rises, but Villarreal's daring strike almost steals the crown."
+ },
+ {
+  "match_id": 564703,
+  "home": "Elche",
+  "away": "Celta",
+  "score": "1-1",
+  "reasoning": "Elche's hopeful charge meets Celta's resilient tide, sharing the spotlight."
+ },
+ {
+  "match_id": 564707,
+  "home": "Real Sociedad",
+  "away": "Deportivo",
+  "score": "2-0",
+  "reasoning": "Real Sociedad's river of passes sweeps Deportivo away."
+ },
+ {
+  "match_id": 564701,
+  "home": "Real Betis",
+  "away": "Osasuna",
+  "score": "1-2",
+  "reasoning": "Betis' rhythm falters as Osasuna's underdog heart storms the net."
+ },
+ {
+  "match_id": 564705,
+  "home": "Santander",
+  "away": "Valencia",
+  "score": "0-2",
+  "reasoning": "Valencia's sunrise attack lights up the night in Santander."
+ },
+ {
+  "match_id": 565820,
+  "home": "Dortmund",
+  "away": "Bremen",
+  "score": "2-1",
+  "reasoning": "A late Dortmund strike silences Bremen's hopeful comeback."
+ },
+ {
+  "match_id": 565812,
+  "home": "Mainz",
+  "away": "Leverkusen",
+  "score": "1-2",
+  "reasoning": "Leverkusen's relentless push steals a last‑minute victory from Mainz."
+ },
+ {
+  "match_id": 565813,
+  "home": "SC Paderborn",
+  "away": "Stuttgart",
+  "score": "0-0",
+  "reasoning": "Both sides hold their breath in a tense, goalless duel."
+ },
+ {
+  "match_id": 565817,
+  "home": "Union Berlin",
+  "away": "Elversberg",
+  "score": "3-1",
+  "reasoning": "Union Berlin's fans roar as they turn a quiet night into a three‑goal celebration."
+ },
+ {
+  "match_id": 565818,
+  "home": "Hoffenheim",
+  "away": "HSV",
+  "score": "1-2",
+  "reasoning": "HSV rise from a goal down to claim a thrilling comeback."
+ },
+ {
+  "match_id": 565819,
+  "home": "Augsburg",
+  "away": "Bayern",
+  "score": "1-3",
+  "reasoning": "Bayern's firepower turns Augsburg's hopes into a distant memory."
+ },
+ {
+  "match_id": 565815,
+  "home": "RB Leipzig",
+  "away": "Frankfurt",
+  "score": "2-2",
+  "reasoning": "Leipzig and Frankfurt trade blows, ending in a pulse‑pounding draw."
+ },
+ {
+  "match_id": 565814,
+  "home": "1. FC Köln",
+  "away": "M'gladbach",
+  "score": "2-0",
+  "reasoning": "Cologne's attack bursts forth, leaving M'gladbach searching for answers."
+ },
+ {
+  "match_id": 565816,
+  "home": "Freiburg",
+  "away": "Schalke",
+  "score": "1-1",
+  "reasoning": "A late Schalke equaliser writes a story of resilience."
+ },
+ {
+  "match_id": 558588,
+  "home": "Genoa",
+  "away": "Fiorentina",
+  "score": "2-1",
+  "reasoning": "Genoa's veteran midfielder's late strike separates the sides in a hard‑fought 2‑1 home victory."
+ },
+ {
+  "match_id": 558582,
+  "home": "Inter",
+  "away": "Parma",
+  "score": "3-0",
+  "reasoning": "Inter's fluid attacking trio dominate from the start, handing Parma a 3‑0 drubbing at the San Siro."
+ },
+ {
+  "match_id": 558586,
+  "home": "Napoli",
+  "away": "Frosinone",
+  "score": "4-1",
+  "reasoning": "Napoli's star forward nets a hat‑trick while Frosinone manages a lone consolation, ending 4‑1."
+ },
+ {
+  "match_id": 558585,
+  "home": "Como 1907",
+  "away": "Roma",
+  "score": "0-2",
+  "reasoning": "Roma's experienced midfield controls the tempo and a late strike secures a 2‑0 win for the Giallorossi."
+ },
+ {
+  "match_id": 558581,
+  "home": "Lecce",
+  "away": "Bologna",
+  "score": "1-1",
+  "reasoning": "Lecce's relentless pressure meets Bologna's resilient defense, producing a shared 1‑1 draw."
+ },
+ {
+  "match_id": 558583,
+  "home": "Lazio",
+  "away": "Monza",
+  "score": "3-1",
+  "reasoning": "Lazio's lethal forward scores twice to secure a 3‑1 victory, with Monza's late penalty only offering a faint hope."
+ },
+ {
+  "match_id": 558580,
+  "home": "Sassuolo",
+  "away": "Milan",
+  "score": "2-2",
+  "reasoning": "A dramatic comeback sees Sassuolo equalise late, sharing the points in a thrilling 2‑2 draw."
+ },
+ {
+  "match_id": 558584,
+  "home": "Cagliari",
+  "away": "Juventus",
+  "score": "0-2",
+  "reasoning": "Juventus's clinical finishing secures a comfortable 2‑0 away win, leaving Cagliari disappointed."
+ },
+ {
+  "match_id": 559669,
+  "home": "RC Lens",
+  "away": "Olympique Lyon",
+  "score": "1-2",
+  "reasoning": "Lens' late surge almost turned the tide, but Lyon's experience whispered a comeback."
+ },
+ {
+  "match_id": 559674,
+  "home": "Lille",
+  "away": "Le Havre",
+  "score": "3-0",
+  "reasoning": "Lille's youthful fire ignited, leaving Le Havre in awe."
+ },
+ {
+  "match_id": 559666,
+  "home": "Brest",
+  "away": "Angers SCO",
+  "score": "2-2",
+  "reasoning": "Brest's daring attack met Angers' resilient defense in a dance of equal hearts."
+ },
+ {
+  "match_id": 559668,
+  "home": "Lorient",
+  "away": "Paris FC",
+  "score": "1-1",
+  "reasoning": "Lorient's seaside spirit clashed with Paris' urban rhythm, ending in a balanced beat."
+ },
+ {
+  "match_id": 559672,
+  "home": "PSG",
+  "away": "Le Mans",
+  "score": "4-0",
+  "reasoning": "PSG's stars painted a night sky of goals, while Le Mans watched in humbled silence."
+ },
+ {
+  "match_id": 559673,
+  "home": "Monaco",
+  "away": "Toulouse",
+  "score": "2-1",
+  "reasoning": "Monaco's royal ambition slipped, but a late heroics stole the crown from Toulouse."
+ },
+ {
+  "match_id": 559670,
+  "home": "Nice",
+  "away": "Strasbourg",
+  "score": "2-0",
+  "reasoning": "Nice's sunlit passes warmed Strasbourg's resolve, leaving them in the shade."
+ },
+ {
+  "match_id": 559667,
+  "home": "Stade Rennais",
+  "away": "Auxerre",
+  "score": "1-0",
+  "reasoning": "Rennais' lone striker whispered a promise that echoed beyond the stadium."
+ },
+ {
+  "match_id": 559671,
+  "home": "Troyes",
+  "away": "Marseille",
+  "score": "1-2",
+  "reasoning": "Troyes' brave hearts fought valiantly, yet Marseille's tide surged at the final whistle."
+ }
+]
