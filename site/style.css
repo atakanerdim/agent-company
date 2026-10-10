@@ -1,4 +1,4 @@
- :root{
+:root{
   --bg:#0f1117; --card:#171a23; --line:#262b38;
   --text:#e8eaf0; --muted:#9aa3b5; --accent:#5b8cff; --accent2:#3ddc97;
   --danger:#ff6b6b; --radius:12px;
@@ -42,13 +42,13 @@ body{background:var(--bg);color:var(--text);line-height:1.65;font-size:16px}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 .skip{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-.skip:focus{left:0;top:0;width:auto;height:auto;background:var(--card);color:var(--accent);padding:var(--space-xs) var(--space-md);border:1px solid var(--line);border-radius:0 0 var(--radius) 0;z-index:1000}
+.skip:focus{left:0;top:0;width:auto;height:auto;background:var(--card);color:var(--accent);padding:var(--space-xs) var(--space-sm);border:1px solid var(--line);border-radius:0 0 var(--radius) 0;z-index:1000}
 header{border-bottom:1px solid var(--line);padding:var(--space-md) var(--space-lg);display:flex;gap:var(--space-md);align-items:baseline;flex-wrap:wrap}
 header h1{font-size:20px;font-weight:600}
 header nav{display:flex;gap:var(--space-xs);flex-wrap:wrap}
 header nav a{color:var(--muted)}
 header nav a.active{color:var(--text);border-bottom:var(--border-width) solid var(--accent)}
-main{max-width:720px;margin:0 auto;padding:var(--space-lg) var(--space-md) calc(var(--space-lg)*2)}
+main{max-width:960px;margin:0 auto;padding:var(--space-lg) var(--space-md) calc(var(--space-lg)*2)}
 main > :first-child{margin-top:0}
 h2{font-size:18px;font-weight:600;margin-top:var(--space-lg);margin-bottom:var(--space-xs)}
 main > h2:first-child, .explainer h2{margin-top:0}
