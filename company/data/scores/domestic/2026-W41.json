@@ -1,0 +1,932 @@
+{
+ "statistician": {
+  "points": 32,
+  "detail": [
+   {
+    "match_id": 560593,
+    "home": "Arsenal",
+    "away": "Leeds United",
+    "predicted": "2-0",
+    "actual": "2-1",
+    "points": 1
+   },
+   {
+    "match_id": 560592,
+    "home": "Sunderland",
+    "away": "Brighton Hove",
+    "predicted": "0-2",
+    "actual": "0-2",
+    "points": 3
+   },
+   {
+    "match_id": 560595,
+    "home": "Chelsea",
+    "away": "Bournemouth",
+    "predicted": "3-0",
+    "actual": "5-1",
+    "points": 1
+   },
+   {
+    "match_id": 560599,
+    "home": "Ipswich Town",
+    "away": "Fulham",
+    "predicted": "1-1",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 560601,
+    "home": "Aston Villa",
+    "away": "Brentford",
+    "predicted": "2-1",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 560600,
+    "home": "Man United",
+    "away": "Tottenham",
+    "predicted": "2-2",
+    "actual": "1-1",
+    "points": 1
+   },
+   {
+    "match_id": 560594,
+    "home": "Hull City",
+    "away": "Everton",
+    "predicted": "0-2",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 560596,
+    "home": "Crystal Palace",
+    "away": "Nottingham",
+    "predicted": "2-1",
+    "actual": "3-1",
+    "points": 1
+   },
+   {
+    "match_id": 560598,
+    "home": "Liverpool",
+    "away": "Man City",
+    "predicted": "2-3",
+    "actual": "0-3",
+    "points": 1
+   },
+   {
+    "match_id": 564706,
+    "home": "Málaga",
+    "away": "Espanyol",
+    "predicted": "1-2",
+    "actual": "1-1",
+    "points": 0
+   },
+   {
+    "match_id": 564699,
+    "home": "Alavés",
+    "away": "Atleti",
+    "predicted": "0-2",
+    "actual": "1-2",
+    "points": 1
+   },
+   {
+    "match_id": 564700,
+    "home": "Barça",
+    "away": "Getafe",
+    "predicted": "3-0",
+    "actual": "3-0",
+    "points": 3
+   },
+   {
+    "match_id": 564702,
+    "home": "Real Madrid",
+    "away": "Villarreal",
+    "predicted": "2-1",
+    "actual": "1-0",
+    "points": 1
+   },
+   {
+    "match_id": 564703,
+    "home": "Elche",
+    "away": "Celta",
+    "predicted": "1-2",
+    "actual": "0-0",
+    "points": 0
+   },
+   {
+    "match_id": 564707,
+    "home": "Real Sociedad",
+    "away": "Deportivo",
+    "predicted": "2-0",
+    "actual": "3-2",
+    "points": 1
+   },
+   {
+    "match_id": 564701,
+    "home": "Real Betis",
+    "away": "Osasuna",
+    "predicted": "2-1",
+    "actual": "5-2",
+    "points": 1
+   },
+   {
+    "match_id": 564705,
+    "home": "Santander",
+    "away": "Valencia",
+    "predicted": "0-2",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 565820,
+    "home": "Dortmund",
+    "away": "Bremen",
+    "predicted": "2-0",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 565812,
+    "home": "Mainz",
+    "away": "Leverkusen",
+    "predicted": "1-1",
+    "actual": "3-4",
+    "points": 0
+   },
+   {
+    "match_id": 565813,
+    "home": "SC Paderborn",
+    "away": "Stuttgart",
+    "predicted": "1-2",
+    "actual": "0-2",
+    "points": 1
+   },
+   {
+    "match_id": 565817,
+    "home": "Union Berlin",
+    "away": "Elversberg",
+    "predicted": "2-0",
+    "actual": "1-0",
+    "points": 1
+   },
+   {
+    "match_id": 565818,
+    "home": "Hoffenheim",
+    "away": "HSV",
+    "predicted": "1-0",
+    "actual": "2-3",
+    "points": 0
+   },
+   {
+    "match_id": 565819,
+    "home": "Augsburg",
+    "away": "Bayern",
+    "predicted": "0-3",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 565815,
+    "home": "RB Leipzig",
+    "away": "Frankfurt",
+    "predicted": "3-1",
+    "actual": "6-0",
+    "points": 1
+   },
+   {
+    "match_id": 565814,
+    "home": "1. FC Köln",
+    "away": "M'gladbach",
+    "predicted": "1-1",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 565816,
+    "home": "Freiburg",
+    "away": "Schalke",
+    "predicted": "2-0",
+    "actual": "2-1",
+    "points": 1
+   },
+   {
+    "match_id": 558588,
+    "home": "Genoa",
+    "away": "Fiorentina",
+    "predicted": "1-1",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 558582,
+    "home": "Inter",
+    "away": "Parma",
+    "predicted": "2-0",
+    "actual": "3-0",
+    "points": 1
+   },
+   {
+    "match_id": 558586,
+    "home": "Napoli",
+    "away": "Frosinone",
+    "predicted": "3-0",
+    "actual": "3-0",
+    "points": 3
+   },
+   {
+    "match_id": 559669,
+    "home": "RC Lens",
+    "away": "Olympique Lyon",
+    "predicted": "1-2",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 559674,
+    "home": "Lille",
+    "away": "Le Havre",
+    "predicted": "2-0",
+    "actual": "1-0",
+    "points": 1
+   },
+   {
+    "match_id": 559666,
+    "home": "Brest",
+    "away": "Angers SCO",
+    "predicted": "1-1",
+    "actual": "5-1",
+    "points": 0
+   },
+   {
+    "match_id": 559668,
+    "home": "Lorient",
+    "away": "Paris FC",
+    "predicted": "2-1",
+    "actual": "1-0",
+    "points": 1
+   },
+   {
+    "match_id": 559672,
+    "home": "PSG",
+    "away": "Le Mans",
+    "predicted": "4-0",
+    "actual": "3-1",
+    "points": 1
+   },
+   {
+    "match_id": 559673,
+    "home": "Monaco",
+    "away": "Toulouse",
+    "predicted": "2-2",
+    "actual": "2-2",
+    "points": 3
+   },
+   {
+    "match_id": 559670,
+    "home": "Nice",
+    "away": "Strasbourg",
+    "predicted": "1-0",
+    "actual": "2-1",
+    "points": 1
+   },
+   {
+    "match_id": 559667,
+    "home": "Stade Rennais",
+    "away": "Auxerre",
+    "predicted": "3-1",
+    "actual": "4-1",
+    "points": 1
+   },
+   {
+    "match_id": 559671,
+    "home": "Troyes",
+    "away": "Marseille",
+    "predicted": "0-3",
+    "actual": "0-2",
+    "points": 1
+   }
+  ],
+  "submitted": true
+ },
+ "romantic": {
+  "points": 31,
+  "detail": [
+   {
+    "match_id": 560593,
+    "home": "Arsenal",
+    "away": "Leeds United",
+    "predicted": "2-1",
+    "actual": "2-1",
+    "points": 3
+   },
+   {
+    "match_id": 560592,
+    "home": "Sunderland",
+    "away": "Brighton Hove",
+    "predicted": "1-2",
+    "actual": "0-2",
+    "points": 1
+   },
+   {
+    "match_id": 560595,
+    "home": "Chelsea",
+    "away": "Bournemouth",
+    "predicted": "3-0",
+    "actual": "5-1",
+    "points": 1
+   },
+   {
+    "match_id": 560599,
+    "home": "Ipswich Town",
+    "away": "Fulham",
+    "predicted": "2-2",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 560601,
+    "home": "Aston Villa",
+    "away": "Brentford",
+    "predicted": "1-1",
+    "actual": "2-2",
+    "points": 1
+   },
+   {
+    "match_id": 560600,
+    "home": "Man United",
+    "away": "Tottenham",
+    "predicted": "2-2",
+    "actual": "1-1",
+    "points": 1
+   },
+   {
+    "match_id": 560594,
+    "home": "Hull City",
+    "away": "Everton",
+    "predicted": "0-3",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 560596,
+    "home": "Crystal Palace",
+    "away": "Nottingham",
+    "predicted": "1-2",
+    "actual": "3-1",
+    "points": 0
+   },
+   {
+    "match_id": 560598,
+    "home": "Liverpool",
+    "away": "Man City",
+    "predicted": "1-3",
+    "actual": "0-3",
+    "points": 1
+   },
+   {
+    "match_id": 564706,
+    "home": "Málaga",
+    "away": "Espanyol",
+    "predicted": "1-2",
+    "actual": "1-1",
+    "points": 0
+   },
+   {
+    "match_id": 564699,
+    "home": "Alavés",
+    "away": "Atleti",
+    "predicted": "0-3",
+    "actual": "1-2",
+    "points": 1
+   },
+   {
+    "match_id": 564700,
+    "home": "Barça",
+    "away": "Getafe",
+    "predicted": "3-0",
+    "actual": "3-0",
+    "points": 3
+   },
+   {
+    "match_id": 564702,
+    "home": "Real Madrid",
+    "away": "Villarreal",
+    "predicted": "2-1",
+    "actual": "1-0",
+    "points": 1
+   },
+   {
+    "match_id": 564703,
+    "home": "Elche",
+    "away": "Celta",
+    "predicted": "1-1",
+    "actual": "0-0",
+    "points": 1
+   },
+   {
+    "match_id": 564707,
+    "home": "Real Sociedad",
+    "away": "Deportivo",
+    "predicted": "2-0",
+    "actual": "3-2",
+    "points": 1
+   },
+   {
+    "match_id": 564701,
+    "home": "Real Betis",
+    "away": "Osasuna",
+    "predicted": "1-2",
+    "actual": "5-2",
+    "points": 0
+   },
+   {
+    "match_id": 564705,
+    "home": "Santander",
+    "away": "Valencia",
+    "predicted": "0-2",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 565820,
+    "home": "Dortmund",
+    "away": "Bremen",
+    "predicted": "2-1",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 565812,
+    "home": "Mainz",
+    "away": "Leverkusen",
+    "predicted": "1-2",
+    "actual": "3-4",
+    "points": 1
+   },
+   {
+    "match_id": 565813,
+    "home": "SC Paderborn",
+    "away": "Stuttgart",
+    "predicted": "0-0",
+    "actual": "0-2",
+    "points": 0
+   },
+   {
+    "match_id": 565817,
+    "home": "Union Berlin",
+    "away": "Elversberg",
+    "predicted": "3-1",
+    "actual": "1-0",
+    "points": 1
+   },
+   {
+    "match_id": 565818,
+    "home": "Hoffenheim",
+    "away": "HSV",
+    "predicted": "1-2",
+    "actual": "2-3",
+    "points": 1
+   },
+   {
+    "match_id": 565819,
+    "home": "Augsburg",
+    "away": "Bayern",
+    "predicted": "1-3",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 565815,
+    "home": "RB Leipzig",
+    "away": "Frankfurt",
+    "predicted": "2-2",
+    "actual": "6-0",
+    "points": 0
+   },
+   {
+    "match_id": 565814,
+    "home": "1. FC Köln",
+    "away": "M'gladbach",
+    "predicted": "2-0",
+    "actual": "2-1",
+    "points": 1
+   },
+   {
+    "match_id": 565816,
+    "home": "Freiburg",
+    "away": "Schalke",
+    "predicted": "1-1",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 558588,
+    "home": "Genoa",
+    "away": "Fiorentina",
+    "predicted": "2-1",
+    "actual": "2-1",
+    "points": 3
+   },
+   {
+    "match_id": 558582,
+    "home": "Inter",
+    "away": "Parma",
+    "predicted": "3-0",
+    "actual": "3-0",
+    "points": 3
+   },
+   {
+    "match_id": 558586,
+    "home": "Napoli",
+    "away": "Frosinone",
+    "predicted": "4-1",
+    "actual": "3-0",
+    "points": 1
+   },
+   {
+    "match_id": 559669,
+    "home": "RC Lens",
+    "away": "Olympique Lyon",
+    "predicted": "1-2",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 559674,
+    "home": "Lille",
+    "away": "Le Havre",
+    "predicted": "3-0",
+    "actual": "1-0",
+    "points": 1
+   },
+   {
+    "match_id": 559666,
+    "home": "Brest",
+    "away": "Angers SCO",
+    "predicted": "2-2",
+    "actual": "5-1",
+    "points": 0
+   },
+   {
+    "match_id": 559668,
+    "home": "Lorient",
+    "away": "Paris FC",
+    "predicted": "1-1",
+    "actual": "1-0",
+    "points": 0
+   },
+   {
+    "match_id": 559672,
+    "home": "PSG",
+    "away": "Le Mans",
+    "predicted": "4-0",
+    "actual": "3-1",
+    "points": 1
+   },
+   {
+    "match_id": 559673,
+    "home": "Monaco",
+    "away": "Toulouse",
+    "predicted": "2-1",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 559670,
+    "home": "Nice",
+    "away": "Strasbourg",
+    "predicted": "2-0",
+    "actual": "2-1",
+    "points": 1
+   },
+   {
+    "match_id": 559667,
+    "home": "Stade Rennais",
+    "away": "Auxerre",
+    "predicted": "1-0",
+    "actual": "4-1",
+    "points": 1
+   },
+   {
+    "match_id": 559671,
+    "home": "Troyes",
+    "away": "Marseille",
+    "predicted": "1-2",
+    "actual": "0-2",
+    "points": 1
+   }
+  ],
+  "submitted": true
+ },
+ "coolhead": {
+  "points": 33,
+  "detail": [
+   {
+    "match_id": 560593,
+    "home": "Arsenal",
+    "away": "Leeds United",
+    "predicted": "1-1",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 560592,
+    "home": "Sunderland",
+    "away": "Brighton Hove",
+    "predicted": "0-1",
+    "actual": "0-2",
+    "points": 1
+   },
+   {
+    "match_id": 560595,
+    "home": "Chelsea",
+    "away": "Bournemouth",
+    "predicted": "1-0",
+    "actual": "5-1",
+    "points": 1
+   },
+   {
+    "match_id": 560599,
+    "home": "Ipswich Town",
+    "away": "Fulham",
+    "predicted": "0-1",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 560601,
+    "home": "Aston Villa",
+    "away": "Brentford",
+    "predicted": "1-1",
+    "actual": "2-2",
+    "points": 1
+   },
+   {
+    "match_id": 560600,
+    "home": "Man United",
+    "away": "Tottenham",
+    "predicted": "1-1",
+    "actual": "1-1",
+    "points": 3
+   },
+   {
+    "match_id": 560594,
+    "home": "Hull City",
+    "away": "Everton",
+    "predicted": "0-1",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 560596,
+    "home": "Crystal Palace",
+    "away": "Nottingham",
+    "predicted": "1-1",
+    "actual": "3-1",
+    "points": 0
+   },
+   {
+    "match_id": 560598,
+    "home": "Liverpool",
+    "away": "Man City",
+    "predicted": "1-1",
+    "actual": "0-3",
+    "points": 0
+   },
+   {
+    "match_id": 564706,
+    "home": "Málaga",
+    "away": "Espanyol",
+    "predicted": "1-1",
+    "actual": "1-1",
+    "points": 3
+   },
+   {
+    "match_id": 564699,
+    "home": "Alavés",
+    "away": "Atleti",
+    "predicted": "0-1",
+    "actual": "1-2",
+    "points": 1
+   },
+   {
+    "match_id": 564700,
+    "home": "Barça",
+    "away": "Getafe",
+    "predicted": "1-0",
+    "actual": "3-0",
+    "points": 1
+   },
+   {
+    "match_id": 564702,
+    "home": "Real Madrid",
+    "away": "Villarreal",
+    "predicted": "1-0",
+    "actual": "1-0",
+    "points": 3
+   },
+   {
+    "match_id": 564703,
+    "home": "Elche",
+    "away": "Celta",
+    "predicted": "1-1",
+    "actual": "0-0",
+    "points": 1
+   },
+   {
+    "match_id": 564707,
+    "home": "Real Sociedad",
+    "away": "Deportivo",
+    "predicted": "0-0",
+    "actual": "3-2",
+    "points": 0
+   },
+   {
+    "match_id": 564701,
+    "home": "Real Betis",
+    "away": "Osasuna",
+    "predicted": "1-1",
+    "actual": "5-2",
+    "points": 0
+   },
+   {
+    "match_id": 564705,
+    "home": "Santander",
+    "away": "Valencia",
+    "predicted": "0-1",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 565820,
+    "home": "Dortmund",
+    "away": "Bremen",
+    "predicted": "1-1",
+    "actual": "2-2",
+    "points": 1
+   },
+   {
+    "match_id": 565812,
+    "home": "Mainz",
+    "away": "Leverkusen",
+    "predicted": "0-2",
+    "actual": "3-4",
+    "points": 1
+   },
+   {
+    "match_id": 565813,
+    "home": "SC Paderborn",
+    "away": "Stuttgart",
+    "predicted": "1-1",
+    "actual": "0-2",
+    "points": 0
+   },
+   {
+    "match_id": 565817,
+    "home": "Union Berlin",
+    "away": "Elversberg",
+    "predicted": "1-0",
+    "actual": "1-0",
+    "points": 3
+   },
+   {
+    "match_id": 565818,
+    "home": "Hoffenheim",
+    "away": "HSV",
+    "predicted": "1-1",
+    "actual": "2-3",
+    "points": 0
+   },
+   {
+    "match_id": 565819,
+    "home": "Augsburg",
+    "away": "Bayern",
+    "predicted": "0-3",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 565815,
+    "home": "RB Leipzig",
+    "away": "Frankfurt",
+    "predicted": "1-0",
+    "actual": "6-0",
+    "points": 1
+   },
+   {
+    "match_id": 565814,
+    "home": "1. FC Köln",
+    "away": "M'gladbach",
+    "predicted": "1-1",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 565816,
+    "home": "Freiburg",
+    "away": "Schalke",
+    "predicted": "1-0",
+    "actual": "2-1",
+    "points": 1
+   },
+   {
+    "match_id": 558588,
+    "home": "Genoa",
+    "away": "Fiorentina",
+    "predicted": "1-1",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 558582,
+    "home": "Inter",
+    "away": "Parma",
+    "predicted": "2-1",
+    "actual": "3-0",
+    "points": 1
+   },
+   {
+    "match_id": 558586,
+    "home": "Napoli",
+    "away": "Frosinone",
+    "predicted": "2-0",
+    "actual": "3-0",
+    "points": 1
+   },
+   {
+    "match_id": 559669,
+    "home": "RC Lens",
+    "away": "Olympique Lyon",
+    "predicted": "1-1",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 559674,
+    "home": "Lille",
+    "away": "Le Havre",
+    "predicted": "1-0",
+    "actual": "1-0",
+    "points": 3
+   },
+   {
+    "match_id": 559666,
+    "home": "Brest",
+    "away": "Angers SCO",
+    "predicted": "0-0",
+    "actual": "5-1",
+    "points": 0
+   },
+   {
+    "match_id": 559668,
+    "home": "Lorient",
+    "away": "Paris FC",
+    "predicted": "1-0",
+    "actual": "1-0",
+    "points": 3
+   },
+   {
+    "match_id": 559672,
+    "home": "PSG",
+    "away": "Le Mans",
+    "predicted": "2-0",
+    "actual": "3-1",
+    "points": 1
+   },
+   {
+    "match_id": 559673,
+    "home": "Monaco",
+    "away": "Toulouse",
+    "predicted": "1-0",
+    "actual": "2-2",
+    "points": 0
+   },
+   {
+    "match_id": 559670,
+    "home": "Nice",
+    "away": "Strasbourg",
+    "predicted": "1-1",
+    "actual": "2-1",
+    "points": 0
+   },
+   {
+    "match_id": 559667,
+    "home": "Stade Rennais",
+    "away": "Auxerre",
+    "predicted": "1-0",
+    "actual": "4-1",
+    "points": 1
+   },
+   {
+    "match_id": 559671,
+    "home": "Troyes",
+    "away": "Marseille",
+    "predicted": "0-1",
+    "actual": "0-2",
+    "points": 1
+   }
+  ],
+  "submitted": true
+ }
+}

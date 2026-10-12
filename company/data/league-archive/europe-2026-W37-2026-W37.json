@@ -1,0 +1,24 @@
+{
+ "personas": {
+  "statistician": {
+   "points": 9,
+   "exact": 0,
+   "outcome": 9,
+   "weeks": 1
+  },
+  "romantic": {
+   "points": 10,
+   "exact": 1,
+   "outcome": 7,
+   "weeks": 1
+  },
+  "coolhead": {
+   "points": 9,
+   "exact": 1,
+   "outcome": 6,
+   "weeks": 1
+  }
+ },
+ "first_week": "2026-W37",
+ "last_week": "2026-W37"
+}
