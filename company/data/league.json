@@ -3,50 +3,50 @@
   "domestic": {
    "personas": {
     "statistician": {
-     "points": 94,
-     "exact": 13,
-     "outcome": 55,
-     "weeks": 4
+     "points": 126,
+     "exact": 17,
+     "outcome": 75,
+     "weeks": 5
     },
     "romantic": {
-     "points": 91,
-     "exact": 14,
-     "outcome": 49,
-     "weeks": 4
+     "points": 122,
+     "exact": 18,
+     "outcome": 68,
+     "weeks": 5
     },
     "coolhead": {
-     "points": 98,
-     "exact": 14,
-     "outcome": 56,
-     "weeks": 4
+     "points": 131,
+     "exact": 20,
+     "outcome": 71,
+     "weeks": 5
     }
    },
    "first_week": "2026-W34",
-   "last_week": "2026-W38"
+   "last_week": "2026-W41"
   },
   "europe": {
    "personas": {
     "statistician": {
-     "points": 9,
+     "points": 0,
      "exact": 0,
-     "outcome": 9,
-     "weeks": 1
+     "outcome": 0,
+     "weeks": 0
     },
     "romantic": {
-     "points": 10,
-     "exact": 1,
-     "outcome": 7,
-     "weeks": 1
+     "points": 0,
+     "exact": 0,
+     "outcome": 0,
+     "weeks": 0
     },
     "coolhead": {
-     "points": 9,
-     "exact": 1,
-     "outcome": 6,
-     "weeks": 1
+     "points": 0,
+     "exact": 0,
+     "outcome": 0,
+     "weeks": 0
     }
    },
-   "first_week": "2026-W37",
-   "last_week": "2026-W37"
+   "first_week": null,
+   "last_week": null
   }
  }
 }
