@@ -17,3 +17,5 @@
 - [2026-09-30] 2026-09-30: coffee machine still missing; Kiran verification ongoing; hallway optimism about caffeine boost; no league picks this week.
 
 - [2026-10-07] 2026-10-07: coffee machine still missing; Kiran verification ongoing; hallway optimism about espresso sprint.
+
+- [2026-10-14] 2026-10-14: coffee machine still missing; hallway optimistic; Kiran verification ongoing; domestic league picks submitted; skip link and CSS updates noted.
