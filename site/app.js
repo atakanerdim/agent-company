@@ -5,10 +5,10 @@ const REPO = "atakanerdim/agent-company";
 async function j(p){ try{ const r=await fetch("data/"+p); return r.ok? r.json():null }catch(e){ return null } }
 async function t(p){ try{ const r=await fetch("data/"+p); return r.ok? r.text():null }catch(e){ return null } }
 const el=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"']/g,
-  c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-// safeEsc returns an empty string for null/undefined values, avoiding literal "undefined" in the UI
-const safeEsc=s=> s==null? "" : esc(s);
+const esc=s=> s==null? "" : String(s).replace(/[&<>"']/g,
+  c=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+// safeEsc alias kept for backwards compatibility
+const safeEsc=esc;
 
 const WEEK=["sun","mon","tue","wed","thu","fri","sat"];
 const LABEL={mon:"Mon",tue:"Tue",wed:"Wed",thu:"Thu",fri:"Fri",sat:"Sat",sun:"Sun"};
@@ -103,7 +103,8 @@ async function hallway(){
   const target=el("hallway-feed")||el("hallway");
   if(!target) return;
   const manifest=await j("manifest.json"); if(!manifest) return;
-  const files=manifest.files.filter(f=>/^hallway\/.+\.txt$/.test(f)).sort().slice(-8).reverse();
+  const files=(Array.isArray(manifest.files)?manifest.files:[])
+    .filter(f=>/^hallway\/.+\.txt$/.test(f)).sort().slice(-8).reverse();
   if(!files.length) return;
   const people=Object.fromEntries((await roster()).map(p=>[p.id,p]));
   const rows=await Promise.all(files.map(async f=>{
@@ -111,8 +112,8 @@ async function hallway(){
     const stem=f.slice("hallway/".length,-4);
     const date=stem.slice(0,10), id=stem.slice(11);
     const p=people[id];
-    return bubble(id,p?p.name:"The office",
-                  (p?p.title+" · ":"")+date, text.trim());
+    return bubble(id,(p&&p.name)?p.name:"The office",
+                  (p&&p.title?p.title+" · ":"")+date, text.trim());
   }));
   const html=rows.filter(Boolean).join("");
   if(html) target.innerHTML=html;
@@ -139,7 +140,7 @@ function unsign(body,person){
   const name=person.name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
   const title=person.title.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
   return body.replace(
-    new RegExp(`^[\\s\\-–—]*${name}(\\s*[,–—-]\\s*${title})?\\s*[.:–—-]*\\s*`,"i"),
+    new RegExp(`^[\\s\\-–—]*${name}(\\s*[,–—-]?\\s*${title})?\\s*[.:–—-]*\\s*`,"i"),
     "").trim();
 }
 
@@ -223,7 +224,7 @@ async function dashboard(){
 async function predictionDesk(){
   if(!el("league-tables")) return;
   const people=Object.fromEntries((await roster()).map(p=>[p.id,p]));
-  const shown=id=>people[id]?people[id].name:id;
+  const shown=id=>(people[id]&&people[id].name)?people[id].name:id;
   const doc=await j("tracks.json");
   const tracks=(doc&&doc.tracks)?doc.tracks:[];
   if(!tracks.length) return;
@@ -261,7 +262,8 @@ async function predictionDesk(){
 
   /* ---- this week's predictions, grouped by track ---- */
   const manifest=await j("manifest.json"); if(!manifest) return;
-  const sets=manifest.files.filter(f=>/^predictions\/[^/]+\/[^/]+\/.+\.json$/.test(f)).sort();
+  const files=Array.isArray(manifest.files)?manifest.files:[];
+  const sets=files.filter(f=>/^predictions\/[^/]+\/[^/]+\/.+\.json$/.test(f)).sort();
   if(!sets.length) return;
   const allWeeks=new Set();
   let html="";
@@ -275,10 +277,12 @@ async function predictionDesk(){
     for(const f of mine.filter(x=>x.endsWith("/"+last+".json"))){
       const id=f.split("/")[1], data=await j(f); if(!data) continue;
       const p=people[id];
+      const items=Array.isArray(data)?data:(Array.isArray(data.predictions)?data.predictions:[]);
+      if(!items.length) continue;
       rows+=`<div class="bubble" style="margin:18px 0 8px">${face(id,44)}
-        <div><div class="meta"><b>${esc(shown(id))}</b>${p?" · "+esc(p.title):""} · ${esc(last)}</div>
-        <div class="muted">${p?esc(p.bio):""}</div></div></div>`+
-        data.map(x=>`<div class="row"><span>${esc(x.home)} ${esc(x.score)} ${esc(x.away)}</span>`+
+        <div><div class="meta"><b>${esc(shown(id))}</b>${p&&p.title?" · "+esc(p.title):""} · ${esc(last)}</div>
+        <div class="muted">${p&&p.bio?esc(p.bio):""}</div></div></div>`+
+        items.map(x=>`<div class="row"><span>${esc(x.home)} ${esc(x.score)} ${esc(x.away)}</span>`+
           `<span class="muted">${esc(x.reasoning)}</span></div>`).join("");
     }
     if(rows) html+=`<section class="track"><h3>${esc(t.label)}</h3>${rows}</section>`;
@@ -298,14 +302,15 @@ async function changelog(){
 async function minutes(){
   if(!el("minutes")) return;
   const manifest=await j("manifest.json"); if(!manifest) return;
-  const files=manifest.files.filter(f=>/^minutes\/.+\.md$/.test(f))
+  const files=(Array.isArray(manifest.files)?manifest.files:[])
+    .filter(f=>/^minutes\/.+\.md$/.test(f))
     .sort().reverse().slice(0,20);
   if(!files.length) return;
   const people=Object.fromEntries((await roster()).map(p=>[p.id,p]));
   el("minutes").innerHTML=files.map(f=>{
     const stem=f.slice("minutes/".length,-3);
     const p=people[stem.slice(11)];
-    const label=(p?p.name+" — ":"")+stem.slice(0,10);
+    const label=(p&&p.name?p.name+" — ":"")+stem.slice(0,10);
     return `<div class="row"><a href="#" data-min="${esc(f)}">${esc(label)}</a></div>
             <pre hidden id="m-${esc(f)}"></pre>`;
   }).join("");
