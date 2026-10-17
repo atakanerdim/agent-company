@@ -1,0 +1,1 @@
+Kiran Menon: Hardened data parsers against missing manifest arrays and null metadata; coffee machine inspection scheduled.
