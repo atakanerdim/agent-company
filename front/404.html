@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not found</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/agent-company/assets/quantumpulse-icon.svg" type="image/svg+xml">
+<script>
+/* The firm's own pages moved to console/. Send old links there; anything else is a 404. */
+(function () {
+  var base = '/agent-company/', p = location.pathname;
+  if (p.indexOf(base) === 0) {
+    var rest = p.slice(base.length);
+    if (rest && rest.indexOf('console/') !== 0) location.replace(base + 'console/' + rest + location.search + location.hash);
+  }
+})();
+</script>
+<style>
+html,body{margin:0;background:#0F2547;color:#F4F7FB;font-family:'Helvetica Neue',Arial,sans-serif}
+main{max-width:1280px;margin:0 auto;padding:12vh 5vw}
+h1{font-size:clamp(34px,5vw,64px);line-height:1.05;margin:0 0 24px;font-weight:650;letter-spacing:-.02em}
+a{color:#F4F7FB}
+</style>
+</head>
+<body>
+<main>
+<h1>This sheet isn’t in the set.</h1>
+<p><a href="/agent-company/">Back to the first sheet</a></p>
+</main>
+</body>
+</html>
