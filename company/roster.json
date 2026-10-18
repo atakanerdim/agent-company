@@ -108,9 +108,7 @@
    "company/agents/appearance.json",
    "site/"
   ],
-  "gunler": [
-   "tue"
-  ],
+  "gunler": [],
   "draft_pr": true
  },
  {
@@ -121,10 +119,7 @@
   "alan": [
    "site/"
   ],
-  "gunler": [
-   "wed",
-   "sat"
-  ],
+  "gunler": [],
   "draft_pr": false
  },
  {
