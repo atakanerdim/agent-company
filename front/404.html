@@ -5,15 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Not found</title>
 <meta name="robots" content="noindex">
-<link rel="icon" href="/agent-company/assets/quantumpulse-icon.svg" type="image/svg+xml">
 <script>
-/* The firm's own pages moved to console/. Send old links there; anything else is a 404. */
+/* Pages that moved keep working: old addresses are sent to their new page. */
 (function () {
-  var base = '/agent-company/', p = location.pathname;
-  if (p.indexOf(base) === 0) {
-    var rest = p.slice(base.length);
-    if (rest && rest.indexOf('console/') !== 0) location.replace(base + 'console/' + rest + location.search + location.hash);
-  }
+  var base = '__BASE__', map = __MAP__, p = location.pathname;
+  if (p.indexOf(base) !== 0) return;
+  var rest = p.slice(base.length).replace(/^console\//, '');
+  if (rest === '' && p !== base) location.replace(base + location.search + location.hash);
+  else if (Object.prototype.hasOwnProperty.call(map, rest)) location.replace(base + map[rest] + location.search + location.hash);
 })();
 </script>
 <style>
@@ -26,7 +25,7 @@ a{color:#F4F7FB}
 <body>
 <main>
 <h1>This sheet isn’t in the set.</h1>
-<p><a href="/agent-company/">Back to the first sheet</a></p>
+<p><a href="__BASE__">Back to the first sheet</a></p>
 </main>
 </body>
 </html>

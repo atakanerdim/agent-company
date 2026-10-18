@@ -1,20 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Race the ghost — QuantumPulse Analytics</title>
-<meta name="description" content="How QuantumPulse&#x27;s predictors compare with a rule that never thinks, Home 2-1, and when we&#x27;ll say they&#x27;ve beaten it. For entertainment.">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="QuantumPulse Analytics">
-<meta property="og:title" content="Race the ghost — QuantumPulse Analytics">
-<meta property="og:description" content="How QuantumPulse&#x27;s predictors compare with a rule that never thinks, Home 2-1, and when we&#x27;ll say they&#x27;ve beaten it. For entertainment.">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#1B3B6F">
-<meta property="og:image" content="https://atakanerdim.github.io/agent-company/assets/og-quantumpulse.png">
-<link rel="canonical" href="https://atakanerdim.github.io/agent-company/proof.html">
-<link rel="icon" href="assets/quantumpulse-icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="assets/fonts.css">
+<helmet>
 <style>
 :root{--cyanotype:#1B3B6F;--prussian:#0F2547;--plotter:#F4F7FB;--highlight:#FFD23F;--pencil:#FF6B5B;--pencil-text:#FF8A7D;--whiteprint:#F2F4F7;--ghost:rgba(244,247,251,.5);--rule:rgba(244,247,251,.2);--rule3:rgba(244,247,251,.3);--rule7:rgba(244,247,251,.7);--muted:rgba(244,247,251,.74);--grid-minor:rgba(244,247,251,.04);--grid-major:rgba(244,247,251,.08);--ease-plot:cubic-bezier(.65,0,.35,1);--ease-settle:cubic-bezier(.2,.8,.2,1);--ease-stamp:cubic-bezier(.3,1.6,.5,1);--ease-out:cubic-bezier(.4,0,.2,1);--sans:'Archivo','Helvetica Neue',Helvetica,Arial,sans-serif;--doc:'Newsreader',Georgia,'Times New Roman',serif}
 *{box-sizing:border-box}
@@ -359,12 +344,8 @@ ul{margin:0;padding:0;list-style:none}
 .door-name .logo{display:inline-block;vertical-align:-5px;margin-right:10px}
 @media (max-width:720px){.mark .wm-sub{display:none}.mark .logo{width:30px;height:30px}}
 </style>
-<script src="assets/preact.min.js" defer></script>
-<script src="assets/dc.js" defer></script>
-</head>
-<body>
-<div id="dc-root"><!--prerender--></div>
-<template id="dc-tpl">
+</helmet>
+<x-dc>
 <div class="site {{ siteCls }}" style="--hh: {{ hh }}px">
 <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
 <defs>
@@ -419,33 +400,27 @@ ul{margin:0;padding:0;list-style:none}
 <div class="race-head">
 <h2 class="h2" id="studio-h">The studio against <span style="white-space: nowrap">Home 2–1</span></h2>
 <p class="sub">Three predictors, and a ghost that says the home side wins 2–1, every match.</p>
-<span class="asof">As of 12 Oct 2026</span>
+<span class="asof">{{ L.race.asof }}</span>
 </div>
 <sc-if value="{{ closed }}" hint-placeholder-val="{{ true }}">
 <div class="verdict">
-<h3>The ghost is ahead. Not by enough to call it.</h3>
-<p>After 200 matches the ghost leads by 0.098 points a match, and the uncertainty is wider than the lead. The predictors led for the first three weeks.</p>
+<h3>{{ L.race.head }}</h3>
+<p>{{ L.race.body }}</p>
 </div>
 </sc-if>
 
 <div class="chart-box">
 <div class="chart-top">
-<span class="chart-t">Points since week 34</span>
+<span class="chart-t">Points since week {{ L.chart.first }}</span>
 <span class="legend"><span><svg width="26" height="8" viewBox="0 0 26 8" aria-hidden="true"><path d="M0 4 H26" stroke="#F4F7FB" stroke-width="2"></path></svg>Predictors</span><span><svg width="26" height="8" viewBox="0 0 26 8" aria-hidden="true"><path d="M0 4 H26" stroke="rgba(244,247,251,.6)" stroke-width="2" stroke-dasharray="6 5"></path></svg>Home 2–1 (ghost)</span><span><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1 L11 6 L6 11 L1 6 Z" fill="#FFD23F"></path></svg>Lead changes</span></span>
 </div>
 <div class="chart" onPointerMove="{{ onStudioMove }}" role="img" aria-label="{{ studioAria }}">
 <div class="ov" aria-hidden="true">
-<span class="hband hband-x" style="left: 34.375%; width: 9.125%"></span>
-<span class="hband" style="left: 52.625%; width: 18.25%"></span>
-<span class="bl" style="left: 38.94%">Not scored</span>
-<span class="bl" style="left: 61.75%">No matches</span>
+<sc-for list="{{ L.chart.bands }}" as="b"><span class="{{ b.cls }}" style="left: {{ b.left }}%; width: {{ b.width }}%"></span><span class="bl" style="left: {{ b.mid }}%">{{ b.label }}</span></sc-for>
 </div>
 <svg viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
 <defs><clipPath id="clipP3"><rect class="clip-r" x="60" y="0" height="400" style="width: {{ s.clipW }}px"></rect></clipPath></defs>
-<line class="gl" x1="70" x2="800" y1="41" y2="41"></line>
-<line class="gl" x1="70" x2="800" y1="146" y2="146"></line>
-<line class="gl" x1="70" x2="800" y1="251" y2="251"></line>
-<line class="g0" x1="70" x2="800" y1="356" y2="356"></line>
+<sc-for list="{{ s.grid }}" as="g"><line class="{{ g.cls }}" x1="70" x2="800" y1="{{ g.y }}" y2="{{ g.y }}"></line></sc-for>
 <line class="xh" x1="{{ s.hx }}" x2="{{ s.hx }}" y1="20" y2="356"></line>
 <g clip-path="url(#clipP3)">
 <path class="ln-gh" d="{{ s.ghostD }}"></path>
@@ -453,18 +428,8 @@ ul{margin:0;padding:0;list-style:none}
 </g>
 </svg>
 <div class="ov" aria-hidden="true">
-<span class="yt" style="top: 10.25%">150</span>
-<span class="yt" style="top: 36.5%">100</span>
-<span class="yt" style="top: 62.75%">50</span>
-<span class="yt" style="top: 89%">0</span>
-<span class="xt xt-c" style="left: 16.125%">34</span>
-<span class="xt xt-c" style="left: 25.25%">35</span>
-<span class="xt xt-c" style="left: 34.375%">36</span>
-<span class="xt xt-c" style="left: 43.5%">37</span>
-<span class="xt xt-c" style="left: 52.625%">38</span>
-<span class="xt xt-c" style="left: 61.75%">39</span>
-<span class="xt xt-c" style="left: 70.875%">40</span>
-<span class="xt xt-c" style="left: 80%">41</span>
+<sc-for list="{{ s.grid }}" as="g"><span class="yt" style="top: {{ g.top }}%">{{ g.t }}</span></sc-for>
+<sc-for list="{{ s.xticks }}" as="t"><span class="xt xt-c" style="left: {{ t.x }}%">{{ t.t }}</span></sc-for>
 <sc-for list="{{ s.lcs }}" as="c"><span class="lcd" style="left: {{ c.x }}%; top: {{ c.y }}%"></span></sc-for>
 <sc-for list="{{ s.heads }}" as="h"><span class="dot {{ h.cls }}" style="left: {{ h.x }}%; top: {{ h.y }}%"></span></sc-for>
 </div>
@@ -476,57 +441,47 @@ ul{margin:0;padding:0;list-style:none}
 <ul class="mlist">
 <sc-for list="{{ s.mlist }}" as="l"><li><span class="mli {{ l.cls }}"><span>{{ l.name }}</span><b>{{ l.val }}</b></span></li></sc-for>
 </ul>
-<div class="scrub-row"><span class="scrub-v">{{ s.week }}</span><input class="scrub" type="range" min="0" max="5" step="1" value="{{ studioI }}" onChange="{{ onStudioRange }}" aria-label="Drag to move through the weeks" aria-valuetext="{{ s.week }}"><span class="scrub-l" aria-hidden="true">Drag to move through the weeks</span></div>
+<div class="scrub-row"><span class="scrub-v">{{ s.week }}</span><input class="scrub" type="range" min="0" max="{{ s.maxI }}" step="1" value="{{ studioI }}" onChange="{{ onStudioRange }}" aria-label="Drag to move through the weeks" aria-valuetext="{{ s.week }}"><span class="scrub-l" aria-hidden="true">Drag to move through the weeks</span></div>
 </div>
 
 <div class="interval">
 <p>Studio minus ghost, points a match, with the 95% interval</p>
-<div class="iv" role="img" aria-label="The studio scores 0.098 points a match fewer than the ghost. The 95% interval runs from minus 0.253 to plus 0.057, so it includes zero.">
+<div class="iv" role="img" aria-label="{{ L.iv.aria }}">
 <svg viewBox="0 0 1000 130" preserveAspectRatio="none" aria-hidden="true">
 <line class="ax" x1="80" y1="84" x2="920" y2="84"></line>
-<line class="tk" x1="80" y1="84" x2="80" y2="92"></line>
-<line class="tk" x1="290" y1="84" x2="290" y2="92"></line>
-<line class="tk" x1="500" y1="84" x2="500" y2="92"></line>
-<line class="tk" x1="920" y1="84" x2="920" y2="92"></line>
-<line class="zero" x1="710" y1="18" x2="710" y2="94"></line>
-<line class="bar" x1="178.7" y1="54" x2="829.7" y2="54"></line>
-<line class="end" x1="178.7" y1="44" x2="178.7" y2="64"></line>
-<line class="end" x1="829.7" y1="44" x2="829.7" y2="64"></line>
+<sc-for list="{{ L.iv.ticks }}" as="t"><line class="tk" x1="{{ t.sx }}" y1="84" x2="{{ t.sx }}" y2="92"></line></sc-for>
+<line class="zero" x1="{{ L.iv.x0 }}" y1="18" x2="{{ L.iv.x0 }}" y2="94"></line>
+<line class="bar" x1="{{ L.iv.xlo }}" y1="54" x2="{{ L.iv.xhi }}" y2="54"></line>
+<line class="end" x1="{{ L.iv.xlo }}" y1="44" x2="{{ L.iv.xlo }}" y2="64"></line>
+<line class="end" x1="{{ L.iv.xhi }}" y1="44" x2="{{ L.iv.xhi }}" y2="64"></line>
 </svg>
 <div class="ov" aria-hidden="true">
-<span class="ivp" style="left: 50.42%; top: 41.5%"></span>
-<span class="ivl tl" style="left: 8%">−0.3</span>
-<span class="ivl tl" style="left: 29%">−0.2</span>
-<span class="ivl tl" style="left: 50%">−0.1</span>
-<span class="ivl vl" style="left: 71%">0</span>
-<span class="ivl tl" style="left: 92%">+0.1</span>
-<span class="ivv" style="left: 17.87%">−0.253</span>
-<span class="ivv" style="left: 50.42%">−0.098</span>
-<span class="ivv" style="left: 82.97%">+0.057</span>
-<span class="ivr" style="left: 39.5%">Ghost ahead</span>
-<span class="ivr" style="left: 81.5%">Studio ahead</span>
+<span class="ivp" style="left: {{ L.iv.pm }}%; top: 41.5%"></span>
+<sc-for list="{{ L.iv.ticks }}" as="t"><span class="ivl {{ t.cls }}" style="left: {{ t.x }}%">{{ t.t }}</span></sc-for>
+<span class="ivv" style="left: {{ L.iv.plo }}%">{{ L.iv.lo }}</span>
+<span class="ivv" style="left: {{ L.iv.pm }}%">{{ L.iv.mean }}</span>
+<span class="ivv" style="left: {{ L.iv.phi }}%">{{ L.iv.hi }}</span>
+<span class="ivr" style="left: {{ L.iv.ghostL }}%">Ghost ahead</span>
+<span class="ivr" style="left: {{ L.iv.studioL }}%">Studio ahead</span>
 </div>
 </div>
 </div>
 
 <div class="sched-wrap">
 <table class="sched">
-<caption><span class="asof">As of 12 Oct 2026</span></caption>
+<caption><span class="asof">{{ L.race.asof }}</span></caption>
 <thead><tr><th scope="col">Predictor</th><th scope="col" class="r">Points</th><th scope="col" class="r">Per match</th><th scope="col" class="r">Exact scores</th><th scope="col" class="r">Right result</th></tr></thead>
 <tbody>
-<tr class="ghost"><td class="who">Home 2–1 (ghost)<small>the home side wins 2–1, every match</small></td><td data-l="Points" class="r">146</td><td data-l="Per match" class="r">0.730</td><td data-l="Exact scores" class="r">25</td><td data-l="Right result" class="r">48.0%</td></tr>
-<tr><td class="who">Amara Diallo<small>the cool head</small></td><td data-l="Points" class="r">131</td><td data-l="Per match" class="r">0.655</td><td data-l="Exact scores" class="r">20</td><td data-l="Right result" class="r">45.5%</td></tr>
-<tr><td class="who">Elias Brandt<small>the statistician</small></td><td data-l="Points" class="r">126</td><td data-l="Per match" class="r">0.630</td><td data-l="Exact scores" class="r">17</td><td data-l="Right result" class="r">46.0%</td></tr>
-<tr><td class="who">Sofia Marchetti<small>the romantic</small></td><td data-l="Points" class="r">122</td><td data-l="Per match" class="r">0.610</td><td data-l="Exact scores" class="r">18</td><td data-l="Right result" class="r">43.0%</td></tr>
+<tr data-for="{{ L.race.rows }}" data-as="t" class="{{ t.rowcls }}"><td class="who">{{ t.name }}<small>{{ t.sub }}</small></td><td data-l="Points" class="r">{{ t.pts }}</td><td data-l="Per match" class="r">{{ t.ppm }}</td><td data-l="Exact scores" class="r">{{ t.exact }}</td><td data-l="Right result" class="r">{{ t.right }}</td></tr>
 </tbody>
 </table>
 </div>
-<p class="note">Weeks 39 and 40 had no matches (international break). Week 37 was never scored because of a timing fault; it’s left out until it is.</p>
+<sc-if value="{{ L.race.note }}"><p class="note">{{ L.race.note }}</p></sc-if>
 
 <h3 class="sr">Gates</h3>
 <ul class="gates g4">
 <sc-for list="{{ studioGates }}" as="g">
-<li class="gate {{ g.cls }}" style="--i: {{ $index }}">
+<li class="gate {{ g.cls }}" >
 <svg class="lock" viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-bg" cx="60" cy="62" r="52"></circle><circle class="ring" cx="60" cy="62" r="52" pathLength="1" transform="rotate(-90 60 62)" style="stroke-dashoffset: {{ g.off }}"></circle><path class="shackle" d="M46 58 V44 A14 14 0 0 1 74 44 V58"></path><rect class="lbody" x="36" y="56" width="48" height="36" rx="3"></rect><path class="khole" d="M56 70 A4 4 0 1 1 64 70 A4 4 0 1 1 56 70 M60 74 V82"></path></svg>
 <span class="g-name">{{ g.name }}</span>
 <span class="g-cond">{{ g.pre }}<span class="g-num">{{ g.num }}</span>{{ g.post }}</span>
@@ -557,11 +512,11 @@ ul{margin:0;padding:0;list-style:none}
 <div class="wrap list2">
 <div style="grid-column: 1 / span 4; display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
 <h2 class="h2" id="holds-h" style="grid-column: auto">What already holds</h2>
-<span class="asof">As of 13 Oct 2026</span>
+<span class="asof">{{ L.holds.asof }}</span>
 </div>
 <ul class="rows">
 <li><span class="row-t"><svg class="tick" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9.5 L7 14 L16 4" fill="none" stroke="#F4F7FB" stroke-width="1.6"></path></svg>The studio runs every day with no human approving anything.</span><a class="src" href="https://github.com/atakanerdim/agent-company">Source</a></li>
-<li><span class="row-t"><svg class="tick" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9.5 L7 14 L16 4" fill="none" stroke="#F4F7FB" stroke-width="1.6"></path></svg><span>137 changes made by agents have merged. Human approvals: 0.</span></span><a class="src" href="https://github.com/atakanerdim/agent-company/commits/main">Source</a></li>
+<li><span class="row-t"><svg class="tick" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9.5 L7 14 L16 4" fill="none" stroke="#F4F7FB" stroke-width="1.6"></path></svg><span>{{ L.holds.merged }}</span></span><a class="src" href="https://github.com/atakanerdim/agent-company/commits/main">Source</a></li>
 <li><span class="row-t"><svg class="tick" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9.5 L7 14 L16 4" fill="none" stroke="#F4F7FB" stroke-width="1.6"></path></svg>The weekly health check found two models that had stopped being available and rewired both links on its own (23 August).</span><a class="src" href="https://github.com/atakanerdim/agent-company/blob/main/company/log/2026-08-23-health.log">Source</a></li>
 <li><span class="row-t"><svg class="tick" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 9.5 L7 14 L16 4" fill="none" stroke="#F4F7FB" stroke-width="1.6"></path></svg>Failed providers are published by name. Nothing is invented.</span><a class="src" href="https://github.com/atakanerdim/agent-company/tree/main/company/log">Source</a></li>
 </ul>
@@ -618,35 +573,16 @@ ul{margin:0;padding:0;list-style:none}
 </div>
 </footer>
 </div>
-</template>
+</x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"motion":{"editor":"enum","options":["full","still"],"default":"full","section":"Motion"},"$preview":{"width":1440,"height":5607}}'>
-var DATES = ['2026-09-09','2026-09-10','2026-09-11','2026-09-14','2026-09-15','2026-09-16','2026-09-17','2026-09-18','2026-09-21','2026-09-22','2026-09-23','2026-09-24','2026-09-25','2026-09-28','2026-09-29','2026-09-30','2026-10-01','2026-10-02','2026-10-05','2026-10-06','2026-10-07','2026-10-08','2026-10-09','2026-10-12'];
-var NAV = {
-  momentum: [100000.0,100000.0,100010.68,100042.73,100053.62,100064.56,100075.57,100086.61,100119.68,100130.75,100141.83,100152.97,100164.18,100198.14,100209.51,100220.89,100232.16,100243.33,100276.37,100287.52,100298.76,100310.02,100321.29,100355.17],
-  macro: [100000.0,99707.72,99293.94,99472.21,98308.27,99340.98,98267.12,99052.61,99259.3,98478.48,98146.97,98300.93,98425.85,98218.73,98083.93,98318.24,97686.24,98693.31,99053.4,99208.76,99069.12,98652.72,98439.11,99309.85],
-  value: [100000.0,100000.0,100010.68,100042.73,100053.62,100064.56,100075.57,100179.49,100143.73,100199.85,100183.54,99727.49,99538.2,99260.43,99225.38,99157.63,98651.26,98746.04,98743.03,98815.25,98795.54,98937.94,99052.38,99156.18],
-  contrarian: [100000.0,99972.5,99691.41,99739.99,99767.03,99804.58,99828.62,100180.48,99926.9,100238.18,100135.37,99591.24,99336.16,99024.36,98641.37,98579.33,98418.46,98685.51,99048.73,99143.59,98802.13,99044.89,99009.57,99026.42],
-  index: [100000.0,100000.0,99505.51,99934.5,99683.73,99450.71,99311.93,99953.12,99692.58,100394.17,100471.36,99521.1,99128.49,99076.15,98967.86,98687.31,98063.57,98120.35,98405.55,98569.92,98069.85,98238.31,98478.65,98813.69],
-  metals: [100000.0,100000.0,99811.02,99546.02,99578.69,99992.21,99557.14,100765.44,100533.58,99982.95,99694.78,99060.46,99717.27,97949.73,97597.75,98115.21,97824.97,98323.83,97614.73,97896.91,96902.7,96963.2,97733.56,97551.33],
-  benchmark: [100000.0,99833.57,99331.24,99959.29,99537.48,99514.53,99041.63,99843.49,99563.04,100514.6,100369.49,99685.23,99741.48,99306.22,98884.58,98732.6,98647.47,98416.82,99268.5,99341.59,99103.01,99000.16,98924.54,99889.84]
-};
-var SERIES = [
-  { k: 'cash', nav: 'momentum', label: 'Three in cash', tip: 'Tobias, Beatriz and Marisol', ghost: false },
-  { k: 'macro', nav: 'macro', label: 'Emeka', tip: 'Emeka Nwosu', ghost: false },
-  { k: 'value', nav: 'value', label: 'Priya', tip: 'Priya Raghunathan', ghost: false },
-  { k: 'contrarian', nav: 'contrarian', label: 'Ines', tip: 'Ines Kovac', ghost: false },
-  { k: 'index', nav: 'index', label: 'Grace', tip: 'Grace Okonkwo', ghost: false },
-  { k: 'metals', nav: 'metals', label: 'Anton', tip: 'Anton Weiss', ghost: false },
-  { k: 'ghost', nav: 'benchmark', label: 'Buy and hold (ghost)', tip: 'Buy and hold', ghost: true }
-];
-var WEEKS = ['W33','W34','W35','W36','W37','W38','W39','W40','W41'];
-var CUM = {
-  statistician: [0,27,54,69,69,94,94,94,126],
-  romantic: [0,22,40,62,62,91,91,91,122],
-  coolhead: [0,29,43,69,69,98,98,98,131],
-  ghost: [0,19,46,63,63,110,110,110,146]
-};
-var SCORED = [0,1,2,3,5,8];
+var LIVE = window.LIVE;
+var WEEKS = LIVE.chart.weeks;
+var CUM = LIVE.chart.cum;
+var SCORED = LIVE.chart.scored_idx;
+var LAST = SCORED.length - 1;
+var NW = WEEKS.length - 1;
+var YMAX = LIVE.chart.ymax;
+var PRED = LIVE.pred;
 var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function clamp(v, a, b) { a = a === undefined ? 0 : a; b = b === undefined ? 1 : b; return Math.min(b, Math.max(a, v)); }
 function fmtPct(v) { var r = Math.round(v * 100) / 100; var s = r > 0 ? '+' : (r < 0 ? '−' : ''); return s + Math.abs(r).toFixed(2) + '%'; }
@@ -669,46 +605,18 @@ class Component extends DCLogic {
     this.r = {};
     var self = this;
     ['desk', 'studio', 'hdr'].forEach(function (k) { self.r[k] = function (el) { self.els[k] = el; }; });
-    this.tickers = ['AAPL','AMZN','AUDUSD','CAT','CHFUSD','EEM','EFA','EURUSD','GBPUSD','GOOGL','IWM','JNJ','JPM','JPYUSD','KO','META','MSFT','NVDA','QQQ','SPY','TLT','TSLA','VNQ','WTI','XAGUSD','XAUUSD','XOM'];
-    this.ret = {};
-    SERIES.forEach(function (s) { self.ret[s.k] = NAV[s.nav].map(function (v) { return (v / 100000 - 1) * 100; }); });
-    this.hotFns = {};
-    this.tapFns = {};
-    SERIES.forEach(function (s) {
-      self.hotFns[s.k] = function () { self.setState({ hot: s.k }); };
-      self.tapFns[s.k] = function () { self.setState({ hot: self.state.hot === s.k ? null : s.k }); };
-    });
-    this.offDesk = function () { self.setState({ hot: null }); };
-    this.onDeskLeave = function () { self.setState({ hot: null }); };
-    this.onDeskRange = function (e) { self.stop('d'); self.setState({ deskI: +e.target.value }); };
     this.onStudioRange = function (e) { self.stop('s'); self.setState({ studioI: +e.target.value }); };
-    this.onDeskMove = function (e) {
-      if (e.pointerType === 'touch') return;
-      var b = e.currentTarget.getBoundingClientRect();
-      var vx = (e.clientX - b.left) / b.width * 1000, vy = (e.clientY - b.top) / b.height * 400;
-      if (vx < 60 || vx > 806) return;
-      var i = Math.round(clamp((vx - 70) / 730) * 23), best = null, bd = 1e9;
-      SERIES.forEach(function (s) { var d = Math.abs(self.yP(self.ret[s.k][i]) - vy); if (d < bd) { bd = d; best = s.k; } });
-      self.stop('d');
-      var st = {};
-      if (i !== self.state.deskI) st.deskI = i;
-      var hot = bd < 24 ? best : null;
-      if (hot !== self.state.hot) st.hot = hot;
-      if (Object.keys(st).length) self.setState(st);
-    };
     this.onStudioMove = function (e) {
       if (e.pointerType === 'touch') return;
       var b = e.currentTarget.getBoundingClientRect();
       var vx = (e.clientX - b.left) / b.width * 1000;
       if (vx < 60 || vx > 806) return;
-      var j = clamp((vx - 70) / 730) * 8, best = 0;
+      var j = clamp((vx - 70) / 730) * NW, best = 0;
       for (var q = 0; q < SCORED.length; q++) if (Math.abs(SCORED[q] - j) < Math.abs(SCORED[best] - j)) best = q;
       self.stop('s');
       if (best !== self.state.studioI) self.setState({ studioI: best });
     };
     this.onScroll = function () { var y = window.scrollY > 8; if (y !== self.state.scrolled) self.setState({ scrolled: y }); };
-    this.squares = [];
-    for (var i = 0; i < 27; i++) this.squares.push({ x: 14 + (i % 9) * 22.6, y: 18 + Math.floor(i / 9) * 30 });
   }
 
   xP(i) { return 70 + i * 730 / 23; }
@@ -717,7 +625,7 @@ class Component extends DCLogic {
   componentDidMount() {
     var still = this.props.motion === 'still' || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     var self = this;
-    this.setState({ mode: still ? 'still' : 'play', deskI: still ? 23 : 0, studioI: still ? 5 : 0, desk: still, studio: still });
+    this.setState({ mode: still ? 'still' : 'play', studioI: still ? LAST : 0, studio: still });
     window.addEventListener('scroll', this.onScroll, { passive: true });
     this.measure = function () { if (self.els.hdr) { var hh = Math.round(self.els.hdr.offsetHeight); if (hh && hh !== self.state.hh) self.setState({ hh: hh }); } };
     this.measure();
@@ -726,14 +634,14 @@ class Component extends DCLogic {
       this.io = new IntersectionObserver(function (es) {
         es.forEach(function (e) { if (e.isIntersecting) { var k = e.target.getAttribute('data-sec'); self.io.unobserve(e.target); self.seen(k); } });
       }, { rootMargin: '0px 0px -15% 0px', threshold: 0 });
-      ['desk', 'studio'].forEach(function (k) { if (self.els[k]) self.io.observe(self.els[k]); });
+      if (self.els.studio) self.io.observe(self.els.studio);
     } else if (!still) {
-      this.setState({ deskI: 23, studioI: 5, desk: true, studio: true });
+      this.setState({ studioI: LAST, studio: true });
     }
   }
 
   componentDidUpdate(prev) {
-    if (prev.motion !== this.props.motion && this.props.motion === 'still') { this.stop('d'); this.stop('s'); this.setState({ mode: 'still', deskI: 23, studioI: 5, desk: true, studio: true }); }
+    if (prev.motion !== this.props.motion && this.props.motion === 'still') { this.stop('d'); this.stop('s'); this.setState({ mode: 'still', studioI: LAST, studio: true }); }
   }
 
   componentWillUnmount() {
@@ -745,12 +653,9 @@ class Component extends DCLogic {
 
   seen(k) {
     var self = this, t0 = performance.now();
-    if (k === 'desk') {
-      this.setState({ desk: true });
-      this.dT = setInterval(function () { var i = Math.min(23, Math.floor((performance.now() - t0) / 95)); if (i !== self.state.deskI) self.setState({ deskI: i }); if (i >= 23) self.stop('d'); }, 30);
-    } else if (k === 'studio') {
+    if (k === 'studio') {
       this.setState({ studio: true });
-      this.sT = setInterval(function () { var i = Math.min(5, Math.floor((performance.now() - t0) / 420)); if (i !== self.state.studioI) self.setState({ studioI: i }); if (i >= 5) self.stop('s'); }, 30);
+      this.sT = setInterval(function () { var i = Math.min(LAST, Math.floor((performance.now() - t0) / Math.max(180, 2100 / Math.max(1, LAST)))); if (i !== self.state.studioI) self.setState({ studioI: i }); if (i >= LAST) self.stop('s'); }, 30);
     }
   }
 
@@ -759,46 +664,12 @@ class Component extends DCLogic {
     if (w === 's' && this.sT) { clearInterval(this.sT); this.sT = 0; }
   }
 
-  deskChart() {
-    var self = this, di = this.state.deskI, hot = this.state.hot;
-    var path = function (arr) { return 'M' + arr.map(function (v, i) { return n1(self.xP(i)) + ' ' + n1(self.yP(v)); }).join(' L'); };
-    var vals = SERIES.map(function (s) { return { s: s, v: self.ret[s.k][di] }; });
-    var top = vals.reduce(function (a, b) { return b.v > a.v + 1e-9 ? b : a; });
-    var lines = SERIES.slice().reverse().map(function (s) {
-      var base = s.ghost ? 'ln-gh' : 'ln';
-      var cls = base + (hot ? (hot === s.k ? ' is-hot' : ' is-dim') : '');
-      return { d: path(self.ret[s.k]), cls: cls };
-    });
-    var heads = vals.map(function (o) { return { x: n1(self.xP(di) / 10), y: n1(self.yP(o.v) / 4), cls: o.s.ghost ? 'hd-gh' : (o.s.k === top.s.k && di > 0 ? 'hd-lead' : 'hd') }; });
-    var labels = spread(vals.map(function (o) { return { s: o.s, y: self.yP(o.v), v: o.v }; }), 20, 12, 360).map(function (l) {
-      return { name: l.s.label, val: fmtPct(l.v), top: n1(l.y / 400 * 100), cls: (l.s.ghost ? 'gh' : '') + (hot === l.s.k ? ' is-hot' : ''), on: self.hotFns[l.s.k] };
-    });
-    var mlist = vals.slice().sort(function (a, b) { return b.v - a.v; }).map(function (o) {
-      return { name: o.s.label, val: fmtPct(o.v), cls: (o.s.ghost ? 'gh' : '') + (hot === o.s.k ? ' is-hot' : ''), on: self.tapFns[o.s.k] };
-    });
-    var tag;
-    if (di === 0) tag = { t: 'Level', cls: 'tag-none', v: 0 };
-    else if (top.s.ghost) tag = { t: 'Ghost leads', cls: 'tag-gh', v: top.v };
-    else tag = { t: top.s.label + (top.s.k === 'cash' ? ' lead' : ' leads'), cls: '', v: top.v };
-    var tip = { cls: 'is-off', x: 0, y: 0, t: '' };
-    if (hot) {
-      var hs = SERIES.filter(function (s) { return s.k === hot; })[0];
-      var hv = this.ret[hot][di];
-      tip = { cls: '', x: n1(this.xP(di) / 1000 * 100), y: n1(this.yP(hv) / 400 * 100), t: hs.tip + ': ' + fmtPct(hv) + ' on ' + fmtDate(DATES[di], true) };
-    }
-    return {
-      lines: lines, heads: heads, labels: labels, mlist: mlist, clipW: n1(this.xP(di) - 60 + 8), hx: n1(this.xP(di)),
-      tag: { t: tag.t, cls: tag.cls, x: n1(this.xP(di) / 1000 * 100), y: n1(this.yP(tag.v) / 400 * 100) },
-      tip: tip, date: fmtDate(DATES[di], true)
-    };
-  }
-
   studioChart() {
     var si = this.state.studioI, j = SCORED[si];
-    var xS = function (k) { return 70 + k * 91.25; };
-    var yS = function (v) { return 20 + (160 - v) * 2.1; };
+    var xS = function (k) { return 70 + k * 730 / NW; };
+    var yS = function (v) { return 41 + (YMAX - v) / YMAX * 315; };
     var path = function (arr) { return 'M' + arr.map(function (v, k) { return n1(xS(k)) + ' ' + n1(yS(v)); }).join(' L'); };
-    var names = [['statistician', 'Elias'], ['romantic', 'Sofia'], ['coolhead', 'Amara']];
+    var names = PRED;
     var vals = names.map(function (n) { return { name: n[1], v: CUM[n[0]][j] }; });
     var gv = CUM.ghost[j];
     var best = Math.max(gv, vals[0].v, vals[1].v, vals[2].v);
@@ -813,56 +684,35 @@ class Component extends DCLogic {
     lab.push({ name: 'Home 2–1 (ghost)', val: String(gv), y: yS(gv), cls: 'gh' });
     var labels = spread(lab, 20, 12, 360).map(function (l) { return { name: l.name, val: l.val, cls: l.cls, top: n1(l.y / 400 * 100) }; });
     var mlist = lab.slice().sort(function (a, b) { return (+b.val) - (+a.val); }).map(function (l) { return { name: l.name, val: l.val, cls: l.cls }; });
-    var lcs = [[1, 29], [2, 54], [3, 69], [5, 110]].filter(function (c) { return c[0] <= j; }).map(function (c) { return { x: n1(xS(c[0]) / 10), y: n1(yS(c[1]) / 4) }; });
+    var lcs = LIVE.chart.lcs.filter(function (c) { return c.i <= j; }).map(function (c) { return { x: n1(xS(c.i) / 10), y: n1(yS(c.v) / 4) }; });
+    var grid = LIVE.chart.ticks.map(function (t) { var y = yS(t); return { y: n1(y), top: n1(y / 400 * 100), t: String(t), cls: t === 0 ? 'g0' : 'gl' }; }).reverse();
+    var xticks = [];
+    for (var q = 1; q <= NW; q++) xticks.push({ x: n1(xS(q) / 10), t: WEEKS[q] });
     return {
       ghostD: path(CUM.ghost), lines: names.map(function (n) { return { d: path(CUM[n[0]]) }; }), heads: heads, labels: labels, mlist: mlist, lcs: lcs,
-      clipW: n1(xS(j) - 60 + 8), hx: n1(xS(j)),
+      clipW: n1(xS(j) - 60 + 8), hx: n1(xS(j)), grid: grid, xticks: xticks, maxI: LAST,
       tag: { t: tag.t, cls: tag.cls, x: n1(xS(j) / 1000 * 100), y: n1(yS(tag.v) / 400 * 100) },
-      week: si === 0 ? 'Before week 34' : 'Week ' + WEEKS[j].slice(1)
+      week: si === 0 ? 'Before week ' + LIVE.chart.first : 'Week ' + WEEKS[j]
     };
-  }
-
-  gates(preview) {
-    var st = preview ? 'Open' : 'Closed', cls = preview ? 'open' : '';
-    var p = function (v) { return preview ? 0 : n1(1 - v); };
-    var desk = [
-      { name: 'Long enough', pre: '', num: preview ? '[cp_days]' : '24', post: ' of 126 trading days', off: preview ? 0 : n1((1 - 24 / 126) * 1000) / 1000, lock: true, record: false },
-      { name: 'The desk is ahead', pre: 'Desk ', num: preview ? '[cp_desk_return]' : '−0.63%', post: preview ? ', ghost [cp_ghost_return]' : ', ghost −0.11%', off: p(0), lock: true, record: false },
-      { name: 'Most advisors are ahead', pre: '', num: preview ? '[cp_n_above]' : '0', post: ' of 8 ahead, 5 needed', off: p(0), lock: true, record: false },
-      { name: 'Ahead while invested', pre: '', num: '', post: 'Only advisors at least half invested count', off: p(0), lock: true, record: false },
-      { name: 'Risk, for the record', pre: 'Desk’s worst drop ', num: '1.13%', post: ', ghost’s 2.09%', lock: false, record: true, dy: n1(96 - 1.13 / 2.5 * 80), dh: n1(1.13 / 2.5 * 80), gy: n1(96 - 2.09 / 2.5 * 80), gh: n1(2.09 / 2.5 * 80) }
-    ];
-    desk.forEach(function (g, i) { g.cls = g.record ? 'record' : cls; g.state = g.record ? '' : st; });
-    var studio = [
-      { name: 'Long enough', pre: '', num: preview ? '[qp_matches]' : '200', post: ' of 400 matches', off: preview ? 0 : 0.5 },
-      { name: 'The studio is ahead', pre: '', num: preview ? '[qp_studio_ppm]' : '0.632', post: preview ? ' points a match, ghost [qp_ghost_ppm]' : ' points a match, ghost 0.73', off: p(0) },
-      { name: 'Most predictors are ahead', pre: '', num: preview ? '[qp_n_above]' : '0', post: ' of 3 ahead, 2 needed', off: p(0) },
-      { name: 'A complete record', pre: '', num: '', post: 'Every week scored', off: p(0) }
-    ];
-    studio.forEach(function (g) { g.cls = cls; g.state = st; });
-    return { desk: desk, studio: studio };
   }
 
   renderVals() {
     var still = this.state.mode === 'still';
     var preview = false;
-    var d = this.deskChart(), s = this.studioChart(), g = this.gates(preview);
+    var s = this.studioChart();
+    var g = { studio: LIVE.gates.map(function (x, i) { return { cls: x.cls, state: x.state, name: x.name, pre: x.pre, num: x.num, post: x.post, off: x.off }; }) };
     return {
       siteCls: (still ? 'm-still' : 'm-anim') + (preview ? ' is-preview' : ''),
       hdrCls: this.state.scrolled ? 'is-scrolled' : '',
-      deskCls: this.state.desk ? 'go' : '', studioCls: this.state.studio ? 'go' : '',
-      closed: !preview, preview: preview,
-      squares: this.squares, tickers: this.tickers, hh: this.state.hh, r: this.r,
-      deskI: this.state.deskI, studioI: this.state.studioI,
-      d: d, s: s,
-      onDeskMove: this.onDeskMove, onDeskLeave: this.onDeskLeave, offDesk: this.offDesk, onDeskRange: this.onDeskRange,
-      onStudioMove: this.onStudioMove, onStudioRange: this.onStudioRange,
-      deskGates: g.desk, studioGates: g.studio,
-      deskAria: 'Line chart of returns from 9 Sep to 12 Oct 2026. Three advisors in cash +0.36%, Buy and hold, the ghost, −0.11%, Emeka −0.69%, Priya −0.84%, Ines −0.97%, Grace −1.19%, Anton −2.45%. Showing ' + d.date + '.',
-      studioAria: 'Line chart of cumulative points from week 34 to week 41: the ghost Home 2–1 146, Amara 131, Elias 126, Sofia 122. Showing ' + s.week + '.'
+      studioCls: this.state.studio ? 'go' : '',
+      closed: true, preview: false,
+      hh: this.state.hh, r: this.r,
+      studioI: this.state.studioI,
+      s: s,
+            onStudioMove: this.onStudioMove, onStudioRange: this.onStudioRange,
+      studioGates: g.studio,
+      studioAria: 'Line chart of cumulative points from week ' + LIVE.chart.first + ' to week ' + LIVE.chart.last + ': ' + LIVE.race.rows.map(function (t) { return (t.k === 'ghost' ? 'the ghost Home 2–1' : t.name.split(' ')[0]) + ' ' + t.pts; }).join(', ') + '. Showing ' + s.week + '.'
     };
   }
 }
 </script>
-</body>
-</html>

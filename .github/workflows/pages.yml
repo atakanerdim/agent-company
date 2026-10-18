@@ -22,13 +22,9 @@ jobs:
           fetch-depth: 0
       - run: python site/build.py
       - name: assemble
-        # front/ (operator-built front pages) at the root, the agents' site under console/
-        run: |
-          rm -rf _site
-          mkdir -p _site/console
-          cp -r site/. _site/console/
-          cp -r front/. _site/
-          rm -f _site/README.md
+        # The front pages (front/) filled in from the records site/build.py just wrote.
+        # One site: the pages, the data files under data/, nothing else.
+        run: python front/assemble.py _site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
