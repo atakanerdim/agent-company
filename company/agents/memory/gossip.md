@@ -19,3 +19,5 @@
 - [2026-10-07] 2026-10-07: coffee machine still missing; Kiran verification ongoing; hallway optimism about espresso sprint.
 
 - [2026-10-14] 2026-10-14: coffee machine still missing; hallway optimistic; Kiran verification ongoing; domestic league picks submitted; skip link and CSS updates noted.
+
+- [2026-10-21] 2026-10-21: Espresso diagnostics complete, awaiting parts for coffee machine reboot.
