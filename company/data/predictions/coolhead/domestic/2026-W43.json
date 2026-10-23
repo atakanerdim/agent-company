@@ -1,0 +1,331 @@
+[
+ {
+  "match_id": 560620,
+  "home": "Ipswich Town",
+  "away": "Nottingham",
+  "score": "1-1",
+  "reasoning": "Both sides have struggled to find the net consistently."
+ },
+ {
+  "match_id": 560614,
+  "home": "Aston Villa",
+  "away": "Man City",
+  "score": "0-2",
+  "reasoning": "City's firepower remains evident even away."
+ },
+ {
+  "match_id": 560616,
+  "home": "Arsenal",
+  "away": "Everton",
+  "score": "1-0",
+  "reasoning": "Arsenal's home edge is slight but enough."
+ },
+ {
+  "match_id": 560618,
+  "home": "Coventry City",
+  "away": "Fulham",
+  "score": "0-1",
+  "reasoning": "Fulham's defense holds up better on the road."
+ },
+ {
+  "match_id": 560617,
+  "home": "Chelsea",
+  "away": "Tottenham",
+  "score": "1-1",
+  "reasoning": "The London derby often ends level with limited chances."
+ },
+ {
+  "match_id": 560612,
+  "home": "Liverpool",
+  "away": "Brighton Hove",
+  "score": "2-0",
+  "reasoning": "Liverpool's attack is too sharp to ignore at Anfield."
+ },
+ {
+  "match_id": 560613,
+  "home": "Crystal Palace",
+  "away": "Newcastle",
+  "score": "0-1",
+  "reasoning": "Newcastle's away form suggests a narrow win."
+ },
+ {
+  "match_id": 560615,
+  "home": "Man United",
+  "away": "Bournemouth",
+  "score": "2-0",
+  "reasoning": "United's depth should secure a comfortable home win."
+ },
+ {
+  "match_id": 560619,
+  "home": "Hull City",
+  "away": "Brentford",
+  "score": "1-1",
+  "reasoning": "Hull and Brentford are likely to share points."
+ },
+ {
+  "match_id": 560621,
+  "home": "Sunderland",
+  "away": "Leeds United",
+  "score": "0-1",
+  "reasoning": "Leeds' recent form gives them the edge away."
+ },
+ {
+  "match_id": 564719,
+  "home": "Alavés",
+  "away": "Málaga",
+  "score": "1-1",
+  "reasoning": "Both sides lack firepower this week."
+ },
+ {
+  "match_id": 564718,
+  "home": "Rayo Vallecano",
+  "away": "Elche",
+  "score": "1-0",
+  "reasoning": "Rayo's home edge may be enough."
+ },
+ {
+  "match_id": 564727,
+  "home": "Santander",
+  "away": "Espanyol",
+  "score": "0-0",
+  "reasoning": "Defensive caution dominates."
+ },
+ {
+  "match_id": 564722,
+  "home": "Valencia",
+  "away": "Villarreal",
+  "score": "1-0",
+  "reasoning": "Valencia's modest attack should edge it."
+ },
+ {
+  "match_id": 564724,
+  "home": "Atleti",
+  "away": "Deportivo",
+  "score": "1-0",
+  "reasoning": "Atleti's home form is marginally better."
+ },
+ {
+  "match_id": 564720,
+  "home": "Athletic",
+  "away": "Getafe",
+  "score": "0-0",
+  "reasoning": "Both likely to sit back."
+ },
+ {
+  "match_id": 564725,
+  "home": "Celta",
+  "away": "Real Betis",
+  "score": "1-1",
+  "reasoning": "Celta and Betis will trade chances."
+ },
+ {
+  "match_id": 564726,
+  "home": "Real Sociedad",
+  "away": "Levante",
+  "score": "1-0",
+  "reasoning": "Sociedad's consistency should prevail."
+ },
+ {
+  "match_id": 564723,
+  "home": "Barça",
+  "away": "Real Madrid",
+  "score": "1-1",
+  "reasoning": "Even giants tend to settle for a draw."
+ },
+ {
+  "match_id": 565833,
+  "home": "Stuttgart",
+  "away": "M'gladbach",
+  "score": "1-1",
+  "reasoning": "Both sides have shown similar defensive solidity this week."
+ },
+ {
+  "match_id": 565830,
+  "home": "Mainz",
+  "away": "Bremen",
+  "score": "0-0",
+  "reasoning": "A midfield stalemate is likely given their recent low‑scoring draws."
+ },
+ {
+  "match_id": 565831,
+  "home": "1. FC Köln",
+  "away": "Schalke",
+  "score": "1-0",
+  "reasoning": "Köln's home edge should be enough to nip Schalke."
+ },
+ {
+  "match_id": 565832,
+  "home": "RB Leipzig",
+  "away": "Elversberg",
+  "score": "2-0",
+  "reasoning": "Leipzig's attack is modest but superior to Elversberg's limited options."
+ },
+ {
+  "match_id": 565834,
+  "home": "SC Paderborn",
+  "away": "HSV",
+  "score": "1-1",
+  "reasoning": "Both clubs have struggled to keep clean sheets lately."
+ },
+ {
+  "match_id": 565838,
+  "home": "Augsburg",
+  "away": "Union Berlin",
+  "score": "0-1",
+  "reasoning": "Union's disciplined defense can silence Augsburg's modest offense."
+ },
+ {
+  "match_id": 565837,
+  "home": "Dortmund",
+  "away": "Frankfurt",
+  "score": "2-1",
+  "reasoning": "Dortmund should edge it, though Frankfurt can sneak a goal."
+ },
+ {
+  "match_id": 565835,
+  "home": "Hoffenheim",
+  "away": "Leverkusen",
+  "score": "0-2",
+  "reasoning": "Leverkusen's quality is likely to break through Hoffenheim's defense."
+ },
+ {
+  "match_id": 565836,
+  "home": "Freiburg",
+  "away": "Bayern",
+  "score": "1-2",
+  "reasoning": "Bayern will prevail, but Freiburg may find the net once."
+ },
+ {
+  "match_id": 558567,
+  "home": "Torino",
+  "away": "Monza",
+  "score": "1-1",
+  "reasoning": "Both clubs will trade strikes, leaving the score level."
+ },
+ {
+  "match_id": 558560,
+  "home": "Cagliari",
+  "away": "Bologna",
+  "score": "0-0",
+  "reasoning": "Defensive solidity will keep the net empty on both sides."
+ },
+ {
+  "match_id": 558561,
+  "home": "Como 1907",
+  "away": "Sassuolo",
+  "score": "0-1",
+  "reasoning": "A lone away goal will be enough to split the points."
+ },
+ {
+  "match_id": 558564,
+  "home": "Napoli",
+  "away": "Roma",
+  "score": "1-1",
+  "reasoning": "A goal each will cancel out the other’s attempts."
+ },
+ {
+  "match_id": 558565,
+  "home": "Lazio",
+  "away": "Parma",
+  "score": "1-1",
+  "reasoning": "Both sides will settle for a point."
+ },
+ {
+  "match_id": 558563,
+  "home": "Inter",
+  "away": "Fiorentina",
+  "score": "1-0",
+  "reasoning": "Inter’s attack will finally break the deadlock."
+ },
+ {
+  "match_id": 558562,
+  "home": "Atalanta",
+  "away": "Frosinone",
+  "score": "2-0",
+  "reasoning": "Atalanta’s firepower will dominate the encounter."
+ },
+ {
+  "match_id": 558568,
+  "home": "Genoa",
+  "away": "Venezia FC",
+  "score": "0-0",
+  "reasoning": "Defensive discipline will keep the scores level."
+ },
+ {
+  "match_id": 558566,
+  "home": "Lecce",
+  "away": "Juventus",
+  "score": "0-1",
+  "reasoning": "A single Juve strike will prove decisive."
+ },
+ {
+  "match_id": 558559,
+  "home": "Udinese",
+  "away": "Milan",
+  "score": "1-1",
+  "reasoning": "Both teams will find a goal, leaving the draw intact."
+ },
+ {
+  "match_id": 559654,
+  "home": "Brest",
+  "away": "Nice",
+  "score": "1-1",
+  "reasoning": "Both sides have been defensively solid lately."
+ },
+ {
+  "match_id": 559652,
+  "home": "RC Lens",
+  "away": "Paris FC",
+  "score": "0-0",
+  "reasoning": "A tight midfield duel is likely to keep the score level."
+ },
+ {
+  "match_id": 559650,
+  "home": "Monaco",
+  "away": "Lille",
+  "score": "1-0",
+  "reasoning": "Monaco's home advantage should be enough to edge a close game."
+ },
+ {
+  "match_id": 559649,
+  "home": "Marseille",
+  "away": "Le Havre",
+  "score": "1-1",
+  "reasoning": "Marseille's attack meets Le Havre's disciplined backline."
+ },
+ {
+  "match_id": 559651,
+  "home": "Stade Rennais",
+  "away": "Strasbourg",
+  "score": "0-1",
+  "reasoning": "Strasbourg's recent form hints at a narrow away win."
+ },
+ {
+  "match_id": 559653,
+  "home": "Angers SCO",
+  "away": "Lorient",
+  "score": "0-0",
+  "reasoning": "Both teams have struggled to convert chances."
+ },
+ {
+  "match_id": 559655,
+  "home": "Toulouse",
+  "away": "Troyes",
+  "score": "1-0",
+  "reasoning": "Toulouse's home crowd may provide the decisive edge."
+ },
+ {
+  "match_id": 559656,
+  "home": "Auxerre",
+  "away": "Le Mans",
+  "score": "0-0",
+  "reasoning": "A cautious approach is expected from both sides."
+ },
+ {
+  "match_id": 559648,
+  "home": "PSG",
+  "away": "Olympique Lyon",
+  "score": "1-1",
+  "reasoning": "Even with talent, the match could settle into a balanced affair."
+ }
+]
