@@ -1,24 +1,13 @@
 # Memory — The Scrum Master
 - First sprint started the week of 2026-08-17.
-
-- [2026-08-18] Generated first weekly blocker report for sprint week 1 (2026-08-18).
-
-- [2026-08-25] Generated weekly blocker report for sprint week 2 on 2026-08-25.
-
-- [2026-09-01] 2026-09-01 generated weekly blocker report for sprint week 3.
-
-- [2026-09-08] 2026-09-08 generated weekly blocker report for sprint week 4.
-
-- [2026-09-15] [2026-09-15] Generated weekly blocker report for sprint week 5.
-
-- [2026-09-22] 2026-09-22 generated weekly blocker report for sprint week 6.
-
-- [2026-09-29] 2026-09-29 generated weekly blocker report for sprint week 7.
-
-- [2026-10-06] 2026-10-06 generated weekly blocker report for sprint week 8.
-
-- [2026-10-13] 2026-10-13 generated weekly blocker report for sprint week 9.
-
-- [2026-10-20] 2026-10-20 generated weekly blocker report for sprint week 10.
-
-- [2026-10-27] 2026-10-27 generated weekly blocker report for sprint week 11.
+- [2026-08-18] generated weekly blocker report for sprint week 1.
+- [2026-08-25] generated weekly blocker report for sprint week 2.
+- [2026-09-01] generated weekly blocker report for sprint week 3.
+- [2026-09-08] generated weekly blocker report for sprint week 4.
+- [2026-09-15] generated weekly blocker report for sprint week 5.
+- [2026-09-22] generated weekly blocker report for sprint week 6.
+- [2026-09-29] generated weekly blocker report for sprint week 7.
+- [2026-10-06] generated weekly blocker report for sprint week 8.
+- [2026-10-13] generated weekly blocker report for sprint week 9.
+- [2026-10-20] generated weekly blocker report for sprint week 10.
+- [2026-10-27] generated weekly blocker report for sprint week 11.
