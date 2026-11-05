@@ -1,0 +1,338 @@
+[
+ {
+  "match_id": 560634,
+  "league": "PL",
+  "home": "Everton",
+  "away": "Coventry City",
+  "date": "2026-11-06T20:00:00Z"
+ },
+ {
+  "match_id": 560632,
+  "league": "PL",
+  "home": "Leeds United",
+  "away": "Tottenham",
+  "date": "2026-11-07T12:30:00Z"
+ },
+ {
+  "match_id": 560640,
+  "league": "PL",
+  "home": "Arsenal",
+  "away": "Hull City",
+  "date": "2026-11-07T15:00:00Z"
+ },
+ {
+  "match_id": 560633,
+  "league": "PL",
+  "home": "Fulham",
+  "away": "Newcastle",
+  "date": "2026-11-07T15:00:00Z"
+ },
+ {
+  "match_id": 560641,
+  "league": "PL",
+  "home": "Nottingham",
+  "away": "Man City",
+  "date": "2026-11-07T17:30:00Z"
+ },
+ {
+  "match_id": 560635,
+  "league": "PL",
+  "home": "Crystal Palace",
+  "away": "Liverpool",
+  "date": "2026-11-08T14:00:00Z"
+ },
+ {
+  "match_id": 560636,
+  "league": "PL",
+  "home": "Sunderland",
+  "away": "Chelsea",
+  "date": "2026-11-08T14:00:00Z"
+ },
+ {
+  "match_id": 560637,
+  "league": "PL",
+  "home": "Ipswich Town",
+  "away": "Bournemouth",
+  "date": "2026-11-08T14:00:00Z"
+ },
+ {
+  "match_id": 560638,
+  "league": "PL",
+  "home": "Brighton Hove",
+  "away": "Brentford",
+  "date": "2026-11-08T14:00:00Z"
+ },
+ {
+  "match_id": 560639,
+  "league": "PL",
+  "home": "Man United",
+  "away": "Aston Villa",
+  "date": "2026-11-08T16:30:00Z"
+ },
+ {
+  "match_id": 564740,
+  "league": "PD",
+  "home": "Sevilla FC",
+  "away": "Alavés",
+  "date": "2026-11-06T20:00:00Z"
+ },
+ {
+  "match_id": 564744,
+  "league": "PD",
+  "home": "Málaga",
+  "away": "Santander",
+  "date": "2026-11-07T13:00:00Z"
+ },
+ {
+  "match_id": 564745,
+  "league": "PD",
+  "home": "Espanyol",
+  "away": "Deportivo",
+  "date": "2026-11-07T15:15:00Z"
+ },
+ {
+  "match_id": 564739,
+  "league": "PD",
+  "home": "Osasuna",
+  "away": "Athletic",
+  "date": "2026-11-07T17:30:00Z"
+ },
+ {
+  "match_id": 564741,
+  "league": "PD",
+  "home": "Valencia",
+  "away": "Real Madrid",
+  "date": "2026-11-07T20:00:00Z"
+ },
+ {
+  "match_id": 564738,
+  "league": "PD",
+  "home": "Elche",
+  "away": "Real Betis",
+  "date": "2026-11-08T13:00:00Z"
+ },
+ {
+  "match_id": 564743,
+  "league": "PD",
+  "home": "Real Sociedad",
+  "away": "Rayo Vallecano",
+  "date": "2026-11-08T15:15:00Z"
+ },
+ {
+  "match_id": 564742,
+  "league": "PD",
+  "home": "Celta",
+  "away": "Levante",
+  "date": "2026-11-08T17:30:00Z"
+ },
+ {
+  "match_id": 564747,
+  "league": "PD",
+  "home": "Villarreal",
+  "away": "Getafe",
+  "date": "2026-11-08T17:30:00Z"
+ },
+ {
+  "match_id": 564746,
+  "league": "PD",
+  "home": "Atleti",
+  "away": "Barça",
+  "date": "2026-11-08T20:00:00Z"
+ },
+ {
+  "match_id": 565852,
+  "league": "BL1",
+  "home": "HSV",
+  "away": "M'gladbach",
+  "date": "2026-11-06T19:30:00Z"
+ },
+ {
+  "match_id": 565848,
+  "league": "BL1",
+  "home": "RB Leipzig",
+  "away": "Augsburg",
+  "date": "2026-11-07T14:30:00Z"
+ },
+ {
+  "match_id": 565850,
+  "league": "BL1",
+  "home": "Dortmund",
+  "away": "Elversberg",
+  "date": "2026-11-07T14:30:00Z"
+ },
+ {
+  "match_id": 565851,
+  "league": "BL1",
+  "home": "Mainz",
+  "away": "Bayern",
+  "date": "2026-11-07T14:30:00Z"
+ },
+ {
+  "match_id": 565853,
+  "league": "BL1",
+  "home": "SC Paderborn",
+  "away": "Frankfurt",
+  "date": "2026-11-07T14:30:00Z"
+ },
+ {
+  "match_id": 565849,
+  "league": "BL1",
+  "home": "Stuttgart",
+  "away": "Bremen",
+  "date": "2026-11-07T17:30:00Z"
+ },
+ {
+  "match_id": 565855,
+  "league": "BL1",
+  "home": "1. FC Köln",
+  "away": "Leverkusen",
+  "date": "2026-11-08T14:30:00Z"
+ },
+ {
+  "match_id": 565854,
+  "league": "BL1",
+  "home": "Freiburg",
+  "away": "Union Berlin",
+  "date": "2026-11-08T16:30:00Z"
+ },
+ {
+  "match_id": 565856,
+  "league": "BL1",
+  "home": "Hoffenheim",
+  "away": "Schalke",
+  "date": "2026-11-08T18:30:00Z"
+ },
+ {
+  "match_id": 558537,
+  "league": "SA",
+  "home": "Venezia FC",
+  "away": "Udinese",
+  "date": "2026-11-06T19:45:00Z"
+ },
+ {
+  "match_id": 558532,
+  "league": "SA",
+  "home": "Torino",
+  "away": "Lecce",
+  "date": "2026-11-07T14:00:00Z"
+ },
+ {
+  "match_id": 558534,
+  "league": "SA",
+  "home": "Cagliari",
+  "away": "Frosinone",
+  "date": "2026-11-07T14:00:00Z"
+ },
+ {
+  "match_id": 558535,
+  "league": "SA",
+  "home": "Parma",
+  "away": "Bologna",
+  "date": "2026-11-07T17:00:00Z"
+ },
+ {
+  "match_id": 558531,
+  "league": "SA",
+  "home": "Roma",
+  "away": "Sassuolo",
+  "date": "2026-11-07T19:45:00Z"
+ },
+ {
+  "match_id": 558533,
+  "league": "SA",
+  "home": "Napoli",
+  "away": "Lazio",
+  "date": "2026-11-08T11:30:00Z"
+ },
+ {
+  "match_id": 558536,
+  "league": "SA",
+  "home": "Genoa",
+  "away": "Milan",
+  "date": "2026-11-08T14:00:00Z"
+ },
+ {
+  "match_id": 558538,
+  "league": "SA",
+  "home": "Monza",
+  "away": "Atalanta",
+  "date": "2026-11-08T14:00:00Z"
+ },
+ {
+  "match_id": 558530,
+  "league": "SA",
+  "home": "Inter",
+  "away": "Como 1907",
+  "date": "2026-11-08T17:00:00Z"
+ },
+ {
+  "match_id": 558529,
+  "league": "SA",
+  "home": "Fiorentina",
+  "away": "Juventus",
+  "date": "2026-11-08T19:45:00Z"
+ },
+ {
+  "match_id": 559638,
+  "league": "FL1",
+  "home": "Toulouse",
+  "away": "Strasbourg",
+  "date": "2026-11-06T19:45:00Z"
+ },
+ {
+  "match_id": 559637,
+  "league": "FL1",
+  "home": "Auxerre",
+  "away": "Paris FC",
+  "date": "2026-11-07T18:00:00Z"
+ },
+ {
+  "match_id": 559635,
+  "league": "FL1",
+  "home": "PSG",
+  "away": "Troyes",
+  "date": "2026-11-07T20:05:00Z"
+ },
+ {
+  "match_id": 559636,
+  "league": "FL1",
+  "home": "Stade Rennais",
+  "away": "Lille",
+  "date": "2026-11-08T14:00:00Z"
+ },
+ {
+  "match_id": 559631,
+  "league": "FL1",
+  "home": "Le Mans",
+  "away": "Monaco",
+  "date": "2026-11-08T16:15:00Z"
+ },
+ {
+  "match_id": 559632,
+  "league": "FL1",
+  "home": "Brest",
+  "away": "Olympique Lyon",
+  "date": "2026-11-08T16:15:00Z"
+ },
+ {
+  "match_id": 559633,
+  "league": "FL1",
+  "home": "Le Havre",
+  "away": "Lorient",
+  "date": "2026-11-08T16:15:00Z"
+ },
+ {
+  "match_id": 559634,
+  "league": "FL1",
+  "home": "Angers SCO",
+  "away": "Nice",
+  "date": "2026-11-08T16:15:00Z"
+ },
+ {
+  "match_id": 559630,
+  "league": "FL1",
+  "home": "RC Lens",
+  "away": "Marseille",
+  "date": "2026-11-08T19:45:00Z"
+ }
+]
