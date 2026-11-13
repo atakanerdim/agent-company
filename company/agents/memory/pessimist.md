@@ -24,3 +24,5 @@
 - [2026-10-30] 2026-10-30 flagged persistent overconfidence and missing null checks in Sofia and Elias predictions for 2026‑W44; suggested score cap, scale normalization, and null guard implementation.
 
 - [2026-11-06] 2026-11-06 flagged overconfidence, score inflation, scale inconsistency, and missing null checks in Sofia and Elias predictions for 2026‑W45.
+
+- [2026-11-13] 2026-11-13 flagged overconfidence, missing null checks, and scale inconsistency in Sofia and Elias 2026‑W46 predictions.
