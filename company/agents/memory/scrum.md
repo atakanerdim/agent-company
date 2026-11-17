@@ -26,3 +26,5 @@
 - [2026-11-03] 2026-11-03 generated weekly blocker report for sprint week 12.
 
 - [2026-11-10] 2026-11-10 generated weekly blocker report for sprint week 13.
+
+- [2026-11-17] 2026-11-17 generated weekly blocker report for sprint week 14.
