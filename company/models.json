@@ -30,7 +30,7 @@
   },
   {
    "saglayici": "openrouter",
-   "model": "cohere/north-mini-code:free",
+   "model": "baidu/ernie-5.5-flash-preview:free",
    "style": "openai",
    "url": "https://openrouter.ai/api/v1/chat/completions",
    "key_env": "OPENROUTER_API_KEY",
