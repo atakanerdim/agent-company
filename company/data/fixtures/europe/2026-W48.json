@@ -1,0 +1,128 @@
+[
+ {
+  "match_id": 575395,
+  "league": "CL",
+  "home": "Galatasaray",
+  "away": "Aston Villa",
+  "date": "2026-11-24T17:45:00Z"
+ },
+ {
+  "match_id": 575396,
+  "league": "CL",
+  "home": "Bodø/Glimt",
+  "away": "LASK",
+  "date": "2026-11-24T17:45:00Z"
+ },
+ {
+  "match_id": 575397,
+  "league": "CL",
+  "home": "Real Madrid",
+  "away": "PSV",
+  "date": "2026-11-24T20:00:00Z"
+ },
+ {
+  "match_id": 575398,
+  "league": "CL",
+  "home": "Man City",
+  "away": "Napoli",
+  "date": "2026-11-24T20:00:00Z"
+ },
+ {
+  "match_id": 575399,
+  "league": "CL",
+  "home": "Arsenal",
+  "away": "Dortmund",
+  "date": "2026-11-24T20:00:00Z"
+ },
+ {
+  "match_id": 575400,
+  "league": "CL",
+  "home": "Feyenoord",
+  "away": "Porto",
+  "date": "2026-11-24T20:00:00Z"
+ },
+ {
+  "match_id": 575401,
+  "league": "CL",
+  "home": "Sl. Bratislava",
+  "away": "Real Betis",
+  "date": "2026-11-24T20:00:00Z"
+ },
+ {
+  "match_id": 575402,
+  "league": "CL",
+  "home": "RB Leipzig",
+  "away": "RC Lens",
+  "date": "2026-11-24T20:00:00Z"
+ },
+ {
+  "match_id": 575403,
+  "league": "CL",
+  "home": "Como 1907",
+  "away": "PAE AEK",
+  "date": "2026-11-24T20:00:00Z"
+ },
+ {
+  "match_id": 575404,
+  "league": "CL",
+  "home": "Sabah FK",
+  "away": "Barça",
+  "date": "2026-11-25T17:45:00Z"
+ },
+ {
+  "match_id": 575405,
+  "league": "CL",
+  "home": "Slavia Praha",
+  "away": "Villarreal",
+  "date": "2026-11-25T17:45:00Z"
+ },
+ {
+  "match_id": 575406,
+  "league": "CL",
+  "home": "Inter",
+  "away": "Stuttgart",
+  "date": "2026-11-25T20:00:00Z"
+ },
+ {
+  "match_id": 575407,
+  "league": "CL",
+  "home": "Atleti",
+  "away": "Viking",
+  "date": "2026-11-25T20:00:00Z"
+ },
+ {
+  "match_id": 575408,
+  "league": "CL",
+  "home": "PSG",
+  "away": "Roma",
+  "date": "2026-11-25T20:00:00Z"
+ },
+ {
+  "match_id": 575409,
+  "league": "CL",
+  "home": "Club Brugge",
+  "away": "Liverpool",
+  "date": "2026-11-25T20:00:00Z"
+ },
+ {
+  "match_id": 575410,
+  "league": "CL",
+  "home": "Lille",
+  "away": "Bayern",
+  "date": "2026-11-25T20:00:00Z"
+ },
+ {
+  "match_id": 575411,
+  "league": "CL",
+  "home": "Sporting CP",
+  "away": "Man United",
+  "date": "2026-11-25T20:00:00Z"
+ },
+ {
+  "match_id": 575412,
+  "league": "CL",
+  "home": "Shaktar",
+  "away": "Fenerbahçe",
+  "date": "2026-11-25T20:00:00Z"
+ }
+]
